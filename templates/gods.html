@@ -3,39 +3,51 @@
 <head>
 	<meta charset="utf-8">
 	<title>SMITE God Overview</title>
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="smitegods.css" />
 </head>
 <body>
-	<h1>SMITE® God Overview</h1>
+	<h1>SMITE God Overview</h1>
 	<div id="about">
 		<h2>About</h2>
-		<p>This is an overview of Smites gods by pantheon and role. This is especially useful for the weekly quests, which may focus on a specific pantheon or role.</p>
-		<aside>Updating this table is trivial (e.g. automated), especially compared to traditional, manually created image files.</aside>
+		<p>This is an interactive overview of SMITE®s gods with their associated pantheon and role. This is especially useful for the weekly quests, which may focus on a specific pantheon or role.</p>
+		<aside>Updating this table is trivial (e.g. automated), especially compared to traditional, manually created image files. So expect this to stay up to date, or give me a quick heads-up.</aside>
 	</div>
 	<div id="legend">
 		<h2>Legend:</h2>
 		Free Rotation: <span id="legend_freerotation">FR</span>
 	</div>
-	{{$size := len .PantheonGodList}}
-	{{$godData := .PantheonGodList}}
-	{{if gt $size 0}}
+
+	<form id="filters-n-options">
+		<h2>Filter and Display Options</h2>
+		<fieldset>
+			<label for="god-icon-size">God Icon Size:</label> <input id="god-icon-size" type="range" min="32" max="128" value="64" step="16" /> <span id="god-icon-size-value"></span> px<br>
+			<label for="filter-god">God Filter:</label> <input id="filter-god" type="text"><br>
+			<label for="filter-pantheon">Pantheon Filter:</label> <input id="filter-pantheon" type="text"><br>
+			<label for="filter-role">Role Filter:</label> <input id="filter-role" type="text">
+		</fieldset>
+	</form>
+
+	{{$size := len .PantheonGodList -}}
+	{{$roles := .Roles -}}
+	{{$gods := .PantheonGodList -}}
+	{{if gt $size 0 -}}
 		<h2>God Grid</h2>
-		<table>
+		<table id="smitegodstable">
 			<thead>
 				<tr>
 					<th></th>
-					{{range $role, $el := .Roles}}
+					{{range $role, $undef := $roles}}
 					<th>{{$role}}</th>
 					{{end}}
 				</tr>
 			</thead>
 			<tbody>
-				{{range $pantheon, $el := .Pantheons}}
+				{{range $pantheon, $undef := .Pantheons}}
 				<tr>
 					<th>{{$pantheon}}</th>
-					{{range $role, $el := index $godData $pantheon}}
+					{{range $role, $undef := $roles}}
 					<td>
-						{{$godsByID := index $godData $pantheon $role}}
+						{{$godsByID := index $gods $pantheon $role}}
 						<ul>
 							{{range $godsByID}}
 							<li>{{template "god.html" .}}</li>
@@ -51,8 +63,10 @@
 		No god data available.
 	{{end}}
 	<footer>
-		Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.<br/>
-		<a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.
+		<p>This interactive overview of SMITE gods has been created by Jan Klass aka <a href="https://github.com/Kissaki">Kissaki</a>. All rights reserved. HTML is generated from a program written in Go. CSS and JavaScript were created bare-bone.</p>
+		<p>Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.</p>
+		<p><a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.</p>
 	</footer>
+	<script src="smitegods.js"></script>
 </body>
 </html>
