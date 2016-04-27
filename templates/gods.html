@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SMITE God Overview</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<h1>SMITE® God Overview</h1>
+	<div id="about">
+		<h2>About</h2>
+		<p>This is an overview of Smites gods by pantheon and role. This is especially useful for the weekly quests, which may focus on a specific pantheon or role.</p>
+		<aside>Updating this table is trivial (e.g. automated), especially compared to traditional, manually created image files.</aside>
+	</div>
+	<div id="legend">
+		<h2>Legend:</h2>
+		Free Rotation: <span id="legend_freerotation">FR</span>
+	</div>
+	{{$size := len .PantheonGodList}}
+	{{$godData := .PantheonGodList}}
+	{{if gt $size 0}}
+		<h2>God Grid</h2>
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					{{range $role, $el := .Roles}}
+					<th>{{$role}}</th>
+					{{end}}
+				</tr>
+			</thead>
+			<tbody>
+				{{range $pantheon, $el := .Pantheons}}
+				<tr>
+					<th>{{$pantheon}}</th>
+					{{range $role, $el := index $godData $pantheon}}
+					<td>
+						{{$godsByID := index $godData $pantheon $role}}
+						<ul>
+							{{range $godsByID}}
+							<li>{{template "god.html" .}}</li>
+							{{end}}
+						</ul>
+					</td>
+					{{end}}
+				</tr>
+				{{end}}
+			</tbody>
+		</table>
+	{{else}}
+		No god data available.
+	{{end}}
+	<footer>
+		Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.<br/>
+		<a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.
+	</footer>
+</body>
+</html>

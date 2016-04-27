@@ -1,0 +1,9 @@
+<div class="god">
+	{{if .GodIconURL}}
+	<img class="godicon" title="" src="{{.GodIconURL}}">
+	{{else}}
+		<div class="godnoicon"></div>
+	{{end}}
+	<div class="godname">{{.Name}}</div>
+	{{if .OnFreeRotation}}<div class="freerotation">FR</div>{{end}}
+</div>
