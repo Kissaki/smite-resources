@@ -67,24 +67,3 @@ aside { font-style:italic; }
 	background-position:-38px -100px;
 	width:124px;
 }
-
-.icon-role {
-	background:url(roles-pantheons-spritesheet-inverted2.png);
-	width:16px; height:16px;
-	display:inline-block;
-}
-.icon-role-assassin {
-	background-position:-0px -300px;
-}
-.icon-role-guardian {
-	background-position:-16px -300px;
-}
-.icon-role-hunter {
-	background-position:-64px -300px;
-}
-.icon-role-mage {
-	background-position:-48px -300px;
-}
-.icon-role-warrior {
-	background-position:-32px -300px;
-}
