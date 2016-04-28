@@ -36,3 +36,55 @@ aside { font-style:italic; }
 }
 
 #god-icon-size-value { width:auto; }
+
+.icon-pantheon {
+	background:url(roles-pantheons-spritesheet-inverted.png);
+	width:100px; height:100px;
+	float:right;
+}
+.icon-pantheon-chinese {
+	background-position:-200px -200px;
+}
+.icon-pantheon-egyptian {
+	background-position:-300px -200px;
+}
+.icon-pantheon-greek {
+	background-position:-100px -200px;
+}
+.icon-pantheon-hindu {
+	background-position:-200px -100px;
+}
+.icon-pantheon-japanese {
+	background-position:-400px -200px;
+}
+.icon-pantheon-mayan {
+	background-position:-350px -100px;
+}
+.icon-pantheon-norse {
+	background-position:0px -200px;
+}
+.icon-pantheon-roman {
+	background-position:-38px -100px;
+	width:124px;
+}
+
+.icon-role {
+	background:url(roles-pantheons-spritesheet-inverted2.png);
+	width:16px; height:16px;
+	display:inline-block;
+}
+.icon-role-assassin {
+	background-position:-0px -300px;
+}
+.icon-role-guardian {
+	background-position:-16px -300px;
+}
+.icon-role-hunter {
+	background-position:-64px -300px;
+}
+.icon-role-mage {
+	background-position:-48px -300px;
+}
+.icon-role-warrior {
+	background-position:-32px -300px;
+}

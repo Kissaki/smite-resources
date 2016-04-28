@@ -44,7 +44,10 @@
 			<tbody>
 				{{range $pantheon, $undef := .Pantheons}}
 				<tr>
-					<th>{{$pantheon}}</th>
+					<th>
+						{{$pantheon}}<br>
+						<div class="icon-pantheon icon-pantheon-{{ToCSSClass $pantheon}}"></div>
+					</th>
 					{{range $role, $undef := $roles}}
 					<td>
 						{{$godsByID := index $gods $pantheon $role}}

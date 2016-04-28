@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 const (
@@ -99,6 +100,10 @@ func initFlags() error {
 	return nil
 }
 
+func ToCSSClass(str string) string {
+	return strings.TrimSpace(strings.ToLower(str))
+}
+
 func main() {
 	//	apidata.LogToFile()
 
@@ -135,7 +140,11 @@ func main() {
 		roleGods[god.ID] = god
 	}
 
-	tmpl, err := template.New("gods.html").ParseGlob("templates/*.html")
+	funcMap := template.FuncMap{
+		"ToCSSClass": ToCSSClass,
+	}
+
+	tmpl, err := template.New("gods.html").Funcs(funcMap).ParseGlob("templates/*.html")
 	if err != nil {
 		log.Fatalln("Failed to parse template files: ", err)
 	}
