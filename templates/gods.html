@@ -27,30 +27,30 @@
 		</fieldset>
 	</form>
 
-	{{$size := len .PantheonGodList -}}
-	{{$roles := .Roles -}}
-	{{$gods := .PantheonGodList -}}
+	{{$size := len .Assoc -}}
 	{{if gt $size 0 -}}
 		<h2>God Grid</h2>
 		<table id="smitegodstable">
 			<thead>
 				<tr>
 					<th></th>
-					{{range $role, $undef := $roles}}
+					{{range $role := .Roles}}
 					<th>{{$role}}</th>
 					{{end}}
 				</tr>
 			</thead>
 			<tbody>
-				{{range $pantheon, $undef := .Pantheons}}
+				{{$roles := .Roles -}}
+				{{$assoc := .Assoc -}}
+				{{range $pantheon := .Pantheons}}
 				<tr>
 					<th>
 						{{$pantheon}}<br>
 						<div class="icon-pantheon icon-pantheon-{{ToCSSClass $pantheon}}"></div>
 					</th>
-					{{range $role, $undef := $roles}}
+					{{range $role := $roles}}
 					<td>
-						{{$godsByID := index $gods $pantheon $role}}
+						{{$godsByID := index $assoc $pantheon $role}}
 						<ul>
 							{{range $godsByID}}
 							<li>{{template "god.html" .}}</li>

@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -55,18 +56,60 @@ func parseGods() (gods.Gods, error) {
 	return gods, nil
 }
 
-type pantheonGodList map[string]roleGodMap
-type roleGodMap map[string]godsByID
-type godsByID map[int]gods.God
-
-type set map[string]struct{}
-type Pantheons set
-type Roles set
-
 type TemplateData struct {
-	Pantheons       Pantheons
-	Roles           Roles
-	PantheonGodList pantheonGodList
+	Pantheons []string
+	Roles     []string
+	// Pantheon => Role => GodID => God
+	//FIXME: Order gods
+	Assoc map[string]map[string]gods.Gods
+}
+
+type IntSet map[int]struct{}
+type StringSet map[string]struct{}
+
+func CreateTemplateData(godsList gods.Gods) TemplateData {
+	rolesUnique := make(StringSet)
+	godData := make(map[string]map[string]gods.Gods)
+	// Unique check
+	GodIds := make(IntSet)
+	for _, god := range godsList {
+		_, ok := GodIds[god.ID]
+		if ok {
+			log.Fatalf("God with ID %d exists more than once; %s", god.ID, god.Name)
+		}
+		GodIds[god.ID] = struct{}{}
+
+		godPantheon := strings.TrimSpace(god.Pantheon)
+		if godData[godPantheon] == nil {
+			godData[godPantheon] = make(map[string]gods.Gods)
+		}
+
+		godRole := strings.TrimSpace(god.Roles)
+		rolesUnique[godRole] = struct{}{}
+		godData[godPantheon][godRole] = append(godData[godPantheon][godRole], god)
+	}
+
+	// Now we have unique pantheons, roles, god IDs, and can get gods by ID
+
+	var pantheons []string
+	for pantheon, _ := range godData {
+		pantheons = append(pantheons, pantheon)
+	}
+	sort.Strings(pantheons)
+
+	var roles []string
+	for role, _ := range rolesUnique {
+		roles = append(roles, role)
+	}
+	sort.Strings(roles)
+
+	for _, data1 := range godData {
+		for _, gods := range data1 {
+			sort.Sort(gods)
+		}
+	}
+
+	return TemplateData{pantheons, roles, godData}
 }
 
 func LogToFile() {
@@ -120,26 +163,6 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	roles := make(Roles)
-	pantheons := make(Pantheons)
-	godMap := make(pantheonGodList)
-	for _, god := range godlist {
-		roles[god.Roles] = struct{}{}
-		pantheons[god.Pantheon] = struct{}{}
-
-		if godMap[god.Pantheon] == nil {
-			godMap[god.Pantheon] = make(roleGodMap)
-		}
-		roleMap := godMap[god.Pantheon]
-
-		if roleMap[god.Roles] == nil {
-			roleMap[god.Roles] = make(godsByID)
-		}
-		roleGods := roleMap[god.Roles]
-
-		roleGods[god.ID] = god
-	}
-
 	funcMap := template.FuncMap{
 		"ToCSSClass": ToCSSClass,
 	}
@@ -157,7 +180,7 @@ func main() {
 	writer := bufio.NewWriter(file)
 	defer writer.Flush()
 
-	err = tmpl.Execute(writer, TemplateData{pantheons, roles, godMap})
+	err = tmpl.Execute(writer, CreateTemplateData(godlist))
 	if err != nil {
 		log.Fatalln("Failed to execute HTML template with data: ", err)
 	}

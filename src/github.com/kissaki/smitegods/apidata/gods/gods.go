@@ -1,6 +1,12 @@
 package gods
 
+import "strings"
+
 type Gods []God
+
+func (gods Gods) Len() int               { return len(gods) }
+func (gods Gods) Swap(i int, j int)      { gods[i], gods[j] = gods[j], gods[i] }
+func (gods Gods) Less(i int, j int) bool { return strings.Compare(gods[i].Name, gods[j].Name) < 0 }
 
 type God struct {
 	Ability1                   Ability `json:"Ability_1"`
