@@ -8,18 +8,21 @@ function forEveryGod(fn)
 	}
 }
 
-function getSizeSlider()
-{
-	return document.querySelector('#god-icon-size');
-}
 function onGodiconsizeChanged()
 {
-	document.querySelector('#god-icon-size-value').innerHTML = getSizeSlider().value;
-	var newSize = getSizeSlider().value + 'px';
+	var value = document.querySelector('#god-icon-size').value;
+	document.querySelector('#god-icon-size-value').innerHTML = value;
+	var newSize = value + 'px';
 	var updateSize = function(god){god.style.width = newSize;}
 	forEveryGod(updateSize);
 }
-getSizeSlider().addEventListener('input', onGodiconsizeChanged);
+function onGodiconsizeClear()
+{
+	document.querySelector('#god-icon-size').value = '64';
+	onGodiconsizeChanged();
+}
+document.querySelector('#god-icon-size').addEventListener('input', onGodiconsizeChanged);
+document.querySelector('#god-icon-size-clear').addEventListener('click', onGodiconsizeClear)
 onGodiconsizeChanged();
 
 function setVisible(el, visible)
@@ -37,7 +40,13 @@ function onGodFilterChanged()
 	}
 	forEveryGod(updateGod);
 }
+function onGodFilterClear()
+{
+	document.querySelector('#filter-god').value = '';
+	onGodFilterChanged();
+}
 document.querySelector('#filter-god').addEventListener('input', onGodFilterChanged);
+document.querySelector('#filter-god-clear').addEventListener('click', onGodFilterClear)
 onGodFilterChanged();
 
 function onPantheonFilterChanged()
@@ -50,7 +59,13 @@ function onPantheonFilterChanged()
 		setVisible(rows[i], visible);
 	}
 }
+function onPantheonFilterClear()
+{
+	document.querySelector('#filter-pantheon').value = '';
+	onPantheonFilterChanged();
+}
 document.querySelector('#filter-pantheon').addEventListener('input', onPantheonFilterChanged);
+document.querySelector('#filter-pantheon-clear').addEventListener('click', onPantheonFilterClear)
 onPantheonFilterChanged();
 
 function onRoleFilterChanged()
@@ -72,5 +87,11 @@ function onRoleFilterChanged()
 		}
 	}
 }
+function onRoleFilterClear()
+{
+	document.querySelector('#filter-role').value = '';
+	onRoleFilterChanged();
+}
 document.querySelector('#filter-role').addEventListener('input', onRoleFilterChanged);
+document.querySelector('#filter-role-clear').addEventListener('click', onRoleFilterClear);
 onRoleFilterChanged();
