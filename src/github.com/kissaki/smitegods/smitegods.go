@@ -14,6 +14,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"time"
 )
 
 const (
@@ -61,7 +62,8 @@ type TemplateData struct {
 	Roles     []string
 	// Pantheon => Role => GodID => God
 	//FIXME: Order gods
-	Assoc map[string]map[string]gods.Gods
+	Assoc             map[string]map[string]gods.Gods
+	ResourceQualifier string
 }
 
 type IntSet map[int]struct{}
@@ -109,7 +111,9 @@ func CreateTemplateData(godsList gods.Gods) TemplateData {
 		}
 	}
 
-	return TemplateData{pantheons, roles, godData}
+	resourceQualifier := time.Now().UTC().Format("20060102150405")
+
+	return TemplateData{pantheons, roles, godData, resourceQualifier}
 }
 
 func LogToFile() {
