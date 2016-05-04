@@ -70,12 +70,13 @@ onPantheonFilterChanged();
 
 function onRoleFilterChanged()
 {
-	var filterValue = document.querySelector('#filter-role').value.toLowerCase();
 	var columnheads = document.querySelector('#smitegodstable tr').querySelectorAll('th');
 	for (var i = 1; i < columnheads.length; ++i)
 	{
 		var roleCell = columnheads[i];
-		var visible = roleCell.textContent.toLowerCase().indexOf(filterValue) !== -1;
+		var role = roleCell.id.substr("role-column-".length);
+		var filter = document.querySelector('#filter-role-cb-' + role);
+		var visible = filter.checked;
 		setVisible(roleCell, visible);
 		// rows have a head column, so td index is 1-based; which matches our off-by-one heads
 		var offset = i - 1;
@@ -89,9 +90,18 @@ function onRoleFilterChanged()
 }
 function onRoleFilterClear()
 {
-	document.querySelector('#filter-role').value = '';
+	var cbs = document.querySelectorAll('.filter-role-cb');
+	for (var i = 0; i < cbs.length; ++i)
+	{
+		var cb = cbs[i];
+		cb.checked = true;
+	}
 	onRoleFilterChanged();
 }
-document.querySelector('#filter-role').addEventListener('input', onRoleFilterChanged);
+var cbs = document.querySelectorAll('.filter-role-cb');
+for (var i = 0; i < cbs.length; ++i)
+{
+	cbs[i].addEventListener('change', onRoleFilterChanged)
+}
 document.querySelector('#filter-role-clear').addEventListener('click', onRoleFilterClear);
 onRoleFilterChanged();

@@ -7,37 +7,58 @@
 </head>
 <body>
 	<h1>SMITE God Overview</h1>
-	<div id="about">
+	<div id="about" class="data-block">
 		<h2>About</h2>
 		<p>This is an interactive overview of SMITE®s gods with their associated pantheon and role. This is especially useful for the weekly quests, which may focus on a specific pantheon or role.</p>
 		<aside>Updating this table is trivial (e.g. automated), especially compared to traditional, manually created image files. So expect this to stay up to date, or give me a quick heads-up.</aside>
 	</div>
-	<div id="legend">
-		<h2>Legend:</h2>
+	<div id="legend" class="data-block">
+		<h2>Legend</h2>
 		Free Rotation: <span id="legend_freerotation">FR</span>
 	</div>
 
-	<form id="filters-n-options">
-		<h2>Filter and Display Options</h2>
+	<form id="options" class="data-block">
+		<h2>Display Options</h2>
 		<fieldset>
-			<label for="god-icon-size">God Icon Size:</label>
-			<input id="god-icon-size" type="range" min="32" max="128" value="64" step="16" />
-			<span id="god-icon-size-value"></span> px
-			<input id="god-icon-size-clear" type="button" value="⌧">
-			<br>
-			<label for="filter-god">God Filter:</label>
-			<input id="filter-god" type="text">
-			<input id="filter-god-clear" type="button" value="⌧">
-			<br>
-			<label for="filter-pantheon">Pantheon Filter:</label>
-			<input id="filter-pantheon" type="text">
-			<input id="filter-pantheon-clear" type="button" value="⌧">
-			<br>
-			<label for="filter-role">Role Filter:</label>
-			<input id="filter-role" type="text">
-			<input id="filter-role-clear" type="button" value="⌧">
+			<div class="option">
+				<label for="god-icon-size">God Icon Size:</label>
+				<input id="god-icon-size" type="range" min="32" max="128" value="64" step="16" />
+				<span id="god-icon-size-value"></span> px
+				<input id="god-icon-size-clear" type="button" value="⌧">
+			</div>
 		</fieldset>
 	</form>
+	<form id="filters" class="data-block">
+		<h2>Filters</h2>
+		<fieldset>
+			<div class="filter">
+				<label for="filter-god">God Filter:</label>
+				<input id="filter-god" type="text">
+				<input id="filter-god-clear" type="button" value="⌧">
+			</div>
+			<div class="filter">
+				<label for="filter-pantheon">Pantheon Filter:</label>
+				<input id="filter-pantheon" type="text">
+				<input id="filter-pantheon-clear" type="button" value="⌧">
+			</div>
+			<div class="filter">
+				<label >Role Filter:</label>
+				<ul>
+					{{range $role := .Roles}}
+					<li>
+						<label id="filter-role-option-{{ToCSSClass $role}}" class="filter-role-option">
+							<input id="filter-role-cb-{{ToCSSClass $role}}" class="filter-role-cb" type="checkbox" checked>
+							{{$role}}
+						</label>
+					</li>
+					{{end}}
+				</ul>
+				<input id="filter-role-clear" type="button" value="All">
+			</div>
+		</fieldset>
+	</form>
+	<div style="clear:both">
+	</div>
 
 	{{$size := len .Assoc -}}
 	{{if gt $size 0 -}}
@@ -47,7 +68,7 @@
 				<tr>
 					<th></th>
 					{{range $role := .Roles}}
-					<th>{{$role}}</th>
+					<th id="role-column-{{ToCSSClass $role}}">{{$role}}</th>
 					{{end}}
 				</tr>
 			</thead>

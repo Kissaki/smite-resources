@@ -1,6 +1,8 @@
 * {border:0; margin:0; padding:0; text-decoration:none;}
 
-html {padding:8px 8px 16px;}
+html {padding:8px 8px 16px; font-size:100%; line-height:1.3em;}
+h1 {font-size:1.6em; line-height:1.6em; margin:0.2em 0 0.1em;}
+h2 {font-size:1.4em; line-height:1.4em; margin:0.3em 0 0.1em;}
 
 input[type=text] { border:1px solid #dddddd; }
 table, tr, th, td {border:1px solid #cccccc; vertical-align:top;}
@@ -23,12 +25,29 @@ aside { font-style:italic; }
 .godnoicon { background-color:lightblue; font-weight:bold; text-align:center; }
 .godname { height:16px; font-size:14px; line-height:16px; text-align:center; white-space:nowrap; overflow:hidden; }
 
+.data-block {
+	background:#fafafa;
+	padding:8px 4px;
+	margin:4px;
+	border:2px solid transparent;
+}
+.data-block h2 {
+	margin:0 0 0.1em;
+}
+.filter {
+	margin-bottom:8px;
+}
+#legend {float:right;}
+#options {float:left;}
+#filters {float:left;}
+
 #legend_freerotation, .freerotation {
 	font-size:12px; line-height:12px;
 	background:#44cc44;
 	font-weight:bold;
 	padding:2px;
 	border:1px solid #000;
+	cursor:default;
 }
 .freerotation {
 	position:absolute; top:0px; left:0px;
@@ -66,4 +85,27 @@ aside { font-style:italic; }
 .icon-pantheon-roman {
 	background-position:-38px -100px;
 	width:124px;
+}
+input[type=button], input[type=text] {
+	padding:2px 4px;
+}
+.filter-role-option {
+	background:#dddddd;
+	padding:2px 4px;
+	cursor:pointer;
+}
+#role-column-assassin, #filter-role-option-assassin {
+	background:#f4d608;
+}
+#role-column-warrior, #filter-role-option-warrior {
+	background:#ff4040;
+}
+#role-column-hunter, #filter-role-option-hunter {
+	background:#ffa44b;
+}
+#role-column-mage, #filter-role-option-mage {
+	background:#bc6fb3;
+}
+#role-column-guardian, #filter-role-option-guardian {
+	background:#aab058;
 }
