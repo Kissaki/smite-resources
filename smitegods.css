@@ -89,7 +89,7 @@ aside { font-style:italic; }
 input[type=button], input[type=text] {
 	padding:2px 4px;
 }
-.filter-role-option {
+.filter-role-option, .filter-pantheon-option {
 	background:#dddddd;
 	padding:2px 4px;
 	cursor:pointer;

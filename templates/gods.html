@@ -38,8 +38,17 @@
 			</div>
 			<div class="filter">
 				<label for="filter-pantheon">Pantheon Filter:</label>
-				<input id="filter-pantheon" type="text">
-				<input id="filter-pantheon-clear" type="button" value="⌧">
+				<ul>
+				{{range $pantheon := .Pantheons}}
+					<li>
+						<label id="filter-pantheon-option-{{ToCSSClass $pantheon}}" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-{{ToCSSClass $pantheon}}" class="filter-pantheon-cb" type="checkbox" checked>
+							{{$pantheon}}
+						</label>
+					</li>
+				{{end}}
+				</ul>
+				<input id="filter-pantheon-clear" type="button" value="All">
 			</div>
 			<div class="filter">
 				<label >Role Filter:</label>
@@ -76,7 +85,7 @@
 				{{$roles := .Roles -}}
 				{{$assoc := .Assoc -}}
 				{{range $pantheon := .Pantheons}}
-				<tr>
+				<tr id="pantheon-row-{{ToCSSClass $pantheon}}">
 					<th>
 						{{$pantheon}}<br>
 						<div class="icon-pantheon icon-pantheon-{{ToCSSClass $pantheon}}"></div>

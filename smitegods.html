@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>SMITE God Overview</title>
-	<link rel="stylesheet" href="smitegods.css?20160504185749" />
+	<link rel="stylesheet" href="smitegods.css?20160504191437" />
 </head>
 <body>
 	<h1>SMITE God Overview</h1>
@@ -38,8 +38,66 @@
 			</div>
 			<div class="filter">
 				<label for="filter-pantheon">Pantheon Filter:</label>
-				<input id="filter-pantheon" type="text">
-				<input id="filter-pantheon-clear" type="button" value="⌧">
+				<ul>
+				
+					<li>
+						<label id="filter-pantheon-option-chinese" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-chinese" class="filter-pantheon-cb" type="checkbox" checked>
+							Chinese
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-egyptian" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-egyptian" class="filter-pantheon-cb" type="checkbox" checked>
+							Egyptian
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-greek" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-greek" class="filter-pantheon-cb" type="checkbox" checked>
+							Greek
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-hindu" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-hindu" class="filter-pantheon-cb" type="checkbox" checked>
+							Hindu
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-japanese" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-japanese" class="filter-pantheon-cb" type="checkbox" checked>
+							Japanese
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-mayan" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-mayan" class="filter-pantheon-cb" type="checkbox" checked>
+							Mayan
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-norse" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-norse" class="filter-pantheon-cb" type="checkbox" checked>
+							Norse
+						</label>
+					</li>
+				
+					<li>
+						<label id="filter-pantheon-option-roman" class="filter-pantheon-option">
+							<input id="filter-pantheon-cb-roman" class="filter-pantheon-cb" type="checkbox" checked>
+							Roman
+						</label>
+					</li>
+				
+				</ul>
+				<input id="filter-pantheon-clear" type="button" value="All">
 			</div>
 			<div class="filter">
 				<label >Role Filter:</label>
@@ -108,7 +166,7 @@
 			</thead>
 			<tbody>
 				
-				<tr>
+				<tr id="pantheon-row-chinese">
 					<th>
 						Chinese<br>
 						<div class="icon-pantheon icon-pantheon-chinese"></div>
@@ -250,7 +308,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-egyptian">
 					<th>
 						Egyptian<br>
 						<div class="icon-pantheon icon-pantheon-egyptian"></div>
@@ -392,7 +450,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-greek">
 					<th>
 						Greek<br>
 						<div class="icon-pantheon icon-pantheon-greek"></div>
@@ -570,7 +628,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-hindu">
 					<th>
 						Hindu<br>
 						<div class="icon-pantheon icon-pantheon-hindu"></div>
@@ -676,7 +734,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-japanese">
 					<th>
 						Japanese<br>
 						<div class="icon-pantheon icon-pantheon-japanese"></div>
@@ -737,7 +795,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-mayan">
 					<th>
 						Mayan<br>
 						<div class="icon-pantheon icon-pantheon-mayan"></div>
@@ -852,7 +910,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-norse">
 					<th>
 						Norse<br>
 						<div class="icon-pantheon icon-pantheon-norse"></div>
@@ -1003,7 +1061,7 @@
 					
 				</tr>
 				
-				<tr>
+				<tr id="pantheon-row-roman">
 					<th>
 						Roman<br>
 						<div class="icon-pantheon icon-pantheon-roman"></div>
@@ -1135,6 +1193,6 @@
 		<p>Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.</p>
 		<p><a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.</p>
 	</footer>
-	<script src="smitegods.js?20160504185749"></script>
+	<script src="smitegods.js?20160504191437"></script>
 </body>
 </html>

@@ -51,20 +51,31 @@ onGodFilterChanged();
 
 function onPantheonFilterChanged()
 {
-	var filterValue = document.querySelector('#filter-pantheon').value.toLowerCase();
-	var rows = document.querySelectorAll('#smitegodstable tr');
-	for (var i = 1; i < rows.length; ++i)
+	var options = document.querySelectorAll('.filter-pantheon-option');
+	for (var i = 0; i < options.length; ++i)
 	{
-		var visible = rows[i].querySelector('th').textContent.toLowerCase().indexOf(filterValue) !== -1;
-		setVisible(rows[i], visible);
+		var option = options[i];
+		var pantheon = option.id.substr('filter-pantheon-option-'.length);
+		var visible = option.querySelector('.filter-pantheon-cb').checked;
+		var row = document.querySelector('#pantheon-row-' + pantheon)
+		setVisible(row, visible);
 	}
 }
 function onPantheonFilterClear()
 {
-	document.querySelector('#filter-pantheon').value = '';
+	var cbs = document.querySelectorAll('.filter-pantheon-cb');
+	for (var i = 0; i < cbs.length; ++i)
+	{
+		var cb = cbs[i];
+		cb.checked = true;
+	}
 	onPantheonFilterChanged();
 }
-document.querySelector('#filter-pantheon').addEventListener('input', onPantheonFilterChanged);
+var cbs = document.querySelectorAll('.filter-pantheon-cb');
+for (var i = 0; i < cbs.length; ++i)
+{
+	cbs[i].addEventListener('change', onPantheonFilterChanged)
+}
 document.querySelector('#filter-pantheon-clear').addEventListener('click', onPantheonFilterClear)
 onPantheonFilterChanged();
 
