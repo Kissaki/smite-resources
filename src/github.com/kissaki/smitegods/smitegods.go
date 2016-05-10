@@ -79,6 +79,13 @@ func CreateTemplateData(godsList gods.Gods) TemplateData {
 		if ok {
 			log.Fatalf("God with ID %d exists more than once; %s", god.ID, god.Name)
 		}
+
+		godRole := strings.TrimSpace(god.Roles)
+		if len(godRole) == 0 {
+			log.Println("WARN: God with no role: ", god.Name)
+			continue
+		}
+
 		GodIds[god.ID] = struct{}{}
 
 		godPantheon := strings.TrimSpace(god.Pantheon)
@@ -86,7 +93,6 @@ func CreateTemplateData(godsList gods.Gods) TemplateData {
 			godData[godPantheon] = make(map[string]gods.Gods)
 		}
 
-		godRole := strings.TrimSpace(god.Roles)
 		rolesUnique[godRole] = struct{}{}
 		godData[godPantheon][godRole] = append(godData[godPantheon][godRole], god)
 	}
