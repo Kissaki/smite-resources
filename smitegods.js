@@ -13,7 +13,15 @@ function onGodiconsizeChanged()
 	var value = document.querySelector('#god-icon-size').value;
 	document.querySelector('#god-icon-size-value').innerHTML = value;
 	var newSize = value + 'px';
-	var updateSize = function(god){god.style.width = newSize;}
+	var updateSize = function(god)
+	{
+		god.style.width = newSize;
+		var pseudoIcon = god.querySelector('.godnoicon');
+		if (pseudoIcon !== null)
+		{
+			pseudoIcon.style.height = newSize
+		}
+	}
 	forEveryGod(updateSize);
 }
 function onGodiconsizeClear()
