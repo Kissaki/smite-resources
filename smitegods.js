@@ -57,6 +57,15 @@ document.querySelector('#filter-god').addEventListener('input', onGodFilterChang
 document.querySelector('#filter-god-clear').addEventListener('click', onGodFilterClear)
 onGodFilterChanged();
 
+
+function setAll(cbs, selected)
+{
+	for (var i = 0; i < cbs.length; ++i)
+	{
+		var cb = cbs[i];
+		cb.checked = selected;
+	}
+}
 function onPantheonFilterChanged()
 {
 	var options = document.querySelectorAll('.filter-pantheon-option');
@@ -72,11 +81,13 @@ function onPantheonFilterChanged()
 function onPantheonFilterClear()
 {
 	var cbs = document.querySelectorAll('.filter-pantheon-cb');
-	for (var i = 0; i < cbs.length; ++i)
-	{
-		var cb = cbs[i];
-		cb.checked = true;
-	}
+	setAll(cbs, true);
+	onPantheonFilterChanged();
+}
+function onPantheonFilterAll()
+{
+	var cbs = document.querySelectorAll('.filter-pantheon-cb');
+	setAll(cbs, false);
 	onPantheonFilterChanged();
 }
 var cbs = document.querySelectorAll('.filter-pantheon-cb');
@@ -85,6 +96,7 @@ for (var i = 0; i < cbs.length; ++i)
 	cbs[i].addEventListener('change', onPantheonFilterChanged)
 }
 document.querySelector('#filter-pantheon-clear').addEventListener('click', onPantheonFilterClear)
+document.querySelector('#filter-pantheon-none').addEventListener('click', onPantheonFilterAll)
 onPantheonFilterChanged();
 
 function onRoleFilterChanged()
@@ -110,11 +122,13 @@ function onRoleFilterChanged()
 function onRoleFilterClear()
 {
 	var cbs = document.querySelectorAll('.filter-role-cb');
-	for (var i = 0; i < cbs.length; ++i)
-	{
-		var cb = cbs[i];
-		cb.checked = true;
-	}
+	setAll(cbs, true);
+	onRoleFilterChanged();
+}
+function onRoleFilterAll()
+{
+	var cbs = document.querySelectorAll('.filter-role-cb');
+	setAll(cbs, false);
 	onRoleFilterChanged();
 }
 var cbs = document.querySelectorAll('.filter-role-cb');
@@ -123,4 +137,5 @@ for (var i = 0; i < cbs.length; ++i)
 	cbs[i].addEventListener('change', onRoleFilterChanged)
 }
 document.querySelector('#filter-role-clear').addEventListener('click', onRoleFilterClear);
+document.querySelector('#filter-role-none').addEventListener('click', onRoleFilterAll);
 onRoleFilterChanged();
