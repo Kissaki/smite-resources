@@ -14,7 +14,6 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"time"
 )
 
 const (
@@ -63,7 +62,8 @@ type TemplateData struct {
 	// Pantheon => Role => GodID => God
 	//FIXME: Order gods
 	Assoc             map[string]map[string]gods.Gods
-	ResourceQualifier string
+	ResourceQualifierCSS string
+	ResourceQualifierJS string
 }
 
 type IntSet map[int]struct{}
@@ -117,9 +117,18 @@ func CreateTemplateData(godsList gods.Gods) TemplateData {
 		}
 	}
 
-	resourceQualifier := time.Now().UTC().Format("20060102150405")
+	fCSS, err := os.Stat("smitegods.css")
+	if (err != nil) {
+		panic("Failed to get CSS file information")
+	}
+	resourceQualifierCSS := fCSS.ModTime().UTC().Format("20060102150405")
+	fJS, err := os.Stat("smitegods.js")
+	if (err != nil) {
+		panic("Failed to get JS file information")
+	} 
+	resourceQualifierJS := fJS.ModTime().UTC().Format("20060102150405")
 
-	return TemplateData{pantheons, roles, godData, resourceQualifier}
+	return TemplateData{pantheons, roles, godData, resourceQualifierCSS, resourceQualifierJS}
 }
 
 func LogToFile() {
