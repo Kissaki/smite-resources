@@ -1,3 +1,13 @@
+build:
+  image: golang:latest
+  script:
+    - cd src
+    - GOPATH=$CI_PROJECT_DIR/src:$GOPATH
+    - go build -o ../bin/smitegods smitegods.go
+  artifacts:
+    paths:
+      - bin/smitegods
+
 pages:
   script:
   - mkdir public
