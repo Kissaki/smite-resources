@@ -1,0 +1,10 @@
+pages:
+  script:
+  - mkdir public
+  - cp roles-pantheons-spritesheet.png smitegods.css smitegods.html smitegods.js public
+  - mv public/smitegods.html public/index.html
+  artifacts:
+    paths:
+    - public
+  only:
+    - master
