@@ -3,6 +3,5 @@
     "files.exclude": {
         "bin": true,
         "pkg": true
-    },
-    "go.gopath": "."
+    }
 }
