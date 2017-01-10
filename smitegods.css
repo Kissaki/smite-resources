@@ -86,6 +86,10 @@ aside { font-style:italic; }
 	background-position:-38px -100px;
 	width:124px;
 }
+.icon-pantheon-celtic {
+	background-position:-500px -200px;
+	width:124px;
+}
 input[type=button], input[type=text] {
 	padding:2px 4px;
 }
