@@ -61,6 +61,9 @@ aside { font-style:italic; }
 	width:100px; height:100px;
 	float:right;
 }
+.icon-pantheon- {
+	background-position:-500px -100px;
+}
 .icon-pantheon-chinese {
 	background-position:-200px -200px;
 }
