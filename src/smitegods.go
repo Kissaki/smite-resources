@@ -15,6 +15,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"time"
 )
 
 const (
@@ -32,6 +33,42 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>Hello %s!</h1>", r.URL.Path[1:])
 }
 
+func reverse(arr Changelog) {
+	// Counting forward from the front, and backward from the back,
+	// swap every nth element with the one on the other side
+	// until we reach the middle.
+	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+}
+
+func addChangelogEntry(description string) (err error) {
+	d, err := ioutil.ReadFile(FILE_CHANGELOG)
+	if err != nil {
+		return
+	}
+
+	log := Changelog{}
+	err = json.Unmarshal(d, &log)
+	if err != nil {
+		return
+	}
+
+	change := Change{Time: time.Now().Format("02.01.2006"), Description: description}
+	reverse(log)
+	log = append(log, change)
+	reverse(log)
+
+	logJSON, err := json.Marshal(&log)
+	if err != nil {
+		return
+	}
+
+	ioutil.WriteFile(FILE_CHANGELOG, logJSON, 0666)
+
+	return
+}
+
 func APITestAndGodsDownload() {
 	s := apidata.NewSession(apidata.EndpointPC, *DeveloperID, *AuthKey, apidata.CreateFormatJson())
 	log.Println(s.Ping())
@@ -43,6 +80,7 @@ func APITestAndGodsDownload() {
 	godsOld, err := ioutil.ReadFile(FILE_GODS)
 	if err != nil || adler32.Checksum(godsOld) != adler32.Checksum([]byte(godsNew)) {
 		fmt.Println("Writing new god data to gods.json")
+		addChangelogEntry("Data update")
 		ioutil.WriteFile(FILE_GODS, []byte(godsNew), 0666)
 	} else {
 		fmt.Println("Pulled god data is not different from the stored data.")
