@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "taskName": "Generate HTML",
+            "command": "${cwd}/bin/smitegods.exe"
+        },
+        {
+            "taskName": "build",
+            "isBuildCommand": true,
+            "args": ["build", "-o","../bin/smitegods.exe", "smitegods.go"],
+            "command": "C:/go/bin/go.exe",
+            "isShellCommand": true,
+            "showOutput": "always",
+            "options": {
+                "cwd": "${cwd}/src",
+                "env": {
+                    "GOPATH": "${cwd}/src;${env.GOPATH}"
+                }
+            }
+        },
+        {
+            "taskName": "go fmt",
+            "command": "C:/go/bin/go.exe",
+            "args": [
+                "fmt", "."
+            ],
+            "options": {
+                "cwd": "src"
+            }
+        }
+    ]
+}
