@@ -174,23 +174,4 @@ func (s *Session) TestSession() string {
 func (s *Session) GetGods() string {
 	method := "getgods"
 	return s.call2ToStringParamed(method, s.createPathPart(method), "/"+LANG_EN)
-	//	body := s.call2(method, s.createPathPartNoSession(method))
-	//
-	//	defer body.Close()
-	//
-	//	str, _ := ioutil.ReadAll(body)
-	//	log.Println("resp: ", fmt.Sprintf("%s", str))
-	//
-	//	//	decoder := json.NewDecoder(body)
-	//	var data SessionReturn
-	//	//	err := decoder.Decode(&data)
-	//	err := json.Unmarshal([]byte(str), &data)
-	//	if err != nil && err != io.EOF {
-	//		log.Fatal("Failed to parse sessioncreate response: ", err)
-	//	}
-	//	if data.Message != "Approved" {
-	//		log.Fatal("Failed to create session. Server returned error: ", data.Message)
-	//	}
-	//	s.sessionID = data.SessionID
-	//	log.Println("Created session ", s.sessionID)
 }
