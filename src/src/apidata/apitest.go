@@ -171,10 +171,9 @@ func (s *Session) TestSession() string {
 	return s.call2ToString(method, s.createPathPart(method))
 }
 
-func (s *Session) GetGods() {
+func (s *Session) GetGods() string {
 	method := "getgods"
-	str := s.call2ToStringParamed(method, s.createPathPart(method), "/"+LANG_EN)
-	ioutil.WriteFile("gods.json", []byte(str), 0666)
+	return s.call2ToStringParamed(method, s.createPathPart(method), "/"+LANG_EN)
 	//	body := s.call2(method, s.createPathPartNoSession(method))
 	//
 	//	defer body.Close()
