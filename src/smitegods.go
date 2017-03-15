@@ -1,12 +1,12 @@
 package main
 
 import (
+	"apidata"
+	"apidata/gods"
 	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
-	"apidata"
-	"apidata/gods"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -87,9 +87,9 @@ type TemplateData struct {
 	Roles     []string
 	// Pantheon => Role => GodID => God
 	//FIXME: Order gods
-	Assoc             map[string]map[string]gods.Gods
+	Assoc                map[string]map[string]gods.Gods
 	ResourceQualifierCSS string
-	ResourceQualifierJS string
+	ResourceQualifierJS  string
 	Changelog            []Change
 }
 
@@ -145,14 +145,14 @@ func CreateTemplateData(godsList gods.Gods, changelog Changelog) TemplateData {
 	}
 
 	fCSS, err := os.Stat("smitegods.css")
-	if (err != nil) {
+	if err != nil {
 		panic("Failed to get CSS file information")
 	}
 	resourceQualifierCSS := fCSS.ModTime().UTC().Format("20060102150405")
 	fJS, err := os.Stat("smitegods.js")
-	if (err != nil) {
+	if err != nil {
 		panic("Failed to get JS file information")
-	} 
+	}
 	resourceQualifierJS := fJS.ModTime().UTC().Format("20060102150405")
 
 	return TemplateData{pantheons, roles, godData, resourceQualifierCSS, resourceQualifierJS, changelog}
