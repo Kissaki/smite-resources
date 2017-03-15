@@ -43,7 +43,7 @@ func APITestAndGodsDownload() {
 	godsOld, err := ioutil.ReadFile(FILE_GODS)
 	if err != nil || adler32.Checksum(godsOld) != adler32.Checksum([]byte(godsNew)) {
 		fmt.Println("Writing new god data to gods.json")
-		ioutil.WriteFile("gods.json", []byte(godsNew), 0666)
+		ioutil.WriteFile(FILE_GODS, []byte(godsNew), 0666)
 	} else {
 		fmt.Println("Pulled god data is not different from the stored data.")
 	}
