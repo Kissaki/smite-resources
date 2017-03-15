@@ -1,0 +1,138 @@
+[
+    {
+        "time": "14.03.2017",
+        "description": "Data Update; FR"
+    },
+    {
+        "time": "24.02.2017",
+        "description": "Data Update; Kuzenbo, FR"
+    },
+    {
+        "time": "12.02.2017",
+        "description": "Data update; FR"
+    },
+    {
+        "time": "04.02.2017",
+        "description": "Data update; new Vamana god icon"
+    },
+    {
+        "time": "01.02.2017",
+        "description": "Data update; new FR"
+    },
+    {
+        "time": "24.01.2017",
+        "description": "Data update; new FR, Kali is back"
+    },
+    {
+        "time": "10.01.2017",
+        "description": "Data update; new pantheon and god"
+    },
+    {
+        "time": "11.12.2016",
+        "description": "Data update; Nike and FR"
+    },
+    {
+        "time": "11.11.2016",
+        "description": "Thoth Icon was added"
+    },
+    {
+        "time": "08.11.2016",
+        "description": "Update data; New god Thoth (no img), new FR"
+    },
+    {
+        "time": "12.10.2016",
+        "description": "Update data, new free rotation"
+    },
+    {
+        "time": "12.10.2016",
+        "description": "Update data, new god Camazotz"
+    },
+    {
+        "time": "03.10.2016",
+        "description": "Add filter action button \"random\" for role and pantheon"
+    },
+    {
+        "time": "03.10.2016",
+        "description": "Update free god rotation"
+    },
+    {
+        "time": "03.10.2016",
+        "description": "Add filter buttons to deselect all pantheons/roles"
+    },
+    {
+        "time": "02.09.2016",
+        "description": "Data update; New god Izanami, new free rotation"
+    },
+    {
+        "time": "17.08.2016",
+        "description": "Data update; god rotation"
+    },
+    {
+        "time": "02.08.2016",
+        "description": "Data update; new patch, new god Terra"
+    },
+    {
+        "time": "19.07.2016",
+        "description": "Data update, new free god rotation"
+    },
+    {
+        "time": "07.07.2016",
+        "description": "Data update; new patch, new god Erlang Shen"
+    },
+    {
+        "time": "…",
+        "description": "Data update"
+    },
+    {
+        "time": "24.05.2016",
+        "description": "Update data after Patch 3.9 release (nothing changed yet)"
+    },
+    {
+        "time": "17.05.2016",
+        "description": "Update data (free god rotation changed)"
+    },
+    {
+        "time": "12.05.2016",
+        "description": "Update data again (upstream got changed) (Susano Icon, Free rotation)"
+    },
+    {
+        "time": "10.05.2016",
+        "description": "Update data for patch 3.8 (new god Susano, updated Arachne image)"
+    },
+    {
+        "time": "04.05.2016",
+        "description": "Add changelog"
+    },
+    {
+        "time": "04.05.2016",
+        "description": "Resource file qualifiers to make sure CSS and JS are not cached by webbrowser"
+    },
+    {
+        "time": "04.05.2016",
+        "description": "Checkboxes for role and pantheon filters"
+    },
+    {
+        "time": "04.05.2016",
+        "description": "Update free rotation gods (fetch data and generate)"
+    },
+    {
+        "time": "03.05.2016",
+        "description": "Add filter clear buttons"
+    },
+    {
+        "time": "29.04.2016",
+        "description": "Sort pantheons, roles and gods"
+    },
+    {
+        "time": "29.04.2016",
+        "description": "Pantheon Icons"
+    },
+    {
+        "time": "27.04.2016",
+        "description": "Fix for Chrome regarding filters"
+    },
+    {
+        "time": "27.04.2016",
+        "description": "Initial Release"
+    }
+]

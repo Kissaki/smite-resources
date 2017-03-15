@@ -17,7 +17,8 @@ import (
 )
 
 const (
-	FILE_GODS = "gods.json"
+	FILE_GODS      = "gods.json"
+	FILE_CHANGELOG = "changes.json"
 )
 
 var UpdateGodData = flag.Bool("updategoddata", false, "Specifies whether the God data should be updated form the SMITE API. This requires specifying the developer ID and authentication key.")
@@ -56,6 +57,31 @@ func parseGods() (gods.Gods, error) {
 	return gods, nil
 }
 
+func parseChangelog() (log Changelog, err error) {
+	jsonData, err := ioutil.ReadFile(FILE_CHANGELOG)
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(jsonData, &log)
+	if err != nil {
+		return nil, err
+	}
+	for _, a := range log {
+		a.Description = a.Description
+	}
+	return
+}
+
+// Change represents a change to the content
+type Change struct {
+	Time        string
+	Description string
+}
+
+// Changelog is a list of dated changes
+type Changelog []Change
+
+// TemplateData contains the data used in the HTML templates to generate the resulting HTML
 type TemplateData struct {
 	Pantheons []string
 	Roles     []string
@@ -64,12 +90,13 @@ type TemplateData struct {
 	Assoc             map[string]map[string]gods.Gods
 	ResourceQualifierCSS string
 	ResourceQualifierJS string
+	Changelog            []Change
 }
 
 type IntSet map[int]struct{}
 type StringSet map[string]struct{}
 
-func CreateTemplateData(godsList gods.Gods) TemplateData {
+func CreateTemplateData(godsList gods.Gods, changelog Changelog) TemplateData {
 	rolesUnique := make(StringSet)
 	godData := make(map[string]map[string]gods.Gods)
 	// Unique check
@@ -128,7 +155,7 @@ func CreateTemplateData(godsList gods.Gods) TemplateData {
 	} 
 	resourceQualifierJS := fJS.ModTime().UTC().Format("20060102150405")
 
-	return TemplateData{pantheons, roles, godData, resourceQualifierCSS, resourceQualifierJS}
+	return TemplateData{pantheons, roles, godData, resourceQualifierCSS, resourceQualifierJS, changelog}
 }
 
 func LogToFile() {
@@ -182,6 +209,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	changelog, err := parseChangelog()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	funcMap := template.FuncMap{
 		"ToCSSClass": ToCSSClass,
 	}
@@ -199,7 +231,7 @@ func main() {
 	writer := bufio.NewWriter(file)
 	defer writer.Flush()
 
-	err = tmpl.Execute(writer, CreateTemplateData(godlist))
+	err = tmpl.Execute(writer, CreateTemplateData(godlist, changelog))
 	if err != nil {
 		log.Fatalln("Failed to execute HTML template with data: ", err)
 	}
