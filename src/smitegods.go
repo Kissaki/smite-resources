@@ -19,8 +19,8 @@ import (
 )
 
 const (
-	FILE_GODS      = "data/gods.json"
-	FILE_CHANGELOG = "changes.json"
+	fileGods      = "data/gods.json"
+	fileChangelog = "changes.json"
 )
 
 var updateGodData = flag.Bool("updategoddata", false, "Specifies whether the God data should be updated form the SMITE API. This requires specifying the developer ID and authentication key.")
@@ -43,7 +43,7 @@ func reverse(arr Changelog) {
 }
 
 func addChangelogEntry(description string) (err error) {
-	d, err := ioutil.ReadFile(FILE_CHANGELOG)
+	d, err := ioutil.ReadFile(fileChangelog)
 	if err != nil {
 		return
 	}
@@ -64,7 +64,7 @@ func addChangelogEntry(description string) (err error) {
 		return
 	}
 
-	ioutil.WriteFile(FILE_CHANGELOG, logJSON, 0666)
+	ioutil.WriteFile(fileChangelog, logJSON, 0666)
 
 	return
 }
@@ -77,11 +77,11 @@ func APITestAndGodsDownload() {
 
 	godsNew := s.GetGods()
 
-	godsOld, err := ioutil.ReadFile(FILE_GODS)
+	godsOld, err := ioutil.ReadFile(fileGods)
 	if err != nil || adler32.Checksum(godsOld) != adler32.Checksum([]byte(godsNew)) {
 		fmt.Println("Writing new god data to gods.json")
 		addChangelogEntry("Data update")
-		ioutil.WriteFile(FILE_GODS, []byte(godsNew), 0666)
+		ioutil.WriteFile(fileGods, []byte(godsNew), 0666)
 	} else {
 		fmt.Println("Pulled god data is not different from the stored data.")
 	}
@@ -93,7 +93,7 @@ func httpListen() {
 }
 
 func parseGods() (gods.Gods, error) {
-	godsJSON, err := ioutil.ReadFile(FILE_GODS)
+	godsJSON, err := ioutil.ReadFile(fileGods)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ func parseGods() (gods.Gods, error) {
 }
 
 func parseChangelog() (log Changelog, err error) {
-	jsonData, err := ioutil.ReadFile(FILE_CHANGELOG)
+	jsonData, err := ioutil.ReadFile(fileChangelog)
 	if err != nil {
 		return nil, err
 	}
