@@ -23,10 +23,10 @@ const (
 	FILE_CHANGELOG = "changes.json"
 )
 
-var UpdateGodData = flag.Bool("updategoddata", false, "Specifies whether the God data should be updated form the SMITE API. This requires specifying the developer ID and authentication key.")
-var DeveloperID = flag.Int("devid", 0, "developer ID given by Hi-Rez")
-var AuthKey = flag.String("authkey", "", "authentication key given by Hi-Rez")
-var OutFile = flag.String("target", "smitegods.html", "Filename that the HTML god overview is written to.")
+var updateGodData = flag.Bool("updategoddata", false, "Specifies whether the God data should be updated form the SMITE API. This requires specifying the developer ID and authentication key.")
+var developerID = flag.Int("devid", 0, "developer ID given by Hi-Rez")
+var authKey = flag.String("authkey", "", "authentication key given by Hi-Rez")
+var outFile = flag.String("target", "smitegods.html", "Filename that the HTML god overview is written to.")
 
 // Default Request Handler
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +70,7 @@ func addChangelogEntry(description string) (err error) {
 }
 
 func APITestAndGodsDownload() {
-	s := apidata.NewSession(apidata.EndpointPC, *DeveloperID, *AuthKey, apidata.CreateFormatJson())
+	s := apidata.NewSession(apidata.EndpointPC, *developerID, *authKey, apidata.CreateFormatJson())
 	log.Println(s.Ping())
 	s.Connect()
 	log.Println(s.TestSession())
@@ -227,7 +227,7 @@ func Dump(filename string, data string) {
 func initFlags() error {
 	flag.Parse()
 
-	if *UpdateGodData && (*DeveloperID == 0 || *AuthKey == "") {
+	if *updateGodData && (*developerID == 0 || *authKey == "") {
 		fmt.Println("invalid or unspecified parameters")
 		flag.Usage()
 		fmt.Println("#" + flag.Arg(0))
@@ -248,7 +248,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if *UpdateGodData {
+	if *updateGodData {
 		APITestAndGodsDownload()
 	}
 
@@ -270,7 +270,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("Failed to parse template files: ", err)
 	}
-	file, err := os.Create(*OutFile)
+	file, err := os.Create(*outFile)
 	if err != nil {
 		log.Fatalln("Failed to create output file: ", err)
 	}
