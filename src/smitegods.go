@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	FILE_GODS      = "gods.json"
+	FILE_GODS      = "data/gods.json"
 	FILE_CHANGELOG = "changes.json"
 )
 

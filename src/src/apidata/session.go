@@ -29,7 +29,9 @@ type Session struct {
 	sessionID string
 }
 
-// NewSession establishes a new session that can be used to call the API with
+// NewSession creates an object that can be used to connect tothe API and then call the API
+// Use Ping to test connectivity, and Connect to establish the session with the API endpoint
+// so other function calls work [with the connected session]
 func NewSession(Endpoint string, developerID int, authKey string, Format Format) Session {
 	return Session{Endpoint, developerID, authKey, Format, ""}
 }
@@ -99,6 +101,7 @@ func (s *Session) remoteCall(path string) io.ReadCloser {
 	return resp.Body
 }
 
+// Ping tests connectivity to the API endpoint (no valid session necessary)
 func (s *Session) Ping() string {
 	return s.call(Ping)
 }

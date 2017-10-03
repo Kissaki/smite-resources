@@ -29,17 +29,22 @@ const (
 // API functions for player data
 // must be followed by Format/DevID/signature/timestamp/player
 const (
-	Friends      = "getfriends"
-	GodRanks     = "getgodranks"
-	MatchHistory = "getmatchhistory"
 	// Player and league information
-	Player       = "getplayer"
+	// /player
+	Player = "getplayer"
+	// /player
 	PlayerStatus = "getplayerstatus"
 	// /player
-	PlayerAchievements = "getplayerachievements"
+	PlayerMatchHistory = "getmatchhistory"
+	// /player
+	PlayerFriends = "getfriends"
+	// /player
+	PlayerGodRanks = "getgodranks"
 	// /player/queue
 	// Match​ ​summary​ ​statistics​ ​for​ ​a​ ​(player,​ ​queue)​ ​combination​ ​grouped​ ​by​ ​gods​ ​played
 	PlayerQueueStats = "getqueuestats"
+	// /playerID
+	PlayerAchievements = "getplayerachievements"
 )
 
 // API functions for match data
