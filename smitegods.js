@@ -164,3 +164,29 @@ document.querySelector('#filter-role-clear').addEventListener('click', onRoleFil
 document.querySelector('#filter-role-none').addEventListener('click', onRoleFilterAll);
 document.querySelector('#filter-role-random').addEventListener('click', onRoleFilterRandom1);
 onRoleFilterChanged();
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values_inclusive
+function getRandomIntInclusive(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}
+function setPickRandomResult(godDomObject)
+{
+	var res = document.getElementById('random-pick-result')
+	while (res.firstChild)
+	{
+		res.removeChild(res.firstChild)
+	}
+	res.appendChild(godDomObject.cloneNode(true))
+}
+function onPickRandom()
+{
+	var gods = document.querySelectorAll('.god')
+	if (gods.length > 0)
+	{
+		var i = getRandomIntInclusive(0, gods.length - 1)
+		setPickRandomResult(gods[i])
+	}
+}
+document.getElementById('random-pick-button').addEventListener('click', onPickRandom);
