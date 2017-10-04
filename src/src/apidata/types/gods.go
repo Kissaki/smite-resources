@@ -1,17 +1,17 @@
-package main
+package types
 
 type Gods []struct {
-	Ability1   string `json:"Ability1"`
-	Ability2   string `json:"Ability2"`
-	Ability3   string `json:"Ability3"`
-	Ability4   string `json:"Ability4"`
-	Ability5   string `json:"Ability5"`
-	AbilityID1 int64  `json:"AbilityId1"`
-	AbilityID2 int64  `json:"AbilityId2"`
-	AbilityID3 int64  `json:"AbilityId3"`
-	AbilityID4 int64  `json:"AbilityId4"`
-	AbilityID5 int64  `json:"AbilityId5"`
-	Ability1   struct {
+	Ability1        string `json:"Ability1"`
+	Ability2        string `json:"Ability2"`
+	Ability3        string `json:"Ability3"`
+	Ability4        string `json:"Ability4"`
+	Ability5        string `json:"Ability5"`
+	AbilityID1      int64  `json:"AbilityId1"`
+	AbilityID2      int64  `json:"AbilityId2"`
+	AbilityID3      int64  `json:"AbilityId3"`
+	AbilityID4      int64  `json:"AbilityId4"`
+	AbilityID5      int64  `json:"AbilityId5"`
+	Ability1Details struct {
 		Description struct {
 			ItemDescription struct {
 				Cooldown    string `json:"cooldown"`
@@ -32,7 +32,7 @@ type Gods []struct {
 		Summary string `json:"Summary"`
 		URL     string `json:"URL"`
 	} `json:"Ability_1"`
-	Ability2 struct {
+	Ability2Details struct {
 		Description struct {
 			ItemDescription struct {
 				Cooldown    string `json:"cooldown"`
@@ -53,7 +53,7 @@ type Gods []struct {
 		Summary string `json:"Summary"`
 		URL     string `json:"URL"`
 	} `json:"Ability_2"`
-	Ability3 struct {
+	Ability3Details struct {
 		Description struct {
 			ItemDescription struct {
 				Cooldown    string `json:"cooldown"`
@@ -74,7 +74,7 @@ type Gods []struct {
 		Summary string `json:"Summary"`
 		URL     string `json:"URL"`
 	} `json:"Ability_3"`
-	Ability4 struct {
+	Ability4Details struct {
 		Description struct {
 			ItemDescription struct {
 				Cooldown    string `json:"cooldown"`
@@ -95,7 +95,7 @@ type Gods []struct {
 		Summary string `json:"Summary"`
 		URL     string `json:"URL"`
 	} `json:"Ability_4"`
-	Ability5 struct {
+	Ability5Details struct {
 		Description struct {
 			ItemDescription struct {
 				Cooldown    string `json:"cooldown"`

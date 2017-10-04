@@ -1,4 +1,4 @@
-package main
+package types
 
 type PlayerStatus []struct {
 	Match                 int64       `json:"Match"`

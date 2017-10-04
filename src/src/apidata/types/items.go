@@ -1,4 +1,4 @@
-package main
+package types
 
 type Items []struct {
 	ChildItemID     int64  `json:"ChildItemId"`

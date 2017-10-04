@@ -1,4 +1,4 @@
-package main
+package types
 
 type PlayerGodRanks []struct {
 	Assists     int64       `json:"Assists"`

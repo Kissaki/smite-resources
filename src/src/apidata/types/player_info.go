@@ -1,4 +1,4 @@
-package main
+package types
 
 type PlayerInfo []struct {
 	AvatarURL             string `json:"Avatar_URL"`

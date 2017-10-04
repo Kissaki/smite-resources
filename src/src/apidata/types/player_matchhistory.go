@@ -1,4 +1,4 @@
-package main
+package types
 
 type PlayerMatchHistory []struct {
 	ActiveID1           int64       `json:"ActiveId1"`
