@@ -180,13 +180,19 @@ function setPickRandomResult(godDomObject)
 	}
 	res.appendChild(godDomObject.cloneNode(true))
 }
+function pickRandomFromArray(array)
+{
+	var i = getRandomIntInclusive(0, array.length - 1)
+	return array[i]
+}
 function onPickRandom()
 {
 	var gods = document.querySelectorAll('.god')
 	if (gods.length > 0)
 	{
-		var i = getRandomIntInclusive(0, gods.length - 1)
-		setPickRandomResult(gods[i])
+		var visibleGods = []
+		gods.forEach(function(g){ if (g.offsetParent !== null) { visibleGods.push(g) } })
+		setPickRandomResult(pickRandomFromArray(visibleGods))
 	}
 }
 document.getElementById('random-pick-button').addEventListener('click', onPickRandom);
