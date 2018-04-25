@@ -1,4 +1,11 @@
-build:
+
+stages:
+  - build_go
+  - build_web
+  - deploy
+
+build_go:
+  stage: build_go
   image: golang:latest
   script:
     - cd src
@@ -6,15 +13,33 @@ build:
     - go build -o ../bin/smitegods smitegods.go
   artifacts:
     paths:
-      - bin/smitegods
+      - bin
 
-pages:
+build_web:
+  stage: build_web
   script:
-  - mkdir public
-  - cp roles-pantheons-spritesheet.png smitegods.css smitegods.html smitegods.js public
-  - mv public/smitegods.html public/index.html
+    - bin/smitegods -updategoddata -devid $SMITE_API_DEVID -authkey $SMITE_API_AUTHKEY
+    - mkdir public
+    - cp roles-pantheons-spritesheet.png smitegods.css smitegods.html smitegods.js public
   artifacts:
     paths:
     - public
+
+deploy_prod:
+  stage: deploy
+  image: registry.gitlab.com/kissaki/docker-hugo:latest
+  before_script:
+  - eval $(ssh-agent -s)
+  - echo "$SFTP_PRIVKEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo "$SFTP_KNOWNHOSTS" > ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+  script:
+    - cd public
+    - lftp -c "open -u $SFTP_USERNAME,NONE -p $SFTP_PORT sftp://$SFTP_HOST ; mirror --reverse . $SFTP_PATH"
+  environment:
+    name: production
+    url: https://kcode.de/smite/smitegods.html
   only:
     - master
