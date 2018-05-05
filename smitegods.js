@@ -66,6 +66,14 @@ function setAll(cbs, selected)
 		cb.checked = selected;
 	}
 }
+function invertSelection(cbs)
+{
+	for (var i = 0; i < cbs.length; ++i)
+	{
+		var cb = cbs[i];
+		cb.checked = !cb.checked;
+	}
+}
 function setRandom1(cbs)
 {
 	setAll(cbs, false);
@@ -101,6 +109,12 @@ function onPantheonFilterAll()
 	setAll(cbs, false);
 	onPantheonFilterChanged();
 }
+function onPantheonFilterInvert()
+{
+	var cbs = document.querySelectorAll('.filter-pantheon-cb');
+	invertSelection(cbs);
+	onPantheonFilterChanged();
+}
 function onPantheonFilterRandom1()
 {
 	var cbs = document.querySelectorAll('.filter-pantheon-cb');
@@ -114,6 +128,7 @@ for (var i = 0; i < cbs.length; ++i)
 }
 document.querySelector('#filter-pantheon-clear').addEventListener('click', onPantheonFilterClear)
 document.querySelector('#filter-pantheon-none').addEventListener('click', onPantheonFilterAll)
+document.querySelector('#filter-pantheon-invert').addEventListener('click', onPantheonFilterInvert)
 document.querySelector('#filter-pantheon-random').addEventListener('click', onPantheonFilterRandom1)
 onPantheonFilterChanged();
 
@@ -149,6 +164,12 @@ function onRoleFilterAll()
 	setAll(cbs, false);
 	onRoleFilterChanged();
 }
+function onRoleFilterInvert()
+{
+	var cbs = document.querySelectorAll('.filter-role-cb');
+	invertSelection(cbs);
+	onRoleFilterChanged();
+}
 function onRoleFilterRandom1()
 {
 	var cbs = document.querySelectorAll('.filter-role-cb');
@@ -162,6 +183,7 @@ for (var i = 0; i < cbs.length; ++i)
 }
 document.querySelector('#filter-role-clear').addEventListener('click', onRoleFilterClear);
 document.querySelector('#filter-role-none').addEventListener('click', onRoleFilterAll);
+document.querySelector('#filter-role-invert').addEventListener('click', onRoleFilterInvert);
 document.querySelector('#filter-role-random').addEventListener('click', onRoleFilterRandom1);
 onRoleFilterChanged();
 
