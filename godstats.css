@@ -54,3 +54,9 @@ ul#speeds .gods li::after {
 #speeds .gods li::after {
     content: ',';
 }
+#speeds .gods img {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    margin-right: 3px;
+}

@@ -44,53 +44,35 @@ function handleGods(gods) {
         godsBySpeed[god.Speed] = godsBySpeed[god.Speed] || []
         godsBySpeed[god.Speed].push(god)
     })
-    var godsBySpeedArray = [];
     for (var speed in godsBySpeed){
-        godsBySpeedArray.push(godsBySpeed[speed])
-        // var elRow = document.createElement('tr')
-        // var elLabel = document.createElement('td')
-        // elLabel.classList.add('label')
-        // elLabel.textContent = speed
-        // elRow.appendChild(elLabel)
-        // var elBoxCell = document.createElement('td')
-        // var elBox = document.createElement('div')
-        // elBox.classList.add('box')
-        // elBox.style.width = speed + 'px'
-        // elBoxCell.appendChild(elBox)
-        // elRow.appendChild(elBoxCell)
-        // var cellGods = document.createElement('td')
-        // var elGods = document.createElement('ul')
-        // elGods.classList.add('gods')
-        // godsBySpeed[speed].forEach(function(god){
-        //     var elGod = document.createElement('li')
-        //     elGod.textContent = god.Name
-        //     elGods.appendChild(elGod)
-        // })
-        // cellGods.appendChild(elGods)
-        // elRow.appendChild(cellGods)
-        // speeds.appendChild(elRow)
+        var elRow = document.createElement('tr')
+        var elLabel = document.createElement('td')
+        elLabel.classList.add('label')
+        elLabel.textContent = speed
+        elRow.appendChild(elLabel)
+        var elBoxCell = document.createElement('td')
+        var elBox = document.createElement('div')
+        elBox.classList.add('box')
+        elBox.style.width = speed + 'px'
+        elBoxCell.appendChild(elBox)
+        elRow.appendChild(elBoxCell)
+        var cellGods = document.createElement('td')
+        var elGods = document.createElement('ul')
+        elGods.classList.add('gods')
+        godsBySpeed[speed].forEach(function(god){
+            var elGod = document.createElement('li')
+            var icon = new Image()
+            icon.src = god.godIcon_URL
+            elGod.appendChild(icon)
+            var name = document.createElement('span')
+            name.textContent = god.Name
+            elGod.appendChild(name)
+            elGods.appendChild(elGod)
+        })
+        cellGods.appendChild(elGods)
+        elRow.appendChild(cellGods)
+        speeds.appendChild(elRow)
     }
-    // d3.select('#speeds tbody')
-    //     .selectAll('tr')
-    //     .data(godsBySpeedArray)
-    //     // .data([4, 8, 15, 16, 23, 42])
-    //     .enter()
-    //     .append('tr')
-    //     .append('td')
-    //     .text(function(d){return(d)})
-    //     .exit()
-
-    var tbody = d3.select('#speeds tbody')
-    tr = tbody.selectAll("tr")
-        .data(godsBySpeedArray)
-        .enter().append("tr")
-    tr.exit().remove()
-    var td = tr.selectAll('td')
-        .data(function(d){console.log(d); return [d[0].Speed, d];})
-        .text(function(d){ return d;})
-    td.enter().append('td').text(function(d){return d})
-    td.exit().remove()
-
 
     gods.sort(compareHealth)
     var healths = document.querySelector('#healths')
