@@ -1,0 +1,56 @@
+/* ul#speeds li {
+    display: grid;
+    grid-template-areas: "label bar gods";
+    grid-template-rows: auto;
+    grid-template-columns: auto auto auto;
+}
+ul#speeds .label {
+    grid-area: label;
+    display: inline-block;
+}
+ul#speeds .box {
+    grid-area: bar;
+    display: inline-block;
+    height: 1em;
+    background-color: green;
+}
+ul#speeds .gods {
+    grid-area: gods;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+ul#speeds .gods li {
+    display: inline;
+    list-style-type: none;
+    margin-left:4px;
+}
+ul#speeds .gods li::after {
+    content: ',';
+} */
+#speeds .label {
+    display: inline-block;
+}
+#speeds .box-container {
+    width: 400px;
+}
+#speeds .box {
+    display: inline-block;
+    height: 1em;
+    background-color: green;
+    width: 400px;
+}
+#speeds .gods {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+#speeds .gods li {
+    display: inline-block;
+    list-style-type: none;
+    margin-left:4px;
+    white-space: nowrap;
+}
+#speeds .gods li::after {
+    content: ',';
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SMITE God Stats Overview</title>
+	<link rel="stylesheet" href="godstats.css?201701231201000" />
+</head>
+<body>
+	<h1>SMITE God Stats Overview</h1>
+	<div id="about" class="data-block">
+		<h2>About</h2>
+		<p>This is an interactive overview of SMITE®s gods with their associated pantheon and role. This is especially useful for the weekly quests, which may focus on a specific pantheon or role.</p>
+		<aside>Updating this table is trivial (e.g. automated), especially compared to traditional, manually created image files. So expect this to stay up to date, or give me a quick heads-up.</aside>
+	</div>
+    <div class="block">
+        <h2>Gods by Movement Speed</h2>
+        <table id="speeds">
+            <thead>
+                <tr><th>Speed</th><th></th><th>Gods</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="block">
+        <h2 id="health">Gods by Health</h2>
+        <ul id="healths">
+        </ul>
+    </div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="godstats.js"></script>
+</body>
+</html>
