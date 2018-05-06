@@ -1,62 +1,33 @@
-/* ul#speeds li {
-    display: grid;
-    grid-template-areas: "label bar gods";
-    grid-template-rows: auto;
-    grid-template-columns: auto auto auto;
+th,
+td {
+  vertical-align: top;
+  text-align: left;
 }
-ul#speeds .label {
-    grid-area: label;
-    display: inline-block;
+thead th:nth-child(1) {
+  width: 100px;
 }
-ul#speeds .box {
-    grid-area: bar;
-    display: inline-block;
-    height: 1em;
-    background-color: green;
+.box {
+  display: inline-block;
+  height: 1em;
+  background-color: green;
+  width: 400px;
 }
-ul#speeds .gods {
-    grid-area: gods;
-    display: inline;
-    margin: 0;
-    padding: 0;
+.godrole {
+  font-variant-position: super;
+  font-size: 0.8em;
 }
-ul#speeds .gods li {
-    display: inline;
-    list-style-type: none;
-    margin-left:4px;
+.godrole.godrole-guardian {
+  color: #aab058;
 }
-ul#speeds .gods li::after {
-    content: ',';
-} */
-#speeds .label {
-    display: inline-block;
+.godrole.godrole-assassin {
+  color: #f4d608;
 }
-#speeds .box-container {
-    width: 400px;
+.godrole.godrole-warrior {
+  color: #ff4040;
 }
-#speeds .box {
-    display: inline-block;
-    height: 1em;
-    background-color: green;
-    width: 400px;
+.godrole.godrole-mage {
+  color: #bc6fb3;
 }
-#speeds .gods {
-    display: inline;
-    margin: 0;
-    padding: 0;
-}
-#speeds .gods li {
-    display: inline-block;
-    list-style-type: none;
-    margin-left:4px;
-    white-space: nowrap;
-}
-#speeds .gods li::after {
-    content: ',';
-}
-#speeds .gods img {
-    width: 1em;
-    height: 1em;
-    vertical-align: middle;
-    margin-right: 3px;
+.godrole.godrole-hunter {
+  color: #ffa44b;
 }

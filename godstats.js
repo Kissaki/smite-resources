@@ -36,79 +36,79 @@ function createBar(value, min, max) {
     return '<div style="float:left; width:' + barWidth + 'px; background-color:' + rgbString(255, 255, 255) + ';">' + value + '</div>'
 }
 function handleGods(gods) {
-    gods.sort(compareSpeed)
-
-    var speeds = document.querySelector('#speeds tbody')
-    var godsBySpeed = {}
-    gods.forEach(function(god){
-        godsBySpeed[god.Speed] = godsBySpeed[god.Speed] || []
-        godsBySpeed[god.Speed].push(god)
-    })
-    for (var speed in godsBySpeed){
-        var elRow = document.createElement('tr')
-        var elLabel = document.createElement('td')
-        elLabel.classList.add('label')
-        elLabel.textContent = speed
-        elRow.appendChild(elLabel)
-        var elBoxCell = document.createElement('td')
-        var elBox = document.createElement('div')
-        elBox.classList.add('box')
-        elBox.style.width = speed + 'px'
-        elBoxCell.appendChild(elBox)
-        elRow.appendChild(elBoxCell)
-        var cellGods = document.createElement('td')
-        var elGods = document.createElement('ul')
-        elGods.classList.add('gods')
-        godsBySpeed[speed].forEach(function(god){
-            var elGod = document.createElement('li')
-            var icon = new Image()
-            icon.src = god.godIcon_URL
-            elGod.appendChild(icon)
-            var name = document.createElement('span')
-            name.textContent = god.Name
-            elGod.appendChild(name)
-            elGods.appendChild(elGod)
-        })
-        cellGods.appendChild(elGods)
-        elRow.appendChild(cellGods)
-        speeds.appendChild(elRow)
-    }
-
-    gods.sort(compareHealth)
-    var healths = document.querySelector('#healths')
-    var min = null
-    var max = null
-    var minPL = null
-    var maxPL = null
-    for (var i in gods) {
-        var god = gods[i]
-
-        var field = god.Health
-        min = min === null || field < min ? field : min
-        max = max === null || field > max ? field : max
-
-        var fieldPL = god.HealthPerLevel
-        var field20 = fieldPL * 20
-        minPL = (minPL === null || field20 < minPL) ? field20 : minPL
-        maxPL = (maxPL === null || field20 > maxPL) ? field20 : maxPL
-    }
-    for (var i in gods) {
-        var god = gods[i]
-        var g = document.createElement('li')
-
-        var field = god.Health
-        var cBar = createBar(field, min, max)
-
-        var fieldPL = god.HealthPerLevel
-        var field20 = fieldPL * 20
-        var cBarPL = createBar(field20, minPL, maxPL)
-
-        var cName = god.Name
-
-        g.innerHTML = cBar + cBarPL + cName
-        healths.appendChild(g)
-    }
+    createInfos(gods, 'AttackSpeed')
+    createInfos(gods, 'AttackSpeedPerLevel')
+    createInfos(gods, 'HP5PerLevel')
+    createInfos(gods, 'Health')
+    createInfos(gods, 'HealthPerFive')
+    createInfos(gods, 'HealthPerLevel')
+    createInfos(gods, 'MP5PerLevel')
+    createInfos(gods, 'MagicProtection')
+    createInfos(gods, 'MagicProtectionPerLevel')
+    createInfos(gods, 'MagicalPower')
+    createInfos(gods, 'MagicalPowerPerLevel')
+    createInfos(gods, 'Mana')
+    createInfos(gods, 'ManaPerFive')
+    createInfos(gods, 'ManaPerLevel')
+    createInfos(gods, 'PhysicalPower')
+    createInfos(gods, 'PhysicalPowerPerLevel')
+    createInfos(gods, 'PhysicalProtection')
+    createInfos(gods, 'PhysicalProtectionPerLevel')
+    createInfos(gods, 'Speed')
 }
 function rgbString(r, g, b) {
     return 'rgb(' + r + ', ' + g + ', ' + b + ')'
+}
+function createInfos(gods, property){
+    var godsBy = {}
+    var valueRange = {min:999, max:0}
+    gods.forEach(function(god){
+        var value = god[property]
+        godsBy[value] = godsBy[value] || []
+        godsBy[value].push(god)
+        if (valueRange.min > value) {
+            valueRange.min = value
+        } else if (valueRange.max < value) {
+            valueRange.max = value
+        }
+    })
+    
+    var table = document.createElement('table')
+    table.innerHTML = '<thead><th colspan="2">'+property+'</th><th>Gods</th></thead><tbody></tbody>'
+    document.body.appendChild(table)
+    
+    var tbody = table.querySelector('tbody')
+    var values = []
+    for (var value in godsBy){
+        values.push(value)
+    }
+    values.sort(function (a, b) {
+        return (parseFloat(a) - parseFloat(b))
+    })
+    values.forEach(function(value)
+    {
+        var tr = document.createElement('tr')
+        tr.innerHTML = '<td>'+value+'</td><td class="box-container">'+getBox(value, valueRange)+'</td><td>' + getGodInfoList(godsBy[value]) + '</td>'
+        tbody.appendChild(tr)
+    })
+}
+function getBox(value, valueRange){
+    var diff = valueRange.max - valueRange.min
+    var relative = diff === 0 ? 100 : (value - valueRange.min) / diff * 100
+    return '<div class="box" style="width:' + Math.round(relative) + 'px"></div>'
+}
+function getGodInfoList(gods){
+    var infolist = ''
+    gods.forEach(function(god){
+        infolist += (infolist.length > 0 ?', ' : '') + getGodInfo(god)
+    })
+    return infolist
+}
+function getGodInfo(god){
+    return god.Name + getGodRoleIcon(god)
+}
+function getGodRoleIcon(god){
+    var role = god.Roles.replace(' ', '').toLowerCase()
+    var caption = role[0].toUpperCase()
+    return '<span class="godrole godrole-'+role+'">'+caption+'</span>'
 }
