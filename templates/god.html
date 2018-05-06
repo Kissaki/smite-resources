@@ -5,5 +5,19 @@
 		<div class="godnoicon">no icon</div>
 	{{end}}
 	<div class="godname">{{.Name}}</div>
+	<div class="goddetails">
+		<div class="caption">God Details</div>
+		<h2>{{.Name}}</h2>
+		<div class="role-pantheon">{{.Pantheon}} {{.Roles}}</div>
+		<div class="pros">Pros: {{.Pros}}</div>
+		<div class="cons">Cons: {{.Cons}}</div>
+		<div class="abilities">
+			<div>Abilities:</div>
+			{{template "godability.html" .Ability1}}
+			{{template "godability.html" .Ability2}}
+			{{template "godability.html" .Ability3}}
+			{{template "godability.html" .Ability4}}
+			{{template "godability.html" .Ability5}}
+		</div>
 	{{if .OnFreeRotation}}<div class="freerotation">FR</div>{{end}}
 </div>

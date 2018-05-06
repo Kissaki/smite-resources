@@ -24,6 +24,22 @@ aside { font-style:italic; }
 .godicon, .godnoicon { display:block; width:100%; }
 .godnoicon { background-color:lightblue; font-style:italic; text-align:center; }
 .godname { height:16px; font-size:14px; line-height:16px; text-align:center; white-space:nowrap; overflow:hidden; }
+.goddetails {
+	display:none; position:absolute; top:80px; left:-50%; z-index:1; width:400px; background-color:#fff; border:1px solid #ccc;
+	padding:4px 8px;
+}
+.god:hover .goddetails { display:block; }
+.goddetails .caption { font-size:0.6em; line-height:1em; }
+.goddetails h2 { margin:0; }
+.goddetails .ability { margin-top: 2px; }
+.goddetails .ability img {
+	margin-right: 4px;
+	height: 2em;
+	vertical-align: middle;
+}
+.goddetails .ability-description { display:none; position:absolute; left:200px; width:400px; background-color:#fff; border:1px solid #333; }
+.goddetails .ability:hover .ability-description { display:block; }
+.goddetails .ability-description { padding:2px 4px; }
 
 .data-block {
 	background:#fafafa;
