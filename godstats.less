@@ -1,0 +1,35 @@
+
+@import "colors";
+th, td {
+    vertical-align: top;
+    text-align: left;
+}
+thead th:nth-child(1) {
+    width: 100px;
+}
+.box {
+    display: inline-block;
+    height: 1em;
+    background-color: green;
+    width: 400px;
+}
+.godrole {
+    font-variant-position: super;
+    font-size: 0.8em;
+    
+    &.godrole-guardian {
+        color: @color-guardian;
+    }
+    &.godrole-assassin {
+        color: @color-assassin;
+    }
+    &.godrole-warrior {
+        color: @color-warrior;
+    }
+    &.godrole-mage {
+        color: @color-mage;
+    }
+    &.godrole-hunter {
+        color: @color-hunter;
+    }
+}
