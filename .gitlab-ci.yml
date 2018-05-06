@@ -21,7 +21,9 @@ build_web:
     - bin/smitegods -updategoddata -devid $SMITE_API_DEVID -authkey $SMITE_API_AUTHKEY
     - mkdir public
     - cp roles-pantheons-spritesheet.png smitegods.css smitegods.html smitegods.js public
-    - cp godstats.css godstats.html godstats.js data/gods.json public
+    - cp godstats.css godstats.html godstats.js public
+    - mkdir public/data
+    - cp data/gods.json public/data
   artifacts:
     paths:
     - public
