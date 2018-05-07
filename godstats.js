@@ -75,7 +75,7 @@ function createInfos(gods, property){
     
     var table = document.createElement('table')
     table.innerHTML = '<thead><th colspan="2">'+property+'</th><th>Gods</th></thead><tbody></tbody>'
-    document.body.appendChild(table)
+    document.querySelector('#godstats-container').appendChild(table)
     
     var tbody = table.querySelector('tbody')
     var values = []
