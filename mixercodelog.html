@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SMITE Mixer Stream Chest Code Chat Tracker</title>
+        <style>
+            html {color:#333;}
+            aside {font-style: italic;}
+            .new {color:#338833; font-weight:bold;}
+        </style>
+    </head>
+    <body>
+        <h1>SMITE Mixer Stream Chest Code Chat Tracker</h1>
+        <p>The official <a href="https://mixer.com/SmiteGame">SMITE Mixer Stream @SmiteGame</a> regulary streams esport matches.</p>
+        <p>
+            During these streams chest codes are dropped from time to time.
+            The `!lastdrop` command triggers a message from `Scottybot` to everyone saying if there is an active code, and what it is.
+        </p>
+        <p>What this website does: Every 5 minutes the most recent chat history is checked for messages from Scottybot. These messages are displayed here.</p>
+        <p>You can then check these for changes and codes.</p>
+        <p>The list only shows the last 10 entries, and marks new messages in green and bold. Most recent is at the bottom.</p>
+        <aside><p>Note: This may not include all codes posted. And if you’re interested, please enjoy the stream. ;)</p></aside>
+        <ul id="msgs">
+        </ul>
+        <script>
+            let url = 'https://mixer.com/api/v1/chats/19088261/history'
+            // Scottybot has user id 2685
+            let trackedUserId = 2685
+            let checkIntervalMin = 5
+            let maxElCount = 10
+
+            let loop = setInterval(update, checkIntervalMin * 60 * 1000)
+            update()
+            function update(){
+                let req = new XMLHttpRequest(); req.open('GET', url)
+                req.responseType = 'json'
+                req.send()
+                req.onload = function(event){
+                    let req = event.target
+                    let resp = req.response
+                    resp.forEach(msg => {
+                        if (msg.user_id === trackedUserId) {
+                            append(msg.message.message[0].text)
+                        }
+                    })
+                    append('^ results from checked at ' + (new Date()).toLocaleTimeString() + ' (of ' + resp.length + ' last msgs)')
+                    window.scrollTo({'top': window.scrollMaxY})
+                }
+                function append(text){
+                    let trg = document.getElementById('msgs')
+                    let el = document.createElement('li')
+                    let isNew = true
+                    el.textContent = text
+                    trg.childNodes.forEach(node => {if (isNew) {isNew = node.textContent != text;}})
+                    if (isNew) {
+                        el.classList.add('new')
+                    }
+                    trg.appendChild(el)
+                    if (trg.childNodes.length > maxElCount) {
+                        trg.childNodes[0].remove()
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
