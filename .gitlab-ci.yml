@@ -24,6 +24,7 @@ build_web:
     - cp godstats.css godstats.html godstats.js public
     - mkdir public/data
     - cp data/gods.json public/data
+    - cp mixercodelog.html public
   artifacts:
     paths:
     - public
