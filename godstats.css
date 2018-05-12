@@ -31,3 +31,22 @@ thead th:nth-child(1) {
 .godrole.godrole-hunter {
   color: #ffa44b;
 }
+#relatedpages {
+  background-color: #eeeeff;
+  line-height: 2em;
+  padding: 0.4em;
+  font-style: normal;
+}
+#relatedpages a {
+  margin: 0 0.4em;
+  padding: 0.2em;
+  background-color: #ccccff;
+  border-radius: 6px;
+  border: 1px solid #ccccff;
+  text-decoration: none;
+}
+#relatedpages a:hover {
+  background-color: #aaaaff;
+  border-color: #aaaaff;
+  color: #000;
+}
