@@ -1,6 +1,7 @@
 // http://lesscss.org/
 
 @import "colors";
+@import "smiteicons";
 
 * {border:0; margin:0; padding:0; text-decoration:none;}
 
@@ -13,7 +14,7 @@ table, tr, th, td {border:1px solid #cccccc; vertical-align:top;}
 table {border-collapse:collapse;}
 th, td {padding:2px;}
 thead th {vertical-align:bottom;}
-tbody th {text-align:right;}
+tbody th {text-align:center;}
 ul, li {list-style-type:none; display:inline-block;}
 footer {
 	font-size:0.9em; line-height:1.2em;
@@ -77,43 +78,11 @@ aside { font-style:italic; }
 #god-icon-size-value { width:auto; }
 
 .icon-pantheon {
-	background:url(roles-pantheons-spritesheet-inverted.png);
-	width:100px; height:100px;
+	width:100px;
+	height:1em;
+	font-size:80px;
+	line-height:1em;
 	float:right;
-}
-.icon-pantheon- {
-	background-position:-500px -100px;
-}
-.icon-pantheon-chinese {
-	background-position:-200px -200px;
-}
-.icon-pantheon-egyptian {
-	background-position:-300px -200px;
-}
-.icon-pantheon-greek {
-	background-position:-100px -200px;
-}
-.icon-pantheon-hindu {
-	background-position:-200px -100px;
-}
-.icon-pantheon-japanese {
-	background-position:-400px -200px;
-}
-.icon-pantheon-mayan {
-	background-position:-300px -100px;
-}
-.icon-pantheon-slavic {
-	background-position:-400px -100px;
-}
-.icon-pantheon-norse {
-	background-position:0px -200px;
-}
-.icon-pantheon-roman {
-	background-position:-38px -100px;
-	width:124px;
-}
-.icon-pantheon-celtic {
-	background-position:-500px -200px;
 }
 input[type=button], input[type=text] {
 	padding:2px 4px;
