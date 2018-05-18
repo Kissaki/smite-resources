@@ -1,8 +1,6 @@
 package main
 
 import (
-	"apidata"
-	"apidata/gods"
 	"bufio"
 	"encoding/json"
 	"flag"
@@ -16,6 +14,9 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"../../apidata"
+	"../../apidata/gods"
 )
 
 const (

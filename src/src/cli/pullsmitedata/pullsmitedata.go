@@ -1,10 +1,11 @@
 package main
 
 import (
-	"apidata"
 	"flag"
 	"io/ioutil"
 	"log"
+
+	"../../apidata"
 )
 
 var developerID = flag.Int("devid", 0, "developer ID given by Hi-Rez")
