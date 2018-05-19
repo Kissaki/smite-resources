@@ -1,0 +1,209 @@
+@font-face {
+  font-family: Smiticons;
+  src: url(4bfba3d77789a9ec16129032096c7f12.woff);
+  font-weight: 400;
+  font-style: normal;
+}
+i.icon {
+  font-family: Smiticons !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-slavic:before {
+  content: "\E92B";
+}
+.icon-voodoo:before {
+  content: "\E92C";
+}
+.icon-polynesian:before {
+  content: "\E92D";
+}
+.icon-cog:before {
+  content: "\E90A";
+}
+.icon-link-out:before {
+  content: "\E908";
+}
+.icon-new-account:before {
+  content: "\E909";
+}
+.icon-arrow-next:before {
+  content: "\E900";
+}
+.icon-games:before {
+  content: "\E902";
+}
+.icon-profile:before {
+  content: "\E905";
+}
+.icon-schedule:before {
+  content: "\E906";
+}
+.icon-teams:before {
+  content: "\E907";
+}
+.icon-arena:before {
+  content: "\E901";
+}
+.icon-assault:before {
+  content: "\E903";
+}
+.icon-clash:before {
+  content: "\E904";
+}
+.icon-conquest:before {
+  content: "\E90B";
+}
+.icon-joust:before {
+  content: "\E90C";
+}
+.icon-siege:before {
+  content: "\E90D";
+}
+.icon-magical:before {
+  content: "\E90E";
+}
+.icon-melee:before {
+  content: "\E90F";
+}
+.icon-physical:before {
+  content: "\E910";
+}
+.icon-ranged:before {
+  content: "\E911";
+}
+.icon-ps-icon:before {
+  content: "\E912";
+}
+.icon-faq:before {
+  content: "\E913";
+}
+.icon-search-icon:before {
+  content: "\E915";
+}
+.icon-cosplay-icon:before {
+  content: "\E914";
+}
+.icon-dev-insights-icon:before {
+  content: "\E916";
+}
+.icon-events-icon:before {
+  content: "\E917";
+}
+.icon-gods-icon:before {
+  content: "\E918";
+}
+.icon-patch-notes-icon:before {
+  content: "\E919";
+}
+.icon-globe:before {
+  content: "\E91A";
+}
+.icon-mage:before {
+  content: "\E91B";
+}
+.icon-blog-news:before {
+  content: "\E91C";
+}
+.icon-guardian:before {
+  content: "\E91D";
+}
+.icon-google:before {
+  content: "\EA88";
+}
+.icon-facebook:before {
+  content: "\EA90";
+}
+.icon-instagram:before {
+  content: "\EA92";
+}
+.icon-twitter:before {
+  content: "\EA96";
+}
+.icon-youtube:before {
+  content: "\EA9D";
+}
+.icon-youtube2:before {
+  content: "\EA9E";
+}
+.icon-twitch:before {
+  content: "\EA9F";
+}
+.icon-steam:before {
+  content: "\EAAC";
+}
+.icon-apple:before {
+  content: "\EABE";
+}
+.icon-windows:before {
+  content: "\EAC2";
+}
+.icon-close:before {
+  content: "\E5CD";
+}
+.icon-keyboard_arrow_up:before {
+  content: "\E316";
+}
+.icon-close2:before {
+  content: "\E5CE";
+}
+.icon-done:before {
+  content: "\E876";
+}
+.icon-keyboard_arrow_up2:before {
+  content: "\E317";
+}
+.icon-menu:before {
+  content: "\E5D2";
+}
+.icon-play_arrow:before {
+  content: "\E037";
+}
+.icon-arrow-icon:before {
+  content: \1f323;
+}
+.icon-celtic:before {
+  content: "\E91E";
+}
+.icon-japanese:before {
+  content: "\E91F";
+}
+.icon-egyptian:before {
+  content: "\E920";
+}
+.icon-mayan:before {
+  content: "\E921";
+}
+.icon-hindu:before {
+  content: "\E922";
+}
+.icon-roman:before {
+  content: "\E923";
+}
+.icon-chinese:before {
+  content: "\E924";
+}
+.icon-greek:before {
+  content: "\E925";
+}
+.icon-norse:before {
+  content: "\E926";
+}
+.icon-assassin:before {
+  content: "\E927";
+}
+.icon-warrior:before {
+  content: "\E928";
+}
+.icon-hunter:before {
+  content: "\E929";
+}
+.icon-xbox:before {
+  content: "\E92A";
+}
