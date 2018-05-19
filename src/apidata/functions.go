@@ -20,7 +20,7 @@ const (
 	TopMatches = "gettopmatches"
 )
 
-// API function sub paths; must be followed by Format/DevID/signature/timestamp/languageCode
+// API function sub paths; must be followed by Format/DevID/signature/session/timestamp/languageCode
 const (
 	Gods  = "getgods"
 	Items = "getitems"
