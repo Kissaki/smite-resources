@@ -1,0 +1,45 @@
+* {border:0; margin:0; padding:0; text-decoration:none;}
+
+html {padding:8px 8px 16px; font-size:100%; line-height:1.3em;}
+h1 {font-size:1.6em; line-height:1.6em; margin:0.2em 0 0.1em;}
+h2 {font-size:1.4em; line-height:1.4em; margin:0.3em 0 0.1em;}
+
+input[type=text] { border:1px solid #dddddd; }
+table, tr, th, td {border:1px solid #cccccc; vertical-align:top;}
+table {border-collapse:collapse;}
+th, td {padding:2px;}
+thead th {vertical-align:bottom;}
+tbody th {text-align:right;}
+ul, li {list-style-type:none; display:inline-block;}
+footer {
+	font-size:0.9em; line-height:1.2em;
+	margin:8px 0 0; font-style:italic;
+}
+aside { font-style:italic; }
+
+.item {display:inline-block; position:relative; background-color:#dddddd; margin:10px; width: 128px; }
+.item a {display:block;}
+.item:hover::after {content:attr(title); color:#000000; background-color:#ffffff; display:block; width:100%; height:12px; position:absolute;}
+/* Icon size: 128x128 */
+/* .item .icon, .godnoicon { display:block; width:100%; } */
+.item .noicon { background-color:lightblue; font-style:italic; text-align:center; }
+.item .name { height:16px; font-size:14px; line-height:16px; text-align:center; white-space:nowrap; overflow:hidden; }
+/* .item .shortdesc {} */
+.item .description { overflow:scroll; height:102px; width:128px; font-size:0.8em; line-height:1em; }
+.item .tag.startingitem { background-color:#000088; color:#ffffff; }
+
+.data-block {
+	background:#fafafa;
+	padding:8px 4px;
+	margin:4px;
+	border:2px solid transparent;
+}
+.data-block h2 {
+	margin:0 0 0.1em;
+}
+.filter {
+	margin-bottom:8px;
+}
+#legend {float:right;}
+#options {float:left;}
+#filters {float:left;}
