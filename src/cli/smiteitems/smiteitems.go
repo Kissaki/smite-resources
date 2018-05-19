@@ -1,7 +1,6 @@
 package main
 
 import (
-	"apidata/types"
 	"bufio"
 	"encoding/json"
 	"flag"
@@ -9,6 +8,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+
+	"../../apidata/types"
 )
 
 const (
