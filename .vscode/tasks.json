@@ -4,32 +4,30 @@
     "version": "0.1.0",
     "tasks": [
         {
-            "taskName": "Generate HTML",
-            "command": "${cwd}/bin/smitegods.exe"
+            "taskName": "Generate HTML Smitegods",
+            "command": "bin/smitegods.exe"
         },
         {
-            "taskName": "build",
+            "taskName": "build smitegods",
             "isBuildCommand": true,
-            "args": ["build", "-o","../bin/smitegods.exe", "smitegods.go"],
-            "command": "C:/go/bin/go.exe",
+            "command": "go.exe",
+            "args": ["build", "-o","bin/smitegods.exe", "src/cli/smitegods/smitegods.go"],
             "isShellCommand": true,
-            "showOutput": "always",
-            "options": {
-                "cwd": "${cwd}/src",
-                "env": {
-                    "GOPATH": "${cwd}/src;${env.GOPATH}"
-                }
-            }
+            "showOutput": "always"
+        },
+        {
+            "taskName": "build pullsmitedata",
+            "command": "go.exe",
+            "args": ["build", "-o","bin/pullsmitedata.exe", "src/cli/pullsmitedata/pullsmitedata.go"],
+            "isShellCommand": true,
+            "showOutput": "always"
         },
         {
             "taskName": "go fmt",
-            "command": "C:/go/bin/go.exe",
+            "command": "go.exe",
             "args": [
-                "fmt", "."
-            ],
-            "options": {
-                "cwd": "src"
-            }
+                "fmt", "src"
+            ]
         }
     ]
 }
