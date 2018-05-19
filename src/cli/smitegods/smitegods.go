@@ -17,6 +17,7 @@ import (
 
 	"../../apidata"
 	"../../apidata/gods"
+	"../common/godhandling"
 )
 
 const (
@@ -91,19 +92,6 @@ func APITestAndGodsDownload() {
 func httpListen() {
 	http.HandleFunc("/", defaultHandler)
 	http.ListenAndServe(":8080", nil)
-}
-
-func parseGods() (gods.Gods, error) {
-	godsJSON, err := ioutil.ReadFile(fileGods)
-	if err != nil {
-		return nil, err
-	}
-	var gods gods.Gods
-	err = json.Unmarshal(godsJSON, &gods)
-	if err != nil {
-		return nil, err
-	}
-	return gods, nil
 }
 
 func parseChangelog() (log Changelog, err error) {
@@ -253,7 +241,7 @@ func main() {
 		APITestAndGodsDownload()
 	}
 
-	godlist, err := parseGods()
+	godlist, err := godhandling.ParseGods(fileGods)
 	if err != nil {
 		log.Fatalln(err)
 	}
