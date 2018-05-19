@@ -8,7 +8,7 @@ build_go:
   stage: build_go
   image: golang:latest
   script:
-    - go build -o bin/smitegods src/src/cli/smitegods/smitegods.go
+    - go build -o bin/smitegods src/cli/smitegods/smitegods.go
   artifacts:
     paths:
       - bin
