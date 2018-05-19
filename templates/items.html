@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>SMITE Items</title>
+	<link rel="stylesheet" href="smiteitems.css">
+</head>
+<body>
+	<h1>SMITE Items Overview</h1>
+	<label>Filter</label><input type="text" id="item-filter">
+	{{$size := len . -}}
+	{{if gt $size 0 -}}
+	<ul>
+        {{range .}}
+        <li>{{template "item.html" .}}</li>
+		{{end}}
+	</ul>
+	{{else}}
+		No item data available.
+	{{end}}
+	<footer>
+		<p>This interactive overview of SMITE gods has been created by Jan Klass aka <a href="https://github.com/Kissaki">Kissaki</a>. All rights reserved. HTML is generated from a program written in Go. CSS and JavaScript were created bare-bone.</p>
+		<p>Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.</p>
+		<p><a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.</p>
+	</footer>
+	<script src="smiteitems.js"></script>
+</body>
+</html>
