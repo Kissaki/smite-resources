@@ -98,52 +98,58 @@ function setRandom1(cbs)
 	i = Math.floor(i * cbs.length);
 	cbs[i].checked = true;
 }
-function onPantheonFilterChanged()
-{
-	var options = document.querySelectorAll('.filter-pantheon-option');
-	for (var i = 0; i < options.length; ++i)
+
+pantheonFilter = {
+	init: function() {
+		var cbs = document.querySelectorAll('.filter-pantheon-cb');
+		for (var i = 0; i < cbs.length; ++i)
+		{
+			cbs[i].addEventListener('change', this.onPantheonFilterChanged.bind(this))
+		}
+		document.querySelector('#filter-pantheon-clear').addEventListener('click', this.onPantheonFilterClear.bind(this))
+		document.querySelector('#filter-pantheon-none').addEventListener('click', this.onPantheonFilterAll.bind(this))
+		document.querySelector('#filter-pantheon-invert').addEventListener('click', this.onPantheonFilterInvert.bind(this))
+		document.querySelector('#filter-pantheon-random').addEventListener('click', this.onPantheonFilterRandom1.bind(this))
+		this.onPantheonFilterChanged();
+	},
+	onPantheonFilterChanged: function()
 	{
-		var option = options[i];
-		var pantheon = option.id.substr('filter-pantheon-option-'.length);
-		var visible = option.querySelector('.filter-pantheon-cb').checked;
-		var row = document.querySelector('#pantheon-row-' + pantheon)
-		setVisible(row, visible);
-	}
+		var options = document.querySelectorAll('.filter-pantheon-option');
+		for (var i = 0; i < options.length; ++i)
+		{
+			var option = options[i];
+			var pantheon = option.id.substr('filter-pantheon-option-'.length);
+			var visible = option.querySelector('.filter-pantheon-cb').checked;
+			var row = document.querySelector('#pantheon-row-' + pantheon)
+			setVisible(row, visible);
+		}
+	},
+	onPantheonFilterClear: function()
+	{
+		var cbs = document.querySelectorAll('.filter-pantheon-cb');
+		setAll(cbs, true);
+		this.onPantheonFilterChanged();
+	},
+	onPantheonFilterAll: function()
+	{
+		var cbs = document.querySelectorAll('.filter-pantheon-cb');
+		setAll(cbs, false);
+		this.onPantheonFilterChanged();
+	},
+	onPantheonFilterInvert: function()
+	{
+		var cbs = document.querySelectorAll('.filter-pantheon-cb');
+		invertSelection(cbs);
+		this.onPantheonFilterChanged();
+	},
+	onPantheonFilterRandom1: function()
+	{
+		var cbs = document.querySelectorAll('.filter-pantheon-cb');
+		setRandom1(cbs);
+		this.onPantheonFilterChanged();
+	},
 }
-function onPantheonFilterClear()
-{
-	var cbs = document.querySelectorAll('.filter-pantheon-cb');
-	setAll(cbs, true);
-	onPantheonFilterChanged();
-}
-function onPantheonFilterAll()
-{
-	var cbs = document.querySelectorAll('.filter-pantheon-cb');
-	setAll(cbs, false);
-	onPantheonFilterChanged();
-}
-function onPantheonFilterInvert()
-{
-	var cbs = document.querySelectorAll('.filter-pantheon-cb');
-	invertSelection(cbs);
-	onPantheonFilterChanged();
-}
-function onPantheonFilterRandom1()
-{
-	var cbs = document.querySelectorAll('.filter-pantheon-cb');
-	setRandom1(cbs);
-	onPantheonFilterChanged();
-}
-var cbs = document.querySelectorAll('.filter-pantheon-cb');
-for (var i = 0; i < cbs.length; ++i)
-{
-	cbs[i].addEventListener('change', onPantheonFilterChanged)
-}
-document.querySelector('#filter-pantheon-clear').addEventListener('click', onPantheonFilterClear)
-document.querySelector('#filter-pantheon-none').addEventListener('click', onPantheonFilterAll)
-document.querySelector('#filter-pantheon-invert').addEventListener('click', onPantheonFilterInvert)
-document.querySelector('#filter-pantheon-random').addEventListener('click', onPantheonFilterRandom1)
-onPantheonFilterChanged();
+pantheonFilter.init()
 
 function onRoleFilterChanged()
 {
