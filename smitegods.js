@@ -47,25 +47,29 @@ function setVisible(el, visible)
 	el.style.display = visible ? '' : 'none';
 }
 
-function onGodFilterChanged()
-{
-	var filterValue = document.querySelector('#filter-god').value.toLowerCase();
-	var updateGod = function(god)
+godFilter = {
+	init: function(){
+		document.querySelector('#filter-god').addEventListener('input', this.onGodFilterChanged.bind(this));
+		document.querySelector('#filter-god-clear').addEventListener('click', this.onGodFilterClear.bind(this))
+		this.onGodFilterChanged();
+	},
+	onGodFilterChanged: function()
 	{
-		var visible = god.querySelector('.godname').textContent.toLowerCase().indexOf(filterValue) !== -1;
-		setVisible(god, visible);
-	}
-	forEveryGod(updateGod);
+		var filterValue = document.querySelector('#filter-god').value.toLowerCase();
+		var updateGod = function(god)
+		{
+			var visible = god.querySelector('.godname').textContent.toLowerCase().indexOf(filterValue) !== -1;
+			setVisible(god, visible);
+		}
+		forEveryGod(updateGod);
+	},
+	onGodFilterClear: function()
+	{
+		document.querySelector('#filter-god').value = '';
+		this.onGodFilterChanged();
+	},
 }
-function onGodFilterClear()
-{
-	document.querySelector('#filter-god').value = '';
-	onGodFilterChanged();
-}
-document.querySelector('#filter-god').addEventListener('input', onGodFilterChanged);
-document.querySelector('#filter-god-clear').addEventListener('click', onGodFilterClear)
-onGodFilterChanged();
-
+godFilter.init()
 
 function setAll(cbs, selected)
 {
