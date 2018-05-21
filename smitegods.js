@@ -187,34 +187,39 @@ document.querySelector('#filter-role-invert').addEventListener('click', onRoleFi
 document.querySelector('#filter-role-random').addEventListener('click', onRoleFilterRandom1);
 onRoleFilterChanged();
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values_inclusive
-function getRandomIntInclusive(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-}
-function setPickRandomResult(godDomObject)
-{
-	var res = document.getElementById('random-pick-result')
-	while (res.firstChild)
+randomGodPicker = {
+	init: function(){
+		document.getElementById('random-pick-button').addEventListener('click', this.onPickRandom.bind(this));
+	},
+	onPickRandom: function()
 	{
-		res.removeChild(res.firstChild)
-	}
-	res.appendChild(godDomObject.cloneNode(true))
-}
-function pickRandomFromArray(array)
-{
-	var i = getRandomIntInclusive(0, array.length - 1)
-	return array[i]
-}
-function onPickRandom()
-{
-	var gods = document.querySelectorAll('.god')
-	if (gods.length > 0)
+		var gods = document.querySelectorAll('.god')
+		if (gods.length > 0)
+		{
+			var visibleGods = []
+			gods.forEach(function(g){ if (g.offsetParent !== null) { visibleGods.push(g) } })
+			this.setPickRandomResult(this.pickRandomFromArray(visibleGods))
+		}
+	},
+	pickRandomFromArray: function(array)
 	{
-		var visibleGods = []
-		gods.forEach(function(g){ if (g.offsetParent !== null) { visibleGods.push(g) } })
-		setPickRandomResult(pickRandomFromArray(visibleGods))
-	}
+		var i = this.getRandomIntInclusive(0, array.length - 1)
+		return array[i]
+	},
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values_inclusive
+	getRandomIntInclusive: function(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+	},
+	setPickRandomResult: function(godDomObject)
+	{
+		var res = document.getElementById('random-pick-result')
+		while (res.firstChild)
+		{
+			res.removeChild(res.firstChild)
+		}
+		res.appendChild(godDomObject.cloneNode(true))
+	},
 }
-document.getElementById('random-pick-button').addEventListener('click', onPickRandom);
+randomGodPicker.init()
