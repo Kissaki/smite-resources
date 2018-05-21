@@ -393,6 +393,10 @@ input[type=text] {
   padding: 2px 4px;
   cursor: pointer;
 }
+.icon-role {
+  vertical-align: middle;
+  margin-right: 2px;
+}
 #role-column-assassin,
 #filter-role-option-assassin {
   background: #f4d608;

@@ -84,7 +84,9 @@
 				<tr>
 					<th></th>
 					{{range $role := .Roles}}
-					<th id="role-column-{{ToCSSClass $role}}">{{$role}}</th>
+					<th id="role-column-{{ToCSSClass $role}}">
+						<i class="icon-role icon icon-{{ToCSSClass $role}}"></i>{{$role}}
+					</th>
 					{{end}}
 				</tr>
 			</thead>
