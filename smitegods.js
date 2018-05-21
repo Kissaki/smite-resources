@@ -151,60 +151,65 @@ pantheonFilter = {
 }
 pantheonFilter.init()
 
-function onRoleFilterChanged()
-{
-	var columnheads = document.querySelector('#smitegodstable tr').querySelectorAll('th');
-	for (var i = 1; i < columnheads.length; ++i)
-	{
-		var roleCell = columnheads[i];
-		var role = roleCell.id.substr("role-column-".length);
-		var filter = document.querySelector('#filter-role-cb-' + role);
-		var visible = filter.checked;
-		setVisible(roleCell, visible);
-		// rows have a head column, so td index is 1-based; which matches our off-by-one heads
-		var offset = i - 1;
-		var dataCells = document.querySelectorAll('#smitegodstable td');
-		while (dataCells[offset] !== undefined)
+roleFilter = {
+	init: function(){
+		var cbs = document.querySelectorAll('.filter-role-cb');
+		for (var i = 0; i < cbs.length; ++i)
 		{
-			setVisible(dataCells[offset], visible);
-			offset += columnheads.length - 1;
+			cbs[i].addEventListener('change', this.onRoleFilterChanged.bind(this))
 		}
-	}
+		document.querySelector('#filter-role-clear').addEventListener('click', this.onRoleFilterClear.bind(this));
+		document.querySelector('#filter-role-none').addEventListener('click', this.onRoleFilterAll.bind(this));
+		document.querySelector('#filter-role-invert').addEventListener('click', this.onRoleFilterInvert.bind(this));
+		document.querySelector('#filter-role-random').addEventListener('click', this.onRoleFilterRandom1.bind(this));
+		this.onRoleFilterChanged();
+	},
+	onRoleFilterChanged: function()
+	{
+		var columnheads = document.querySelector('#smitegodstable tr').querySelectorAll('th');
+		for (var i = 1; i < columnheads.length; ++i)
+		{
+			var roleCell = columnheads[i];
+			var role = roleCell.id.substr("role-column-".length);
+			var filter = document.querySelector('#filter-role-cb-' + role);
+			var visible = filter.checked;
+			setVisible(roleCell, visible);
+			// rows have a head column, so td index is 1-based; which matches our off-by-one heads
+			var offset = i - 1;
+			var dataCells = document.querySelectorAll('#smitegodstable td');
+			while (dataCells[offset] !== undefined)
+			{
+				setVisible(dataCells[offset], visible);
+				offset += columnheads.length - 1;
+			}
+		}
+	},
+	onRoleFilterClear: function()
+	{
+		var cbs = document.querySelectorAll('.filter-role-cb');
+		setAll(cbs, true);
+		this.onRoleFilterChanged();
+	},
+	onRoleFilterAll: function()
+	{
+		var cbs = document.querySelectorAll('.filter-role-cb');
+		setAll(cbs, false);
+		this.onRoleFilterChanged();
+	},
+	onRoleFilterInvert: function()
+	{
+		var cbs = document.querySelectorAll('.filter-role-cb');
+		invertSelection(cbs);
+		this.onRoleFilterChanged();
+	},
+	onRoleFilterRandom1: function()
+	{
+		var cbs = document.querySelectorAll('.filter-role-cb');
+		setRandom1(cbs);
+		this.onRoleFilterChanged();
+	},
 }
-function onRoleFilterClear()
-{
-	var cbs = document.querySelectorAll('.filter-role-cb');
-	setAll(cbs, true);
-	onRoleFilterChanged();
-}
-function onRoleFilterAll()
-{
-	var cbs = document.querySelectorAll('.filter-role-cb');
-	setAll(cbs, false);
-	onRoleFilterChanged();
-}
-function onRoleFilterInvert()
-{
-	var cbs = document.querySelectorAll('.filter-role-cb');
-	invertSelection(cbs);
-	onRoleFilterChanged();
-}
-function onRoleFilterRandom1()
-{
-	var cbs = document.querySelectorAll('.filter-role-cb');
-	setRandom1(cbs);
-	onRoleFilterChanged();
-}
-var cbs = document.querySelectorAll('.filter-role-cb');
-for (var i = 0; i < cbs.length; ++i)
-{
-	cbs[i].addEventListener('change', onRoleFilterChanged)
-}
-document.querySelector('#filter-role-clear').addEventListener('click', onRoleFilterClear);
-document.querySelector('#filter-role-none').addEventListener('click', onRoleFilterAll);
-document.querySelector('#filter-role-invert').addEventListener('click', onRoleFilterInvert);
-document.querySelector('#filter-role-random').addEventListener('click', onRoleFilterRandom1);
-onRoleFilterChanged();
+roleFilter.init()
 
 randomGodPicker = {
 	init: function(){
