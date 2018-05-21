@@ -8,30 +8,39 @@ function forEveryGod(fn)
 	}
 }
 
-function onGodiconsizeChanged()
-{
-	var value = document.querySelector('#god-icon-size').value;
-	document.querySelector('#god-icon-size-value').innerHTML = value;
-	var newSize = value + 'px';
-	var updateSize = function(god)
+godIconSizeChanger = {
+	init: function() {
+		document.querySelector('#god-icon-size').addEventListener('input', this.onGodiconsizeChanged.bind(this));
+		document.querySelector('#god-icon-size-clear').addEventListener('click', this.onGodiconsizeClear.bind(this))
+		this.onGodiconsizeChanged();
+	},
+	onGodiconsizeChanged: function()
 	{
-		god.style.width = newSize;
-		var pseudoIcon = god.querySelector('.godnoicon');
-		if (pseudoIcon !== null)
+		var value = document.querySelector('#god-icon-size').value;
+		document.querySelector('#god-icon-size-value').innerHTML = value;
+		this.setSize(value)
+	},
+	setSize: function(sizePx)
+	{
+		var newSizeCss = sizePx + 'px';
+		var updateSize = function(god)
 		{
-			pseudoIcon.style.height = newSize
+			god.style.width = newSizeCss;
+			var pseudoIcon = god.querySelector('.godnoicon');
+			if (pseudoIcon !== null)
+			{
+				pseudoIcon.style.height = newSizeCss
+			}
 		}
-	}
-	forEveryGod(updateSize);
+		forEveryGod(updateSize);
+	},
+	onGodiconsizeClear: function()
+	{
+		document.querySelector('#god-icon-size').value = '64';
+		this.onGodiconsizeChanged();
+	},
 }
-function onGodiconsizeClear()
-{
-	document.querySelector('#god-icon-size').value = '64';
-	onGodiconsizeChanged();
-}
-document.querySelector('#god-icon-size').addEventListener('input', onGodiconsizeChanged);
-document.querySelector('#god-icon-size-clear').addEventListener('click', onGodiconsizeClear)
-onGodiconsizeChanged();
+godIconSizeChanger.init()
 
 function setVisible(el, visible)
 {
