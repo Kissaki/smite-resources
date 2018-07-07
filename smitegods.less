@@ -29,22 +29,12 @@ aside { font-style:italic; }
 .godicon, .godnoicon { display:block; width:100%; }
 .godnoicon { background-color:lightblue; font-style:italic; text-align:center; }
 .godname { height:16px; font-size:14px; line-height:16px; text-align:center; white-space:nowrap; overflow:hidden; }
-.goddetails {
-	display:none; position:absolute; top:80px; left:-50%; z-index:1; width:400px; background-color:#fff; border:1px solid #ccc;
-	padding:4px 8px;
+.god {
+	.godinfo-handle {
+		cursor: pointer;
+		display: block;
+	}
 }
-.god:hover .goddetails { display:block; }
-.goddetails .caption { font-size:0.6em; line-height:1em; }
-.goddetails h2 { margin:0; }
-.goddetails .ability { margin-top: 2px; }
-.goddetails .ability img {
-	margin-right: 4px;
-	height: 2em;
-	vertical-align: middle;
-}
-.goddetails .ability-description { display:none; position:absolute; left:200px; width:400px; background-color:#fff; border:1px solid #333; }
-.goddetails .ability:hover .ability-description { display:block; }
-.goddetails .ability-description { padding:2px 4px; }
 
 .data-block {
 	background:#fafafa;
@@ -116,3 +106,52 @@ input[type=button], input[type=text] {
 #relatedpages {background-color:#eeeeff;line-height:2em;padding:0.4em;font-style:normal;}
 #relatedpages a {margin:0 0.4em;padding:0.2em;background-color:#ccccff;border-radius:6px;border:1px solid #ccccff;text-decoration:none;}
 #relatedpages a:hover {background-color:#aaaaff;border-color:#aaaaff;color:#000;}
+
+.god .goddetails {
+	display: none;
+}
+#god-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	&.active {
+		display: block;
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	#god-overlay-close-handle {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 24px;
+		height: 24px;
+		padding: 2px 4px;
+		background-color: #ccc;
+		cursor: pointer;
+	}
+
+	.goddetails {
+		display: block;
+		margin: auto;
+		max-width: 500px;
+		background-color: #fff;
+		padding: 10px;
+	}
+	
+	.caption { font-size:0.6em; line-height:1em; }
+	h2 { margin:0; }
+	.ability { margin-top: 2px; }
+	.ability img {
+		margin-right: 4px;
+		height: 2em;
+		vertical-align: middle;
+	}
+	.ability-description {
+		padding-left: 1em;
+	}
+}

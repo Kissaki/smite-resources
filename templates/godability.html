@@ -1,16 +1,19 @@
 <div class="ability">
-    <img src="{{.URL}}" alt="" />{{.Summary}}
-    <div class="ability-description">
-        {{with .Description.ItemDescription}}
-            <div class="description-primary">{{- .Description -}}</div>
-            <hr>
-            <div class="description-secondary">{{- .SecondaryDescription -}}</div>
-            <hr>
-            <div>Cost: {{.Cost}}</div>
-            <div>Cooldown: {{.Cooldown}}</div>
-            {{range .Menuitems}}
-                <div>{{.Description}}{{.Value}}</div>
+    
+    <details>
+        <summary><img src="{{.URL}}" alt="" />{{.Summary}}</summary>
+        <div class="ability-description">
+            {{with .Description.ItemDescription}}
+                <div class="description-primary">{{- .Description -}}</div>
+                <hr>
+                <div class="description-secondary">{{- .SecondaryDescription -}}</div>
+                <hr>
+                <div>Cost: {{.Cost}}</div>
+                <div>Cooldown: {{.Cooldown}}</div>
+                {{range .Menuitems}}
+                    <div>{{.Description}}{{.Value}}</div>
+                {{end}}
             {{end}}
-        {{end}}
-    </div>
+        </div>
+    </details>
 </div>

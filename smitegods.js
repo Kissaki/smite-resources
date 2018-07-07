@@ -247,3 +247,41 @@ randomGodPicker = {
 	},
 }
 randomGodPicker.init()
+
+godDefailsOverlay = {
+	overlayContainer: null,
+	init: function(){
+		this.overlayContainer = document.querySelector('#god-overlay')
+		this.overlayContainer.addEventListener('click', this.onClose.bind(this))
+
+		var els = document.querySelectorAll('.godinfo-handle')
+		for (let i = 0; i < els.length; ++i)
+		{
+			let handle = els[i]
+			handle.addEventListener('click', this.onClick.bind(this))
+		}
+	},
+	onClose: function(ev)
+	{
+		if (ev.target !== this.overlayContainer)
+		{
+			return
+		}
+		this.overlayContainer.classList.remove('active')
+	},
+	onCloseExplicit: function(ev)
+	{
+		this.overlayContainer.classList.remove('active')
+	},
+	onClick: function(sender)
+	{
+		var god = sender.target.parentElement
+		var deepCopy = true
+		var details = god.querySelector('.goddetails').cloneNode(deepCopy)
+		this.overlayContainer.innerHTML = '<div id="god-overlay-close-handle">X</div>'
+		this.overlayContainer.querySelector('#god-overlay-close-handle').addEventListener('click', this.onCloseExplicit.bind(this))
+		this.overlayContainer.appendChild(details)
+		this.overlayContainer.classList.add('active')
+	}
+}
+godDefailsOverlay.init()
