@@ -1511,7 +1511,7 @@ PASSIVE - This item grants 2.5 MP5 per 10% of your missing Mana.</p>
 	<div class="shortdesc">Physical Power and Physical Protection</div>
 	<div class="description">
 		<p>Heal Health and Mana on successful ability hit</p>
-		<p>Passive - Anytime you hit an Enemy god with an ability you are healed for 2.5% of your maximum Health and Mana. This can only trigger once per ability.</p>
+		<p>Passive - Anytime you hit an Enemy god with an Ability you are healed for 2.5% of your maximum Health and Mana. Anytime you hit an Enemy with Basic Attacks you are healed for 1% of your Maximum Health and Mana. This can only trigger once per Enemy per Ability or Basic Attack.</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -2231,7 +2231,7 @@ PASSIVE - This item grants 2.5 MP5 per 10% of your missing Mana.</p>
 	<div class="shortdesc">Temporarily steal enemy health and mana</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - Whenever you damage an enemy god you steal 8% maximum mana as well as 4% maximum health from the target. The Stats remain stolen for 45s and targets affected can have multiple Buffs and Debuffs at once. This can only occur once every 15 seconds.</p>
+		<p>PASSIVE - Whenever you damage an enemy god with an ability you steal 8% maximum mana as well as 4% maximum health from the target. The Stats remain stolen for 45s and targets affected can have multiple Buffs and Debuffs at once. This can only occur once every 15 seconds.</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -2343,7 +2343,7 @@ PASSIVE - This item grants 2.5 MP5 per 10% of your missing Mana.</p>
 	<div class="shortdesc">Abilities deal bonus damage based on targets maximum health</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - Your abilities deal an additional 2% of the targets maximum Health as Magical Damage. If the target has over 2000 Health, you ability bonus damage scales up. This effect reaches a maximum of 8% Maximum Health damage at 2750 Health.</p>
+		<p>PASSIVE - Your abilities deal an additional 2% of the target&#39;s maximum Health as Magical Damage. If the target has over 2000 Health, your ability bonus damage scales up. This effect reaches a maximum of 8% Maximum Health damage at 2750 Health.</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -2727,7 +2727,7 @@ PASSIVE - This item grants 2.5 MP5 per 10% of your missing Mana.</p>
 	<div class="shortdesc">Increases Attack Speed</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - Hitting enemies with basic attacks gives you 1 stack of 7% Movement Speed. Stacks up to 4 times, stacks last 7s.</p>
+		<p>PASSIVE - Hitting enemies with basic attacks gives you 1 stack of 5% Movement Speed. Stacks up to 3 times, stacks last 7s.</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -2948,10 +2948,10 @@ PASSIVE - This item grants 2.5 MP5 per 10% of your missing Mana.</p>
 	
 	<div class="name">Name: Sundering Spear</div>
 	<div class="price">Price: 0</div>
-	<div class="shortdesc">Fires Damage Increasing Projectile.</div>
+	<div class="shortdesc">Fires Damage Increasing Projectile</div>
 	<div class="description">
 		<p>Fires True Damage Projectile.</p>
-		<p>Using this item fires a bolt that travels 70 units, stopping on the first god hit dealing 15% of the targets Current Health as True Damage. Cooldown - 140s.</p>
+		<p>Using this item fires a bolt that travels 70 units, stopping on the first god hit dealing 15% of the target&#39;s Current Health as True Damage. Cooldown - 110s.</p>
 	</div>
 	<div class="type">Active</div>
 	
@@ -3156,10 +3156,10 @@ PASSIVE - This item grants 2.5 MP5 per 10% of your missing Mana.</p>
 	
 	<div class="name">Name: Sundering Spear Upgrade</div>
 	<div class="price">Price: 500</div>
-	<div class="shortdesc">Fires True Damage Projectile.</div>
+	<div class="shortdesc">Fires True Damage Projectile</div>
 	<div class="description">
 		<p>Fires True Damage Projectile.</p>
-		<p>Using this item fires a bolt that travels 70 units, stopping on the first god hit dealing 15% of the targets Current Health as True Damage and increasing their damage taken by 20% for 5s. Cooldown - 140s.</p>
+		<p>Using this item fires a bolt that travels 70 units, stopping on the first god hit dealing 15% of the target&#39;s Current Health as True Damage and increasing their damage taken by 20% for 5s. Cooldown - 110s.</p>
 	</div>
 	<div class="type">Active</div>
 	
@@ -4246,7 +4246,7 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	<div class="shortdesc">Health and Protections</div>
 	<div class="description">
 		<p></p>
-		<p></p>
+		<p>Passive - Only can be bought by Mages, Hunters, Assassins</p>
 	</div>
 	<div class="type">Item</div>
 	<span class="tag startingitem">Starting Item</span>
@@ -4278,7 +4278,7 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	<div class="shortdesc">Power and Penetration</div>
 	<div class="description">
 		<p></p>
-		<p></p>
+		<p>PASSIVE - Only can be bought by Warriors, Guardians</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -4291,12 +4291,13 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	
 	<div class="name">Name: Bumba&#39;s Mask</div>
 	<div class="price">Price: 1300</div>
-	<div class="shortdesc">Gain Mobility, Sacrifice Defense</div>
+	<div class="shortdesc">Gain Mobility, Sacrifice Defense and Damage</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - GAIN MOBILITY, SACRIFICE DEFENSE
-&lt;font color=&#39;#42F46E&#39;&gt;&#43;50 Movement Speed
-&lt;font color=&#39;#F44242&#39;&gt;&#43;20% Damage Taken</p>
+		<p>PASSIVE - GAIN MOBILITY, SACRIFICE DEFENSE &amp; DAMAGE
+&lt;font color=&#39;#42F46E&#39;&gt;&#43;35% Movement Speed
+&lt;font color=&#39;#F44242&#39;&gt;&#43;10% Damage Taken
+&lt;font color=&#39;#F44242&#39;&gt;-10% Damage Dealt</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -4309,12 +4310,13 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	
 	<div class="name">Name: Bumba&#39;s Mask</div>
 	<div class="price">Price: 1300</div>
-	<div class="shortdesc">Gain Mobility, Sacrifice Defense</div>
+	<div class="shortdesc">Gain Mobility, Sacrifice Defense and Damage</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - GAIN MOBILITY, SACRIFICE DEFENSE
-&lt;font color=&#39;#42F46E&#39;&gt;&#43;50 Movement Speed
-&lt;font color=&#39;#F44242&#39;&gt;&#43;20% Damage Taken</p>
+		<p>PASSIVE - GAIN MOBILITY, SACRIFICE DEFENSE &amp; DAMAGE
+&lt;font color=&#39;#42F46E&#39;&gt;&#43;35% Movement Speed
+&lt;font color=&#39;#F44242&#39;&gt;&#43;10% Damage Taken
+&lt;font color=&#39;#F44242&#39;&gt;-10% Damage Dealt</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -4327,13 +4329,14 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	
 	<div class="name">Name: Rangda&#39;s Mask</div>
 	<div class="price">Price: 1300</div>
-	<div class="shortdesc">Gain Damage, Sacrifice Mobility</div>
+	<div class="shortdesc">Gain Damage, Sacrifice Defenses</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - GAIN DAMAGE, SACRIFICE MOBILITY
+		<p>PASSIVE - GAIN DAMAGE, SACRIFICE DEFENSES
+Only can be bought by Warriors, Guardians
 &lt;font color=&#39;#42F46E&#39;&gt;&#43;15% Ability Damage Dealt
 &lt;font color=&#39;#42F46E&#39;&gt;&#43;20% Basic Attack Damage Dealt
-&lt;font color=&#39;#F44242&#39;&gt;-30 Movement Speed</p>
+&lt;font color=&#39;#F44242&#39;&gt;&#43;25% Damage Taken</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -4346,13 +4349,14 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	
 	<div class="name">Name: Rangda&#39;s Mask</div>
 	<div class="price">Price: 1300</div>
-	<div class="shortdesc">Gain Damage, Sacrifice Mobility</div>
+	<div class="shortdesc">Gain Damage, Sacrifice Defenses</div>
 	<div class="description">
 		<p></p>
-		<p>PASSIVE - GAIN DAMAGE, SACRIFICE MOBILITY
+		<p>PASSIVE - GAIN DAMAGE, SACRIFICE DEFENSES
+Only can be bought by Warriors, Guardians
 &lt;font color=&#39;#42F46E&#39;&gt;&#43;15% Ability Damage Dealt
 &lt;font color=&#39;#42F46E&#39;&gt;&#43;20% Basic Attack Damage Dealt
-&lt;font color=&#39;#F44242&#39;&gt;-30 Movement Speed</p>
+&lt;font color=&#39;#F44242&#39;&gt;&#43;25% Damage Taken</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -4369,8 +4373,10 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	<div class="description">
 		<p></p>
 		<p>PASSIVE - GAIN DEFENSE, SACRIFICE DAMAGE
-&lt;font color=&#39;#42F46E&#39;&gt;-15% Damage Taken
-&lt;font color=&#39;#F44242&#39;&gt;-25% Damage Dealt</p>
+Only can be bought by Mages, Hunters, Assassins
+&lt;font color=&#39;#42F46E&#39;&gt;-20% Damage Taken
+&lt;font color=&#39;#F44242&#39;&gt;-20% Damage Dealt
+&lt;font color=&#39;#F44242&#39;&gt;-20% Healing Done</p>
 	</div>
 	<div class="type">Item</div>
 	
@@ -4387,8 +4393,10 @@ ROLE QUEST: TANK: COMPLETED!</p>
 	<div class="description">
 		<p></p>
 		<p>PASSIVE - GAIN DEFENSE, SACRIFICE DAMAGE
-&lt;font color=&#39;#42F46E&#39;&gt;-15% Damage Taken
-&lt;font color=&#39;#F44242&#39;&gt;-25% Damage Dealt</p>
+Only can be bought by Mages, Hunters, Assassins
+&lt;font color=&#39;#42F46E&#39;&gt;-20% Damage Taken
+&lt;font color=&#39;#F44242&#39;&gt;-20% Damage Dealt
+&lt;font color=&#39;#F44242&#39;&gt;-20% Healing Done</p>
 	</div>
 	<div class="type">Item</div>
 	

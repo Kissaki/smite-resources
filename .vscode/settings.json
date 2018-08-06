@@ -3,4 +3,7 @@
     "files.exclude": {
         "bin": true
     },
+    "files.associations": {
+        "*.html": "gohtml"
+    },
 }
