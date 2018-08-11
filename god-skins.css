@@ -135,8 +135,8 @@ footer p {
 }
 .god .skins .skin .skincard {
   grid-area: card;
-  height: 200px;
-  width: 150px;
+  max-height: 200px;
+  max-width: 150px;
 }
 .god .skins .skin .skincard.skincard-missing {
   font-style: italic;
