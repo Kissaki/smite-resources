@@ -35,9 +35,9 @@ footer {
     border: 1px solid #ccc;
     background-color: #eee;
     display: grid;
-    grid-template: "icon name empty" 36px
-    "skins skins skins";
-    grid-template-columns: auto auto 1fr;
+    grid-template: "icon name count empty" 36px
+    "skins skins skins skins";
+    grid-template-columns: auto auto auto 1fr;
 
     &.hidden {
         display: none;
@@ -55,6 +55,9 @@ footer {
         width: 32px;
         height: 32px;
         vertical-align: top;
+    }
+    .godskincount {
+        grid-area: count;
     }
     .skins {
         grid-area: skins;

@@ -2,8 +2,8 @@
 document.dataHandler = {
     SRC_GODS: 'data/gods.json',
     elGods: null,
-    loadGodsDone: false,
-    loadSkinsDone: false,
+    loadGodsDone: 0,
+    loadSkinsDone: 0,
     init: function(){
         this.elGods = document.getElementById('gods')
         this.loadGods()
@@ -29,7 +29,7 @@ document.dataHandler = {
         for (var i = 0; i < gods.length; ++i){
             this.handleGod(gods[i])
         }
-        this.loadGodsDone = true
+        this.loadGodsDone = gods.length
         this.loadDone()
     },
     handleGod: function(god){
@@ -42,7 +42,11 @@ document.dataHandler = {
         let godId = god[KEY_ID]
         el.id = 'god' + godId
         el.className = 'god'
-        el.innerHTML = '<h2 class="godname">' + god[KEY_NAME] + '</h2>' + '<img class="godicon" src="' + god[KEY_ICON] + '" alt=""><div id="skins' + godId + '" class="skins"></div>'
+        let nameHtml = '<h2 class="godname">' + god[KEY_NAME] + '</h2>'
+        let countHtml = '<span class="godskincount"></span>'
+        let iconHtml = '<img class="godicon" src="' + god[KEY_ICON] + '" alt="">'
+        let skinsHtml = '<div id="skins' + godId + '" class="skins"></div>'
+        el.innerHTML = nameHtml + countHtml + iconHtml + skinsHtml
         this.elGods.appendChild(el)
         this.loadSkins(godId)
     },
@@ -55,7 +59,7 @@ document.dataHandler = {
             let skin = skins[i]
             this.handleSkin(skin)
         }
-        this.loadSkinsDone = true
+        this.loadSkinsDone = this.loadSkinsDone + 1
         this.loadDone()
     },
     handleSkin: function(skin) {
@@ -88,7 +92,7 @@ document.dataHandler = {
         godEl.appendChild(el)
     },
     loadDone: function(){
-        if (this.loadGodsDone && this.loadSkinsDone){
+        if (this.loadGodsDone > 0 && this.loadSkinsDone === this.loadGodsDone){
             document.filterHandler.init()
         }
     },
@@ -97,14 +101,36 @@ document.dataHandler.init()
 
 document.filterHandler = {
     elGodname: null,
-    elSkinname: null,
+    godEls: [],
+    skinEls: [],
     init: function(){
+        if (this.elGodname !== null){
+            console.log('ERROR: Called filterHandler init when it is arleady initialized')
+            return
+        }
         this.elGodname = document.getElementById('filter-godname')
         this.elSkinname = document.getElementById('filter-skinname')
         this.elGodname.addEventListener('input', this.onFilterGodnameChange.bind(this))
         this.elSkinname.addEventListener('input', this.onFilterSkinnameChange.bind(this))
         this.elGodname.disabled = false
         this.elSkinname.disabled = false
+
+        // Construct metadata for faster data access (no need to query select dom)
+        let gods = document.querySelectorAll('.god')
+        for (var i = 0; i < gods.length; ++i){
+            let god = gods[i]
+            let godname = god.querySelector('.godname').innerHTML.toLowerCase()
+            let godMeta = {'name': godname, 'el': god, 'skinEls': [],}
+            this.godEls.push(godMeta)
+            let skins = god.querySelectorAll('.skin')
+            for (var j = 0; j < skins.length; ++j){
+                let skin = skins[j]
+                let skinname = skin.querySelector('.skinname').innerHTML.toLowerCase()
+                let skinMeta = {'name': skinname, 'el': skin, }
+                godMeta.skinEls.push(skinMeta)
+            }
+        }
+
         this.onFilterUpdate()
     },
     onFilterGodnameChange: function(){
@@ -116,21 +142,29 @@ document.filterHandler = {
     onFilterUpdate: function(){
         let searchGod = this.elGodname.value.toLowerCase()
         let searchSkin = this.elSkinname.value.toLowerCase()
-        let gods = document.querySelectorAll('.god')
+        let gods = this.godEls
         for (var i = 0; i < gods.length; ++i){
-            let god = gods[i]
-            let godname = god.querySelector('.godname').innerHTML
-            let isGodMatch = searchGod.length == 0 ? true : godname.toLowerCase().includes(searchGod)
+            let godMeta = gods[i]
+            let god = godMeta.el
+            let godname = godMeta.name
+            let isGodMatch = searchGod.length == 0 ? true : godname.includes(searchGod)
             
-            let skins = god.querySelectorAll('.skin')
+            let skins = godMeta.skinEls
+            let skinCount = skins.length
+            let visibleCount = 0
             for (var j = 0; j < skins.length; ++j){
-                let skin = skins[j]
-                let skinname = skin.querySelector('.skinname').innerHTML
-                let isSkinMatch = searchSkin.length == 0 ? true : skinname.toLowerCase().includes(searchSkin)
+                let skinMeta = skins[j]
+                let skin = skinMeta.el
+                let skinname = skinMeta.name
+                let isSkinMatch = searchSkin.length == 0 ? true : skinname.includes(searchSkin)
                 skin.className = 'skin ' + (isSkinMatch ? '' : 'hidden')
+                if (isSkinMatch){
+                    ++visibleCount
+                }
             }
-            let hasSkins = god.querySelectorAll('.skin:not(.hidden)').length > 0
+            let hasSkins = visibleCount > 0
             god.className = 'god ' + (isGodMatch && hasSkins ? '' : 'hidden')
+            god.querySelector('.godskincount').innerHTML = '(' + visibleCount + '/' + skinCount + ')'
         }
     },
 }
