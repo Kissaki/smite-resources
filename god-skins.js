@@ -117,6 +117,7 @@ document.filterHandler = {
 
         // Construct metadata for faster data access (no need to query select dom)
         let gods = document.querySelectorAll('.god')
+        let overallSkinCount = 0
         for (var i = 0; i < gods.length; ++i){
             let god = gods[i]
             let godname = god.querySelector('.godname').innerHTML.toLowerCase()
@@ -128,8 +129,11 @@ document.filterHandler = {
                 let skinname = skin.querySelector('.skinname').innerHTML.toLowerCase()
                 let skinMeta = {'name': skinname, 'el': skin, }
                 godMeta.skinEls.push(skinMeta)
+                ++overallSkinCount
             }
         }
+
+        document.querySelector('#overall-skin-count').innerHTML = '(' + overallSkinCount + ')'
 
         this.onFilterUpdate()
     },

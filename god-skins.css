@@ -82,6 +82,9 @@ footer p {
 #filters {
   margin: 2px 4px 8px;
 }
+#overall-skin-count {
+  margin-left: 6px;
+}
 .god {
   margin: 2px 4px;
   border: 1px solid #ccc;
