@@ -21,8 +21,10 @@ build_web:
     - cp roles-pantheons-spritesheet.png 4bfba3d77789a9ec16129032096c7f12.woff smitegods.css smitegods.html smitegods.js public
     - cp godstats.css godstats.html godstats.js public
     - cp smiteitems.css smiteitems.html smiteitems.js public
+    - cp god-skins.css god-skins.html god-skins.js public
     - mkdir public/data
     - cp data/gods.json public/data
+    - cp data/godskins-*.json public/data
     - cp mixercodelog.html public
   artifacts:
     paths:
