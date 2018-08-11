@@ -90,6 +90,7 @@ footer p {
 .god .godname {
   grid-area: name;
   margin: 2px 4px;
+  white-space: nowrap;
   line-height: 32px;
   font-size: 32px;
 }
@@ -121,6 +122,7 @@ footer p {
 }
 .god .skins .skin .skinname {
   grid-area: name;
+  white-space: nowrap;
 }
 .god .skins .skin .skincard {
   grid-area: card;
