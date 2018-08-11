@@ -12,12 +12,11 @@ html {
 h1 {
   font-size: 1.6em;
   line-height: 1.6em;
-  margin: 0.2em 0 0.1em;
+  margin: 2px 4px;
 }
 h2 {
   font-size: 1.4em;
   line-height: 1.4em;
-  margin: 0.3em 0 0.1em;
 }
 input[type=text] {
   border: 1px solid #dddddd;
@@ -47,6 +46,10 @@ li {
   list-style-type: none;
   display: inline-block;
 }
+hr {
+  border-top: 1px solid #ccc;
+  margin: 4px 8px 0;
+}
 #relatedpages {
   background-color: #eeeeff;
   line-height: 2em;
@@ -75,6 +78,9 @@ footer {
 footer p {
   margin: 0;
   padding: 0;
+}
+#filters {
+  margin: 2px 4px 8px;
 }
 .god {
   margin: 2px 4px;
