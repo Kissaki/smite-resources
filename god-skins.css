@@ -1,0 +1,135 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+html {
+  padding: 8px 8px 16px;
+  font-size: 100%;
+  line-height: 1.3em;
+}
+h1 {
+  font-size: 1.6em;
+  line-height: 1.6em;
+  margin: 0.2em 0 0.1em;
+}
+h2 {
+  font-size: 1.4em;
+  line-height: 1.4em;
+  margin: 0.3em 0 0.1em;
+}
+input[type=text] {
+  border: 1px solid #dddddd;
+}
+table,
+tr,
+th,
+td {
+  border: 1px solid #cccccc;
+  vertical-align: top;
+}
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 2px;
+}
+thead th {
+  vertical-align: bottom;
+}
+tbody th {
+  text-align: center;
+}
+ul,
+li {
+  list-style-type: none;
+  display: inline-block;
+}
+#relatedpages {
+  background-color: #eeeeff;
+  line-height: 2em;
+  padding: 0.4em;
+  font-style: normal;
+}
+#relatedpages a {
+  margin: 0 0.4em;
+  padding: 0.2em;
+  background-color: #ccccff;
+  border-radius: 6px;
+  border: 1px solid #ccccff;
+  text-decoration: none;
+}
+#relatedpages a:hover {
+  background-color: #aaaaff;
+  border-color: #aaaaff;
+  color: #000;
+}
+footer {
+  font-size: 0.9em;
+  line-height: 1.2em;
+  margin: 16px 0 0;
+  font-style: italic;
+}
+footer p {
+  margin: 0;
+  padding: 0;
+}
+.god {
+  margin: 2px 4px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  display: grid;
+  grid-template: "icon name empty" 36px "skins skins skins";
+  grid-template-columns: auto auto 1fr;
+}
+.god.hidden {
+  display: none;
+}
+.god .godname {
+  grid-area: name;
+  margin: 2px 4px;
+  line-height: 32px;
+  font-size: 32px;
+}
+.god .godicon {
+  grid-area: icon;
+  margin: 2px 4px;
+  width: 32px;
+  height: 32px;
+  vertical-align: top;
+}
+.god .skins {
+  grid-area: skins;
+  display: flex;
+}
+.god .skins .skin {
+  margin: 2px 4px;
+  border: 1px solid #aaa;
+  background-color: #ccc;
+  padding: 2px 4px;
+  display: grid;
+  grid-template: "name name" auto "obtainability obtainability" auto "card card" 200px "favor gems" 1fr;
+  /* card full size: 750x1000 */
+}
+.god .skins .skin.hidden {
+  display: none;
+}
+.god .skins .skin .skinname {
+  grid-area: name;
+}
+.god .skins .skin .skincard {
+  grid-area: card;
+  height: 200px;
+  width: 150px;
+}
+.god .skins .skin .skincard.skincard-missing {
+  font-style: italic;
+}
+.god .skins .skin .price-favor {
+  grid-area: favor;
+}
+.god .skins .skin .price-gems {
+  grid-area: gems;
+}
