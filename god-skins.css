@@ -133,6 +133,10 @@ footer p {
   grid-area: name;
   white-space: nowrap;
 }
+.god .skins .skin a.skincard {
+  display: block;
+  width: 150px;
+}
 .god .skins .skin .skincard {
   grid-area: card;
   max-height: 200px;
