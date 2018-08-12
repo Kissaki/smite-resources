@@ -177,7 +177,7 @@ document.dataHandler = {
         let godId = skin[KEY_GODID]
         let godEl = document.getElementById('skins' + godId)
         let el = document.createElement('div')
-        el.className = 'skin'
+        el.className = 'skin ' + (skinName == 'Standard' || skinName == 'Golden' || skinName == 'Legendary' || skinName == 'Diamond' ? 'hidden' : '')
         let nameHtml = '<h2 class="skinname">' + skinName + '</h2>'
         let obtainHtml = '<div class="obtainability">' + skin[KEY_OBTAINABILITY] + '</div>'
         let cardHtml = skin[KEY_CARD].length > 0 ? '<a class="skincard" href="' + skin[KEY_CARD] + '"><img class="skincard" src="' + skin[KEY_CARD] + '" alt=""></a>' : '<div class="skincard skincard-missing">missing card art</div>'
@@ -196,6 +196,9 @@ document.dataHandler.init()
 
 document.filterHandler = {
     elGodname: null,
+    elSkinname: null,
+    elStandard: null,
+    elMastery: null,
     godEls: [],
     skinEls: [],
     init: function(){
@@ -205,8 +208,12 @@ document.filterHandler = {
         }
         this.elGodname = document.getElementById('filter-godname')
         this.elSkinname = document.getElementById('filter-skinname')
-        this.elGodname.addEventListener('input', this.onFilterGodnameChange.bind(this))
-        this.elSkinname.addEventListener('input', this.onFilterSkinnameChange.bind(this))
+        this.elStandard = document.getElementById('show-standard')
+        this.elMastery = document.getElementById('show-mastery')
+        this.elGodname.addEventListener('input', this.onFilterUpdate.bind(this))
+        this.elSkinname.addEventListener('input', this.onFilterUpdate.bind(this))
+        this.elStandard.addEventListener('input', this.onFilterUpdate.bind(this))
+        this.elMastery.addEventListener('input', this.onFilterUpdate.bind(this))
         this.elGodname.disabled = false
         this.elSkinname.disabled = false
 
@@ -222,6 +229,10 @@ document.filterHandler = {
             for (var j = 0; j < skins.length; ++j){
                 let skin = skins[j]
                 let skinname = skin.querySelector('.skinname').innerHTML.toLowerCase()
+                if (skinname == 'Standard ' + godname){
+                    // Shorten the standard skin name to just 'Standard' (dropping the god name)
+                    skinname = 'Standard'
+                }
                 let skinMeta = {'name': skinname, 'el': skin, }
                 godMeta.skinEls.push(skinMeta)
                 ++overallSkinCount
@@ -232,15 +243,11 @@ document.filterHandler = {
 
         this.onFilterUpdate()
     },
-    onFilterGodnameChange: function(){
-        this.onFilterUpdate()
-    },
-    onFilterSkinnameChange: function(){
-        this.onFilterUpdate()
-    },
     onFilterUpdate: function(){
         let searchGod = this.elGodname.value.toLowerCase()
         let searchSkin = this.elSkinname.value.toLowerCase()
+        let showStandard = this.elStandard.checked
+        let showMastery = this.elMastery.checked
         let gods = this.godEls
         for (var i = 0; i < gods.length; ++i){
             let godMeta = gods[i]
@@ -256,6 +263,12 @@ document.filterHandler = {
                 let skin = skinMeta.el
                 let skinname = skinMeta.name
                 let isSkinMatch = searchSkin.length == 0 ? true : skinname.includes(searchSkin)
+                if (isSkinMatch && skinname == 'standard' && !showStandard){
+                    isSkinMatch = false
+                }
+                if (isSkinMatch && !showMastery && (skinname == 'golden' || skinname == 'legendary' || skinname == 'diamond')){
+                    isSkinMatch = false
+                }
                 skin.className = 'skin ' + (isSkinMatch ? '' : 'hidden')
                 if (isSkinMatch){
                     ++visibleCount
