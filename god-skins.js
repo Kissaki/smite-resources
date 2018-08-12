@@ -55,12 +55,101 @@ document.dataHandler = {
         this.loadJson(src, this.handleSkins.bind(this))
     },
     handleSkins: function(skins){
+        skins.sort(this.compareSkins.bind(this))
         for (var i = 0; i < skins.length; ++i){
             let skin = skins[i]
             this.handleSkin(skin)
         }
         this.loadSkinsDone = this.loadSkinsDone + 1
         this.loadDone()
+    },
+    compareSkins(lhs, rhs){
+        let KEY_NAME = 'skin_name'
+        let leftName = lhs[KEY_NAME]
+        let rightName = rhs[KEY_NAME]
+        if (leftName.startsWith('Standard ')){
+            return -1
+        } else if (rightName.startsWith('Standard ')){
+            return 1
+        } else if (leftName == 'Golden'){
+            return -1
+        }else if(rightName == 'Golden'){
+            return 1
+        } else if (leftName == 'Legendary'){
+            return -1
+        } else if (rightName == 'Legendary'){
+            return 1
+        } else if (leftName == 'Diamond'){
+            return -1
+        } else if (rightName == 'Diamond'){
+            return 1
+        }
+        let res = this.compareSkinObtainability(lhs, rhs)
+        if (res !== 0){
+            return res
+        }
+        res = this.compareSkinPrice(lhs, rhs)
+        if (res !== 0){
+            return res
+        }
+        this.compareSkinName(leftName, rightName)
+    },
+    compareSkinObtainability(a, b){
+        let KEY_OBTAINABILITY = 'obtainability'
+        let aObt = a[KEY_OBTAINABILITY]
+        let bObt = b[KEY_OBTAINABILITY]
+        if (aObt === bObt){
+            return 0
+        }
+        let obtValues = {'normal': 'Normal', 'exclusive': 'Exclusive', 'limited': 'Limited',}
+        switch (aObt){
+            case 'Normal':
+                // Normal always before others (first)
+                return -1
+            case 'Exclusive':
+                // Exclusive after normal, before others
+                return bObt === obtValues.normal ? 1 : -1
+            case 'Limited':
+                // Limited always after others (last)
+                return 1
+            default:
+                console.log('ERROR: Unexpected obtainability value', aObt)
+                return -1
+        }
+    },
+    compareSkinPrice(a, b){
+        // 0 if not
+        let KEY_PRICE_FAVOR = 'price_favor'
+        // 0 if not
+        let KEY_PRICE_GEMS = 'price_gems'
+        let aFavor = a[KEY_PRICE_FAVOR]
+        let bFavor = b[KEY_PRICE_FAVOR]
+        let aGems = a[KEY_PRICE_GEMS]
+        let bGems = b[KEY_PRICE_GEMS]
+        if (aFavor !== bFavor){
+            if (aFavor == 0){
+                return 1
+            }
+            if (bFavor == 0){
+                return -1
+            }
+            // Order by lowest price first
+            return aFavor - bFavor
+        }
+        if (aGems !== bGems){
+            if (aGems == 0){
+                return 1
+            }
+            if (bGems == 0){
+                return -1
+            }
+            // Order by lowest price first
+            return aGems - bGems
+        }
+        return 0
+    },
+    compareSkinName(leftName, rightName){
+        return leftName.localeCompare(rightName)
     },
     handleSkin: function(skin) {
         let KEY_GODID = 'god_id'
