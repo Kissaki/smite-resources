@@ -79,11 +79,17 @@ document.dataHandler = {
         let KEY_ID = 'skin_id1'
         let KEY_ID2 = 'skin_id2'
 
+        let skinName = skin[KEY_NAME]
+        if (skinName === 'Standard ' + skin[KEY_GOD_NAME]){
+            // Shorten the standard skin name to just 'Standard' (dropping the god name)
+            skinName = 'Standard'
+        }
+
         let godId = skin[KEY_GODID]
         let godEl = document.getElementById('skins' + godId)
         let el = document.createElement('div')
         el.className = 'skin'
-        let nameHtml = '<h2 class="skinname">' + skin[KEY_NAME] + '</h2>'
+        let nameHtml = '<h2 class="skinname">' + skinName + '</h2>'
         let obtainHtml = '<div class="obtainability">' + skin[KEY_OBTAINABILITY] + '</div>'
         let cardHtml = skin[KEY_CARD].length > 0 ? '<a class="skincard" href="' + skin[KEY_CARD] + '"><img class="skincard" src="' + skin[KEY_CARD] + '" alt=""></a>' : '<div class="skincard skincard-missing">missing card art</div>'
         let costFavor = skin[KEY_PRICE_FAVOR] != 0 ? '<div class="price price-favor">' + skin[KEY_PRICE_FAVOR] + ' favor</div>' : ''
