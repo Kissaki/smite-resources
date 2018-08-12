@@ -140,6 +140,7 @@ footer p {
 }
 .god .skins .skin .skincard.skincard-missing {
   font-style: italic;
+  width: 150px;
 }
 .god .skins .skin .price-favor {
   grid-area: favor;
