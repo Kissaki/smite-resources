@@ -133,6 +133,8 @@ footer p {
 .god .skins .skin .skinname {
   grid-area: name;
   white-space: nowrap;
+  max-width: 150px;
+  overflow: scroll;
 }
 .god .skins .skin a.skincard {
   display: block;
