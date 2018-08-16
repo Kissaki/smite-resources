@@ -18,10 +18,12 @@ build_web:
   script:
     - bin/smitegods -updategoddata -devid $SMITE_API_DEVID -authkey $SMITE_API_AUTHKEY
     - mkdir public
+    - mkdir public/img
     - cp roles-pantheons-spritesheet.png 4bfba3d77789a9ec16129032096c7f12.woff smitegods.css smitegods.html smitegods.js public
     - cp godstats.css godstats.html godstats.js public
     - cp smiteitems.css smiteitems.html smiteitems.js public
     - cp god-skins.css god-skins.html god-skins.js public
+    - cp img/*.png img/*.jpg public/img
     - mkdir public/data
     - cp data/gods.json public/data
     - cp data/godskins-*.json public/data

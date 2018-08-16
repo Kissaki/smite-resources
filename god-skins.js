@@ -180,7 +180,7 @@ document.dataHandler = {
         el.className = 'skin ' + (skinName == 'Standard' || skinName == 'Golden' || skinName == 'Legendary' || skinName == 'Diamond' ? 'hidden' : '')
         let nameHtml = '<h2 class="skinname">' + skinName + '</h2>'
         let obtainHtml = '<div class="obtainability">' + skin[KEY_OBTAINABILITY] + '</div>'
-        let cardHtml = skin[KEY_CARD].length > 0 ? '<a class="skincard" href="' + skin[KEY_CARD] + '"><img class="skincard" data-src="' + skin[KEY_CARD] + '" alt=""></a>' : '<div class="skincard skincard-missing">missing card art</div>'
+        let cardHtml = skin[KEY_CARD].length > 0 ? '<a class="skincard" href="' + skin[KEY_CARD] + '"><img class="skincard" src="img/god-skin-card-loading.png" data-src="' + skin[KEY_CARD] + '" alt=""></a>' : '<div class="skincard skincard-missing">missing card art</div>'
         let costFavor = skin[KEY_PRICE_FAVOR] != 0 ? '<div class="price price-favor">' + skin[KEY_PRICE_FAVOR] + ' favor</div>' : ''
         let costGems = skin[KEY_PRICE_GEMS] != 0 ? '<div class="price price-gems">' + skin[KEY_PRICE_GEMS] + ' gems</div>' : ''
         el.innerHTML = nameHtml + obtainHtml + cardHtml + costFavor + costGems
