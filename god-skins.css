@@ -116,6 +116,7 @@ footer p {
 .god .skins {
   grid-area: skins;
   display: flex;
+  flex-wrap: wrap;
 }
 .god .skins .skin {
   margin: 2px 4px;
