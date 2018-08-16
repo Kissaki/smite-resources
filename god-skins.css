@@ -82,6 +82,9 @@ footer p {
 #filters {
   margin: 2px 4px 8px;
 }
+#filters label {
+  white-space: nowrap;
+}
 #overall-skin-count {
   margin-left: 6px;
 }
