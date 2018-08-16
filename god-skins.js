@@ -180,7 +180,7 @@ document.dataHandler = {
         el.className = 'skin ' + (skinName == 'Standard' || skinName == 'Golden' || skinName == 'Legendary' || skinName == 'Diamond' ? 'hidden' : '')
         let nameHtml = '<h2 class="skinname">' + skinName + '</h2>'
         let obtainHtml = '<div class="obtainability">' + skin[KEY_OBTAINABILITY] + '</div>'
-        let cardHtml = skin[KEY_CARD].length > 0 ? '<a class="skincard" href="' + skin[KEY_CARD] + '"><img class="skincard" src="' + skin[KEY_CARD] + '" alt=""></a>' : '<div class="skincard skincard-missing">missing card art</div>'
+        let cardHtml = skin[KEY_CARD].length > 0 ? '<a class="skincard" href="' + skin[KEY_CARD] + '"><img class="skincard" data-src="' + skin[KEY_CARD] + '" alt=""></a>' : '<div class="skincard skincard-missing">missing card art</div>'
         let costFavor = skin[KEY_PRICE_FAVOR] != 0 ? '<div class="price price-favor">' + skin[KEY_PRICE_FAVOR] + ' favor</div>' : ''
         let costGems = skin[KEY_PRICE_GEMS] != 0 ? '<div class="price price-gems">' + skin[KEY_PRICE_GEMS] + ' gems</div>' : ''
         el.innerHTML = nameHtml + obtainHtml + cardHtml + costFavor + costGems
@@ -189,6 +189,7 @@ document.dataHandler = {
     loadDone: function(){
         if (this.loadGodsDone > 0 && this.loadSkinsDone === this.loadGodsDone){
             document.filterHandler.init()
+            document.imageLoader.init()
         }
     },
 }
@@ -278,5 +279,34 @@ document.filterHandler = {
             god.className = 'god ' + (isGodMatch && hasSkins ? '' : 'hidden')
             god.querySelector('.godskincount').innerHTML = '(' + visibleCount + '/' + skinCount + ')'
         }
+    },
+}
+
+document.imageLoader = {
+    observer: null,
+    init: function(){
+        var images = document.querySelectorAll('img.skincard')
+        if ('IntersectionObserver' in window){
+            observer = new IntersectionObserver(this.onItem.bind(this));
+            images.forEach(this.observe);
+        } else {
+            images.forEach(this.loadImage);
+        }
+    },
+    observe: function(img){
+        this.observer.observe(img)
+    },
+    onItem: function(items, observer) {
+        items.forEach(this.onItemIndiv.bind(this));
+    },
+    onItemIndiv: function(item) {
+        if (item.isIntersecting){
+            let img = item.target
+            this.loadImage(img);
+            observer.unobserve(img);
+        }
+    },
+    loadImage: function(img){
+        img.src = img.dataset.src
     },
 }
