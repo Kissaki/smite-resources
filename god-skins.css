@@ -144,7 +144,7 @@ footer p {
   grid-area: name;
   white-space: nowrap;
   max-width: 150px;
-  overflow: scroll;
+  overflow: auto;
 }
 .god .skins .skin a.skincard {
   display: block;
