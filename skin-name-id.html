@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SMITE Chest Contents</title>
+	<link rel="stylesheet" href="chest-contents.css?20180817" />
+</head>
+<body>
+<div id="content">
+</div>
+<script>
+
+window.KEY = {
+    GOD: {
+        CARD: 'godCard_URL',
+        ICON: 'godIcon_URL',
+        ID: 'id',
+        NAME: 'Name',
+    },
+    SKIN: {
+        GODID: 'god_id',
+        GOD_NAME: 'god_name',
+        NAME: 'skin_name',
+        CARD: 'godSkin_URL',
+        // This is actually always the god icon
+        ICON: 'godIcon_URL',
+        OBTAINABILITY: 'obtainability',
+        // 0 if not
+        PRICE_FAVOR: 'price_favor',
+        // 0 if not
+        PRICE_GEMS: 'price_gems',
+        // ??
+        RETMSG: 'ret_msg',
+        ID: 'skin_id1',
+        ID2: 'skin_id2',
+    },
+}
+
+document.dataHandler = {
+    SRC_GODS: 'data/gods.json',
+    elGods: null,
+    init: function(){
+        this.elGods = document.getElementById('content')
+        this.loadGods()
+    },
+    loadGods: function(){
+        this.loadJson(this.SRC_GODS, this.onGodsLoaded.bind(this))
+    },
+    loadJson: function(url, onLoadHandler){
+        var request = new XMLHttpRequest()
+        request.open('GET', url)
+        request.responseType = 'json'
+        request.send()
+        request.onload = this.onLoadResult(onLoadHandler)
+    },
+    onLoadResult: function(dataHandler){
+        return function(e){
+            var req = e.target
+            var res = req.response
+            dataHandler(res)
+        }
+    },
+    onGodsLoaded: function(gods){
+        for (var i = 0; i < gods.length; ++i){
+            this.handleGod(gods[i])
+        }
+    },
+    handleGod: function(god){
+        let el = document.createElement('div')
+        let godId = god[KEY.GOD.ID]
+        el.id = 'god' + godId
+        el.className = 'god'
+        let nameHtml = '<h2 class="godname">' + god[KEY.GOD.NAME] + '</h2>'
+        let skinsHtml = '<div id="skins' + godId + '" class="skins"></div>'
+        el.innerHTML = nameHtml + skinsHtml
+        this.elGods.appendChild(el)
+        this.loadSkins(godId)
+    },
+    loadSkins: function(godId){
+        var src = 'data/godskins-' + godId + '.json'
+        this.loadJson(src, this.handleSkins.bind(this))
+    },
+    handleSkins: function(skins){
+        for (var i = 0; i < skins.length; ++i){
+            let skin = skins[i]
+            this.handleSkin(skin)
+        }
+    },
+    handleSkin: function(skin) {
+        let godId = skin[KEY.SKIN.GODID]
+        let godEl = document.getElementById('skins' + godId)
+        let el = document.createElement('div')
+        let obtainability = skin[KEY.SKIN.OBTAINABILITY]
+        let isHiddenByDefault = obtainability == 'Standard' || obtainability == 'Mastery'
+        el.className = 'skin ' + (isHiddenByDefault ? 'hidden' : '')
+        el.innerHTML = skin[KEY.SKIN.NAME] + ': ' + skin[KEY.SKIN.ID]
+        godEl.appendChild(el)
+    },
+}
+document.dataHandler.init()
+
+</script>
+</body>
+</html>
