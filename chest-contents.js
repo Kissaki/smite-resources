@@ -23,12 +23,13 @@ document.dataHandler = {
         let chestsHtml = ''
         for (var i = 0; i < chests.length; ++i){
             let chest = chests[i]
-            let nameHtml = '<div class="chestname">' + chest['name'] + '</div>'
+            let nameHtml = '<h2 class="chestname">' + chest['name'] + '</h2>'
             let priceHtml = '<div class="chestprice">Price Gems: ' + chest['priceGems'] + '</div>'
             let godskinsHtml = this.getGodskinsHtml(chest['godskins'])
             let voicepacksHtml = this.getVoicepacksHtml(chest['voicepacks'])
             let wardskinsHtml = this.getWardskinsHtml(chest['wardskins'])
-            let chestHtml = nameHtml + priceHtml + godskinsHtml + voicepacksHtml + wardskinsHtml
+            let contentHtml = '<label>Show content</label> <input type="checkbox" class="checkboxshowcontent"><div class="chestcontent">' + godskinsHtml + voicepacksHtml + wardskinsHtml + '</div>'
+            let chestHtml = '<article class="chest">' + nameHtml  + priceHtml + contentHtml + '</article>'
             chestsHtml += chestHtml
         }
         this.elChests.innerHTML = chestsHtml
@@ -40,12 +41,12 @@ document.dataHandler = {
         if (godskins.length == 0){
             return ''
         }
-        let godskinsHtml = '<b>God Skins:</b>'
+        let godskinsHtml = '<h3>God Skins:</h3>'
         for (var j = 0; j < godskins.length; ++j){
             let godskin = godskins[j]
             godskinsHtml += this.getGodskinHtml(godskin)
         }
-        return godskinsHtml
+        return '<section class="chestcontentcategory">' + godskinsHtml + '</section>'
     },
     getGodskinHtml: function(skin){
         return '<div class="godskin">' + skin['name'] + '</div>'
@@ -57,12 +58,12 @@ document.dataHandler = {
         if (voicepacks.length == 0){
             return ''
         }
-        let voicepacksHtml = '<b>Voicepacks:</b>'
+        let voicepacksHtml = '<h3>Voicepacks:</h3>'
         for (var j = 0; j < voicepacks.length; ++j){
             let voicepack = voicepacks[j]
             voicepacksHtml += this.getVoicepackHtml(voicepack)
         }
-        return voicepacksHtml
+        return '<section class="chestcontentcategory">' + voicepacksHtml + '</section>'
     },
     getVoicepackHtml: function(vp){
         return '<div class="voicepack">' + vp + '</div>'
@@ -74,12 +75,12 @@ document.dataHandler = {
         if (wardskins.length == 0){
             return ''
         }
-        let wardskinsHtml = '<b>Ward Skins</b>:'
+        let wardskinsHtml = '<h3>Ward Skins</h3>'
         for (var j = 0; j < wardskins.length; ++j){
             let wardskin = wardskins[j]
             wardskinsHtml += this.getWardskinHtml(wardskin)
         }
-        return wardskinsHtml
+        return '<section class="chestcontentcategory">' + wardskinsHtml + '</section>'
     },
     getWardskinHtml: function(skin){
         let icon = '<a href="https://smite.gamepedia.com/File:Ward_' + skin + '.png">icon</a>'
