@@ -34,6 +34,9 @@ document.dataHandler = {
         this.elChests.innerHTML = chestsHtml
     },
     getGodskinsHtml: function(godskins){
+        if (godskins === undefined){
+            return ''
+        }
         if (godskins.length == 0){
             return ''
         }
@@ -48,6 +51,9 @@ document.dataHandler = {
         return '<div class="godskin">' + skin['name'] + '</div>'
     },
     getVoicepacksHtml: function(voicepacks){
+        if (voicepacks === undefined){
+            return ''
+        }
         if (voicepacks.length == 0){
             return ''
         }
@@ -62,6 +68,9 @@ document.dataHandler = {
         return '<div class="voicepack">' + vp + '</div>'
     },
     getWardskinsHtml: function(wardskins){
+        if (wardskins === undefined){
+            return ''
+        }
         if (wardskins.length == 0){
             return ''
         }
