@@ -67,6 +67,20 @@
         "Lucky Cat",
         "Squiddle"
       ]
+    },
+    {
+      "name": "Above The Law Chest",
+      "priceGems": 300,
+      "godskins": [
+        {"name": "Covert Ops Bastet","skin_id1":10312},
+        {"name": "G.I.Zhong Zhong Kui","skin_id1":13660},
+        {"name": "Infiltrator Loki","skin_id1":9251},
+        {"name": "K-9 Anubis","skin_id1":18702},
+        {"name": "Red Star Athena","skin_id1":10070},
+        {"name": "Renegade Awilix","skin_id1":14255},
+        {"name": "Sentry Vulcan","skin_id1":9016},
+        {"name": "Siege Engine Xing Tian","skin_id1":16821}
+        ]
     }
   ]
 }
