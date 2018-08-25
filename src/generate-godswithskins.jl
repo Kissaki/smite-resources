@@ -1,8 +1,9 @@
 module godswithskins
 
 import JSON
+import DataStructures
 
-gods = JSON.parsefile("data/gods.json")
+gods = JSON.parsefile("data/gods.json"; dicttype=DataStructures.OrderedDict)
 godcount = length(gods)
 
 println("Count of gods: $godcount")
