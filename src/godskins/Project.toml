@@ -1,0 +1,7 @@
+name = "godskins"
+uuid = "2cee5650-a874-11e8-0438-b9d5c2a48bb8"
+authors = ["Jan Klass <kissaki@posteo.de>"]
+version = "1.0.0"
+
+[deps]
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
