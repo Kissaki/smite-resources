@@ -26,6 +26,7 @@ build_web:
     - cp img/*.png public/img
     - mkdir public/data
     - cp data/gods.json public/data
+    - cp data/godswithskins.json public/data
     - cp data/godskins-*.json public/data
     - cp mixercodelog.html public
   artifacts:
