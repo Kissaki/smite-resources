@@ -1,6 +1,6 @@
 
 document.dataHandler = {
-    SRC_GODS: 'data/gods.json',
+    SRC_GODSWITHSKINS: 'data/godswithskins.json',
     elGods: null,
     loadGodsDone: 0,
     loadSkinsDone: 0,
@@ -9,7 +9,7 @@ document.dataHandler = {
         this.loadGods()
     },
     loadGods: function(){
-        this.loadJson(this.SRC_GODS, this.onGodsLoaded.bind(this))
+        this.loadJson(this.SRC_GODSWITHSKINS, this.onGodsLoaded.bind(this))
     },
     loadJson: function(url, onLoadHandler){
         var request = new XMLHttpRequest()
@@ -37,6 +37,8 @@ document.dataHandler = {
         let KEY_ICON = 'godIcon_URL'
         let KEY_ID = 'id'
         let KEY_NAME = 'Name'
+        // This is a custom key for combined data. It is not provided by the API.
+        let KEY_GODSKINS = 'godskins'
 
         let el = document.createElement('div')
         let godId = god[KEY_ID]
@@ -48,11 +50,8 @@ document.dataHandler = {
         let skinsHtml = '<div id="skins' + godId + '" class="skins"></div>'
         el.innerHTML = nameHtml + countHtml + iconHtml + skinsHtml
         this.elGods.appendChild(el)
-        this.loadSkins(godId)
-    },
-    loadSkins: function(godId){
-        var src = 'data/godskins-' + godId + '.json'
-        this.loadJson(src, this.handleSkins.bind(this))
+        let godskins = god[KEY_GODSKINS]
+        this.handleSkins(godskins)
     },
     handleSkins: function(skins){
         skins.sort(this.compareSkins.bind(this))
