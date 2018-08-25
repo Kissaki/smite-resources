@@ -1,4 +1,4 @@
-module godskins
+module godswithskins
 
 import JSON
 
