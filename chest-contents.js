@@ -1,8 +1,13 @@
 document.dataHandler = {
     elChests: null,
+    gods: {},
+    godskins: {},
     init: function(){
         this.elChests = document.querySelector('#chests')
-        this.loadJson('data/chest-data.json', this.onChestData.bind(this))
+        this.loadData()
+    },
+    loadData: function(){
+        this.loadJson('data/godswithskins.json', this.onGodData.bind(this))
     },
     loadJson: function(url, onLoadHandler){
         var request = new XMLHttpRequest()
@@ -10,6 +15,24 @@ document.dataHandler = {
         request.responseType = 'json'
         request.send()
         request.onload = this.onLoadResult(onLoadHandler)
+    },
+    onGodData: function(gods){
+        let KEY_ID = 'id'
+        let KEY_SKINS = 'godskins'
+        let KEY_SKINID1 = 'skin_id1'
+        for (var i = 0; i < gods.length; ++i){
+            let god = gods[i]
+            let godId = god[KEY_ID]
+            this.gods[godId] = god
+
+            let skins = god[KEY_SKINS]
+            for (var j = 0; j < skins.length; ++j){
+                let skin = skins[j]
+                let skinId = skin[KEY_SKINID1]
+                this.godskins[skinId] = {'god': god, 'godskin': skin,}
+            }
+        }
+        this.loadJson('data/chest-data.json', this.onChestData.bind(this))
     },
     onLoadResult: function(dataHandler){
         return function(e){
@@ -49,7 +72,22 @@ document.dataHandler = {
         return '<section class="chestcontentcategory">' + godskinsHtml + '</section>'
     },
     getGodskinHtml: function(skin){
-        return '<div class="godskin">' + skin['name'] + '</div>'
+        let KEY_SKINID1 = 'skin_id1'
+        let KEY_SKINNAME = 'name'
+        let skinId = skin[KEY_SKINID1]
+        if (skinId === undefined){
+            return '<div class="godskin">' + skin[KEY_SKINNAME] + '</div>'
+        }
+        let data = this.godskins[skinId]
+        let godData = data['god']
+        let skinData = data['godskin']
+        let iconGod = skinData['godIcon_URL']
+        let iconSkin = skinData['godSkin_URL']
+        let godName = godData.Name
+        let skinName = skinData.skin_name
+        let godHtml = '<div class="god"><img class="godicon" src="' + iconGod + '" alt=""><span class="godname">' + godName + '</span></div>'
+        let skinHtml = '<img class="skinicon" src="' + iconSkin + '" alt=""><span class="skinname">' + skinName + '</span>'
+        return '<div class="godskin">' + godHtml + skinHtml + '</div>'
     },
     getVoicepacksHtml: function(voicepacks){
         if (voicepacks === undefined){
