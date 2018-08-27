@@ -29,6 +29,7 @@ build_web:
     - cp data/gods.json public/data
     - cp data/godswithskins.json public/data
     - cp data/godskins-*.json public/data
+    - cp data/chest-data.json public/data
     - cp mixercodelog.html public
   artifacts:
     paths:
