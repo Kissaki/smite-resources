@@ -1,0 +1,86 @@
+{
+  "chests": [
+    {
+      "name": "Bubble-licious Chest",
+      "priceGems": 300,
+      "godskins": [
+        {"name": "Sweet Tooth Sol","skin_id1":34380},
+        {"name": "Fabulous Chiron"},
+        {"name": "Sun-Kissed Amaterasu"},
+        {"name": "Afro-dite Aphrodite"},
+        {"name": "Diva Aphrodite"},
+        {"name": "Midnight Dove Awilix"},
+        {"name": "Kawaii Pop Bastet"},
+        {"name": "Enchanted Chang’e"},
+        {"name": "Dread Lord Fafnir"},
+        {"name": "Expelled Hel"},
+        {"name": "Hou Ru Kai Hou Yi"},
+        {"name": "Shaolin Monk-ey Hun Batz"},
+        {"name": "Mini Metal Jing Wei"},
+        {"name": "Shino-bo Kuzenbo"},
+        {"name": "Nebula Medusa"},
+        {"name": "The Sparrow Nike"},
+        {"name": "Dark Summoner Nu Wa"},
+        {"name": "Solar Sentinel Ra"},
+        {"name": "Devil Horns Raijin"},
+        {"name": "Daisy Despair Scylla"},
+        {"name": "Madame Blade Serqet"},
+        {"name": "Blood Eagle Thor"},
+        {"name": "Vizier Thoth"},
+        {"name": "PrivaTyr Tyr"}
+      ],
+      "voicepacks": [
+        "Artemis",
+        "Artio",
+        "Bakasura",
+        "Cerberus",
+        "Chaac",
+        "Chiron",
+        "Fafnir",
+        "Guan Yu",
+        "Hachiman",
+        "Hou Yi",
+        "Izanami",
+        "Janus",
+        "Khepri",
+        "Kukulkan",
+        "Mercury",
+        "Nike",
+        "Nox",
+        "Osiris",
+        "Poseidon",
+        "Ra",
+        "Ratatoskyr",
+        "Scylla",
+        "Susano",
+        "The Morrigan",
+        "Thoth",
+        "Vulcan"
+      ],
+      "wardskins": [
+        "Box Cat",
+        "Brain In The Jar",
+        "Denton Balloon",
+        "Floaticorn",
+        "Fwuffy Manticore",
+        "Jungle Gnome",
+        "Lucky Cat",
+        "Squiddle"
+      ]
+    },
+    {
+      "name": "Above The Law Chest",
+      "priceGems": 300,
+      "godskins": [
+        {"name": "Covert Ops Bastet","skin_id1":10312},
+        {"name": "G.I.Zhong Zhong Kui","skin_id1":13660},
+        {"name": "Infiltrator Loki","skin_id1":9251},
+        {"name": "K-9 Anubis","skin_id1":18702},
+        {"name": "Red Star Athena","skin_id1":10070},
+        {"name": "Renegade Awilix","skin_id1":14255},
+        {"name": "Sentry Vulcan","skin_id1":9016},
+        {"name": "Siege Engine Xing Tian","skin_id1":16821}
+        ]
+    }
+  ]
+}

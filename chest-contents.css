@@ -1,0 +1,157 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+html {
+  padding: 8px 8px 16px;
+  font-size: 100%;
+  line-height: 1.3em;
+}
+h1 {
+  font-size: 1.6em;
+  line-height: 1.6em;
+  margin: 2px 4px;
+}
+h2 {
+  font-size: 1.4em;
+  line-height: 1.4em;
+}
+input[type=text] {
+  border: 1px solid #dddddd;
+}
+table,
+tr,
+th,
+td {
+  border: 1px solid #cccccc;
+  vertical-align: top;
+}
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 2px;
+}
+thead th {
+  vertical-align: bottom;
+}
+tbody th {
+  text-align: center;
+}
+ul,
+li {
+  list-style-type: none;
+  display: inline-block;
+}
+hr {
+  border-top: 1px solid #ccc;
+  margin: 4px 8px 0;
+}
+#relatedpages {
+  background-color: #eeeeff;
+  line-height: 2em;
+  padding: 0.4em;
+  font-style: normal;
+}
+#relatedpages a {
+  margin: 0 0.4em;
+  padding: 0.2em;
+  background-color: #ccccff;
+  border-radius: 6px;
+  border: 1px solid #ccccff;
+  text-decoration: none;
+}
+#relatedpages a:hover {
+  background-color: #aaaaff;
+  border-color: #aaaaff;
+  color: #000;
+}
+footer {
+  font-size: 0.9em;
+  line-height: 1.2em;
+  margin: 16px 0 0;
+  font-style: italic;
+}
+footer p {
+  margin: 0;
+  padding: 0;
+}
+#filters {
+  margin: 2px 4px 8px;
+}
+#filters label {
+  white-space: nowrap;
+}
+#filters .filter-checkbox {
+  border: 2px solid #aeaeff;
+  background-color: #aeaeff;
+  border-radius: 2px;
+  padding: 0 2px;
+  cursor: pointer;
+}
+#intro-warning {
+  margin: 4px 0 8px;
+  border: 1px solid #ccccff;
+  background-color: #ccccff;
+  padding: 4px 8px;
+}
+.chest {
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  padding: 4px 8px;
+}
+.chest .chestname {
+  font-weight: bold;
+}
+.chest .chestprice {
+  background-color: #ffdddd;
+}
+.chest .checkboxshowcontent {
+  cursor: pointer;
+}
+.chest .chestcontent {
+  display: none;
+}
+.chest .chestcontent .chestcontentcategory {
+  display: flex;
+  flex-wrap: wrap;
+}
+.chest .chestcontent .chestcontentcategory .godskin {
+  margin: 2px 4px;
+  background: #ddd;
+  border: 1px solid #ccc;
+  padding: 4px;
+  display: grid;
+  grid-template: "god" "skinname" "skinicon";
+  grid-gap: 4px;
+}
+.chest .chestcontent .chestcontentcategory .godskin .god {
+  grid-area: god;
+}
+.chest .chestcontent .chestcontentcategory .godskin .god .godicon {
+  max-width: 32px;
+  max-height: 32px;
+  vertical-align: baseline;
+}
+.chest .chestcontent .chestcontentcategory .godskin .god .godname {
+  font-size: 16px;
+  line-height: 32px;
+  padding-left: 4px;
+}
+.chest .chestcontent .chestcontentcategory .godskin .skinicon {
+  grid-area: skinicon;
+  max-width: 128px;
+  max-height: 128px;
+  margin: 0 auto;
+}
+.chest .chestcontent .chestcontentcategory .godskin .skinname {
+  grid-area: skinname;
+  font-size: 24px;
+  line-height: 24px;
+}
+.chest .checkboxshowcontent:checked + .chestcontent {
+  display: block;
+}
