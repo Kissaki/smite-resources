@@ -92,6 +92,9 @@ footer p {
   padding: 0 2px;
   cursor: pointer;
 }
+#filters .filter-clear {
+  cursor: pointer;
+}
 #overall-skin-count {
   margin-left: 6px;
 }

@@ -28,6 +28,8 @@ document.filterHandler = {
         this.elSkinname.addEventListener('input', this.onFilterUpdate.bind(this))
         this.elStandard.addEventListener('input', this.onFilterUpdate.bind(this))
         this.elMastery.addEventListener('input', this.onFilterUpdate.bind(this))
+        document.getElementById('filter-godname-clear').addEventListener('click', this.onFilterGodnameClear.bind(this))
+        document.getElementById('filter-skinname-clear').addEventListener('click', this.onFilterSkinnameClear.bind(this))
         this.elGodname.disabled = false
         this.elSkinname.disabled = false
 
@@ -55,6 +57,14 @@ document.filterHandler = {
 
         document.querySelector('#overall-skin-count').innerHTML = '(' + overallSkinCount + ')'
 
+        this.onFilterUpdate()
+    },
+    onFilterGodnameClear: function(){
+        this.elGodname.value = ''
+        this.onFilterUpdate()
+    },
+    onFilterSkinnameClear: function(){
+        this.elSkinname.value = ''
         this.onFilterUpdate()
     },
     onFilterUpdate: function(){
