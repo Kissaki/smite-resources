@@ -115,14 +115,14 @@ footer p {
 .chest .chestcontent {
   display: none;
 }
-.chest .chestcontent .chestcontentcategory {
+.chest .chestcontent .chestcontentcategory .chestcontentcategorycontent {
   display: flex;
   flex-wrap: wrap;
 }
 .chest .chestcontent .chestcontentcategory .godskin {
   margin: 2px 4px;
   background: #ddd;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   padding: 4px;
   display: grid;
   grid-template: "god" "skinname" "skinicon";
@@ -151,6 +151,17 @@ footer p {
   grid-area: skinname;
   font-size: 24px;
   line-height: 24px;
+}
+.chest .chestcontent .chestcontentcategory .voicepack .god {
+  margin: 2px 4px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  background: #ddd;
+  font-size: 32px;
+  line-height: 1em;
+}
+.chest .chestcontent .chestcontentcategory .voicepack .god .godicon {
+  height: 1em;
 }
 .chest .checkboxshowcontent:checked + .chestcontent {
   display: block;

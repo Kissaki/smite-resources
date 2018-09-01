@@ -49,6 +49,9 @@ footer {
     background-color: #ccccff;
     padding: 4px 8px;
 }
+
+@block-god-bg: #ddd;
+
 .chest {
     border: 1px solid #ccc;
     background-color: #ccc;
@@ -66,13 +69,15 @@ footer {
     .chestcontent {
         display: none;
         .chestcontentcategory {
-            display: flex;
-            flex-wrap: wrap;
+            .chestcontentcategorycontent {
+                display: flex;
+                flex-wrap: wrap;
+            }
 
             .godskin {
                 margin: 2px 4px;
-                background: #ddd;
-                border: 1px solid #ccc;
+                background: @block-god-bg;
+                border: 1px solid @block-god-bg;
                 padding: 4px;
                 display: grid;
                 grid-template: "god"
@@ -103,6 +108,20 @@ footer {
                     grid-area: skinname;
                     font-size: 24px;
                     line-height: 24px;
+                }
+            }
+            .voicepack {
+                .god {
+                    margin: 2px 4px;
+                    border: 1px solid @block-god-bg;
+                    padding: 2px;
+                    background: @block-god-bg;
+                    font-size: 32px;
+                    line-height: 1em;
+
+                    .godicon {
+                        height: 1em;
+                    }
                 }
             }
         }

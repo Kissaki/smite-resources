@@ -23,7 +23,8 @@
             <div class="chestcontent">
                 <section class="chestcontentcategory">
                     <h3>God Skins</h3>
-                    {{#godskins}}
+                    <div class="chestcontentcategorycontent">
+                        {{#godskins}}
                         <div class="godskin">
                             <div class="god">
                                 <img class="godicon" src="{{{godicon}}}" alt="" title="" style="">
@@ -32,23 +33,28 @@
                             <img class="skinicon" src="{{{skinicon}}}" alt="" title="" style="">
                             <span class="skinname">{{skinname}}</span>
                         </div>
-                    {{/godskins}}
+                        {{/godskins}}
+                    </div>
                 </section>
                 <section class="chestcontentcategory">
                     <h3>Voicepacks</h3>
-                    {{#voicepacks}}
-                        <div class="voicepack">{{.}}</div>
-                    {{/voicepacks}}
+                    <div class="chestcontentcategorycontent">
+                        {{#voicepacks}}
+                        <div class="voicepack">{{#god}}<div class="god"><img class="godicon" src="{{{godIcon_URL}}}" alt=""> {{name}}</div>{{/god}}</div>
+                        {{/voicepacks}}
+                    </div>
                 </section>
                 <section class="chestcontentcategory">
                     <h3>Ward Skins</h3>
-                    {{#wardskins}}
+                    <div class="chestcontentcategorycontent">
+                        {{#wardskins}}
                         <div class="wardskin">
                             <a href="https://smite.gamepedia.com/File:Ward_{{{.}}}.png">icon</a>
                             <a href="https://smite.gamepedia.com/File:WardShot_{{{.}}}.png">icon</a>'
                             {{.}}
                         </div>
-                    {{/wardskins}}
+                        {{/wardskins}}
+                    </div>
                 </section>
             </div>
         </article>

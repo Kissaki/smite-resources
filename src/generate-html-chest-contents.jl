@@ -8,9 +8,11 @@ import Mustache
 chests = JSON.parsefile("data/chest-data.json")
 gods = JSON.parsefile("data/godswithskins.json")
 
+godById = Dict()
 godBySkinId = Dict()
 godSkinById = Dict()
 for god in gods
+    godById[god["id"]] = god
     for godskin in god["godskins"]
         skinId = godskin["skin_id1"]
         godSkinById[skinId] = godskin
@@ -37,6 +39,15 @@ for chest in chests["chests"]
         godskin["skinname"] = skinData["skin_name"]
         global handled
         handled = handled + 1
+    end
+
+    vps = get(chest, "voicepacks", nothing)
+    if vps != nothing
+        for vp in vps
+            godId = vp["godid"]
+            god = godById[godId]
+            vp["god"] = god
+        end
     end
 end
 println("skipped: $skipped, handled: $handled")
