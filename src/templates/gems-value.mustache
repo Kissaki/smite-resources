@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SMITE Gems Value Calculator</title>
+	<link rel="stylesheet" href="gems-value.css?20180817" />
+</head>
+<body>
+	<aside id="relatedpages">See also: <a href="smitegods.html">SMITE Gods Overview Table</a><a href="godstats.html">SMITE God Stats</a><a href="mixercodelog.html">SMITE Mixer Stream Chest Code Chat Tracker</a></aside>
+    <h1>SMITE Gems Value Calculator</h1>
+    <h2>Calculator</h2>
+    <fieldset>
+    <label>Gems: <input id="input-gems" type="number" min="0"></label><br>
+    <label>Min value, 200 pack: <input id="eurocents-min" type="number" disabled> €</label><br>
+    <label>Mid value, 1.5k pack: <input id="eurocents-mid" type="number" disabled> €</label><br>
+    <label>Max value, 8k pack: <input id="eurocents-max" type="number" disabled> €</label>
+    </fieldset>
+    <script>
+        let elGems = document.querySelector('#input-gems')
+        let elEcMin = document.querySelector('#eurocents-min')
+        let elEcMid = document.querySelector('#eurocents-mid')
+        let elEcMax = document.querySelector('#eurocents-max')
+        let calcValue = function(){
+            let gems = elGems.value
+            elEcMin.value = 1.995 * gems / 100
+            elEcMid.value = 1.066 * gems / 100
+            elEcMax.value = 0.649875 * gems / 100
+        }
+        elGems.addEventListener('input', calcValue)
+        calcValue()
+    </script>
+    <h2>Gem Prices during and off gem sales</h2>
+    <div>
+        {{! <p><i>2018-08-30 2pmET - 2018-09-09 11:59pm ET</i></p> }}
+        {{#sales}}
+            <h3><a href="{{{link}}}">{{name}}</a></h3>
+            <p>This gem pack sale was active from {{date_from}} to {{date_to}}</p>
+            <img src="{{{screenshot_src}}}" alt="" style="width:600px;">
+            <table>
+            <thead>
+                <tr><th>Gems</th><th>Euro-Cents</th><th>Gem Value (€/gem)</th></tr>
+                </thead>
+                <tbody>
+                {{#pack_values}}
+                <tr><td>{{gems}}</td><td>{{eurocents}}</td><td>{{gemvalue_eurocents}}</td></tr>
+                {{/pack_values}}
+                </tbody>
+            </table>
+        {{/sales}}
+    </div>
+    <p>If you buy the 1500 gem pack a 1:1 mapping of gems to Eurocents is a good estimation.</p>
+</body>
+</html>
