@@ -70,7 +70,7 @@ document.dataHandler = {
         let godId = god[KEY.GOD.ID]
         el.id = 'god' + godId
         el.className = 'god'
-        let nameHtml = '<h2 class="godname">' + god[KEY.GOD.NAME] + '</h2>'
+        let nameHtml = '<h2 class="godname">' + god[KEY.GOD.NAME] + ' (ID ' + godId + ')</h2>'
         let skinsHtml = '<div id="skins' + godId + '" class="skins"></div>'
         el.innerHTML = nameHtml + skinsHtml
         this.elGods.appendChild(el)
