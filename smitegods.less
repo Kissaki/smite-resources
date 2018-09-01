@@ -16,11 +16,10 @@ th, td {padding:2px;}
 thead th {vertical-align:bottom;}
 tbody th {text-align:center;}
 ul, li {list-style-type:none; display:inline-block;}
-footer {
-	font-size:0.9em; line-height:1.2em;
-	margin:8px 0 0; font-style:italic;
-}
 aside { font-style:italic; }
+
+@import "less/relatedpages.less";
+@import "less/footer.less";
 
 .god {display:inline-block; position:relative; background-color:#dddddd; }
 .god a {display:block;}
@@ -102,8 +101,6 @@ input[type=button], input[type=text] {
 #role-column-guardian, #filter-role-option-guardian {
 	background:@color-guardian;
 }
-
-@import "less/relatedpages.less";
 
 .god .goddetails {
 	display: none;

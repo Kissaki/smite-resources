@@ -256,14 +256,37 @@ li {
   list-style-type: none;
   display: inline-block;
 }
+aside {
+  font-style: italic;
+}
+#relatedpages {
+  background-color: #eeeeff;
+  line-height: 2em;
+  padding: 0.4em;
+  font-style: normal;
+}
+#relatedpages a {
+  margin: 0 0.4em;
+  padding: 0.2em;
+  background-color: #ccccff;
+  border-radius: 6px;
+  border: 1px solid #ccccff;
+  text-decoration: none;
+}
+#relatedpages a:hover {
+  background-color: #aaaaff;
+  border-color: #aaaaff;
+  color: #000;
+}
 footer {
   font-size: 0.9em;
   line-height: 1.2em;
-  margin: 8px 0 0;
+  margin: 16px 0 0;
   font-style: italic;
 }
-aside {
-  font-style: italic;
+footer p {
+  margin: 0;
+  padding: 0;
 }
 .god {
   display: inline-block;
@@ -377,25 +400,6 @@ input[type=text] {
 #role-column-guardian,
 #filter-role-option-guardian {
   background: #aab058;
-}
-#relatedpages {
-  background-color: #eeeeff;
-  line-height: 2em;
-  padding: 0.4em;
-  font-style: normal;
-}
-#relatedpages a {
-  margin: 0 0.4em;
-  padding: 0.2em;
-  background-color: #ccccff;
-  border-radius: 6px;
-  border: 1px solid #ccccff;
-  text-decoration: none;
-}
-#relatedpages a:hover {
-  background-color: #aaaaff;
-  border-color: #aaaaff;
-  color: #000;
 }
 .god .goddetails {
   display: none;

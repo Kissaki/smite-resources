@@ -47,12 +47,6 @@ li {
   list-style-type: none;
   display: inline-block;
 }
-footer {
-  font-size: 0.9em;
-  line-height: 1.2em;
-  margin: 8px 0 0;
-  font-style: italic;
-}
 aside {
   font-style: italic;
 }
@@ -74,6 +68,16 @@ aside {
   background-color: #aaaaff;
   border-color: #aaaaff;
   color: #000;
+}
+footer {
+  font-size: 0.9em;
+  line-height: 1.2em;
+  margin: 16px 0 0;
+  font-style: italic;
+}
+footer p {
+  margin: 0;
+  padding: 0;
 }
 .item {
   display: inline-block;
