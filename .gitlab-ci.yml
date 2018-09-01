@@ -19,18 +19,11 @@ build_web:
     - bin/smitegods -updategoddata -devid $SMITE_API_DEVID -authkey $SMITE_API_AUTHKEY
     - mkdir public
     - mkdir public/img
-    - cp roles-pantheons-spritesheet.png 4bfba3d77789a9ec16129032096c7f12.woff smitegods.css smitegods.html smitegods.js public
-    - cp godstats.css godstats.html godstats.js public
-    - cp smiteitems.css smiteitems.html smiteitems.js public
-    - cp god-skins.css god-skins.html god-skins.js public
-    - cp chest-contents.html chest-contents.css chest-contents.js public
-    - cp img/*.png public/img
     - mkdir public/data
-    - cp data/gods.json public/data
-    - cp data/godswithskins.json public/data
-    - cp data/godskins-*.json public/data
-    - cp data/chest-data.json public/data
-    - cp mixercodelog.html public
+    - cp *.html *.css *.js public
+    - cp roles-pantheons-spritesheet.png 4bfba3d77789a9ec16129032096c7f12.woff public
+    - cp img/* public/img
+    - cp data/*.json public/data
   artifacts:
     paths:
     - public
