@@ -2,4 +2,4 @@
 /pkg
 /src/bin/
 /src/pkg/
-
+/.auth.yaml
