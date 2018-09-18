@@ -1,29 +1,23 @@
 module SmiteApi
 
-import HTTP
 import MD5
-import YAML
 import Dates
 import JSON
 
 module Endpoint
-    struct EndpointType
-        Baseurl::String
-    end
-    const PC = EndpointType("http://api.smitegame.com/smiteapi.svc")
-    const Xbox = EndpointType("http://api.xbox.smitegame.com/smiteapi.svc")
-    const PS4  = EndpointType("http://api.ps4.smitegame.com/smiteapi.svc")
+include("smiteapi/endpoints.jl")
 end
 
 module Method
-    struct MethodType
-        name::String
-    end
-    const Ping = MethodType("ping")
-    const CreateSession = MethodType("createsession")
-    const TestSession = MethodType("testsession")
-    const ServerStatus = MethodType("gethirezserverstatus")
-    const ApiQuota = MethodType("getdataused")
+include("smiteapi/methods.jl")
+end
+
+module Language
+include("smiteapi/langcodes.jl")
+end
+
+module ResFormat
+include("smiteapi/resformats.jl")
 end
 
 struct Session
@@ -33,14 +27,17 @@ struct Session
 	Id::String
 end
 
-const response_format = "json"
+const response_format = ResFormat.Json
+
+include("smiteapi/credentials.jl")
+include("smiteapi/base.jl")
 
 """
 Simple not authenticated method
 <base>/<method><response_format>
 """
 function createurl(method::Method.MethodType, endpoint::Endpoint.EndpointType)
-    "$(endpoint.Baseurl)/$(method.name)$response_format"
+    "$(endpoint.Baseurl)/$(method.name)$(response_format.name)"
 end
 
 """
@@ -63,6 +60,10 @@ function createurl(method::Method.MethodType, session::Session)
     baseurl * "/$(session.devID)/$(signature)/$(session.Id)/$timestamp"
 end
 
+function createurl(method::Method.MethodType, session::Session, language::Language.LangType)
+    createurl(method, session) * "/$(language.code)"
+end
+
 function createtimestamp()
     Dates.format(Dates.now(Dates.UTC), "yyyymmddHHMMSS")
 end
@@ -75,14 +76,6 @@ function createsignature(method::Method.MethodType, session::Session, timestampU
     createsignature(method, session.devID, session.authKey, timestampUtc)
 end
 
-function send(url::String)
-    try
-    HTTP.request("GET", url)
-    catch
-        error("Response status error")
-    end
-end
-
 function ping()
     method = Method.Ping
     url = createurl(method, Endpoint.PC)
@@ -91,20 +84,17 @@ function ping()
     logrecv(method, r)
 end
 
-const authfile = ".auth.yaml"
-data = YAML.load(open(authfile))
 function createsession(endpoint::Endpoint.EndpointType)Union{Session, Nothing}
-    developerid = data["devid"]
-    authkey = data["authkey"]
+    cred = loadcredentials()
     method = Method.CreateSession
-    url = createurl(method, endpoint, developerid, authkey)
+    url = createurl(method, endpoint, cred.devid, cred.authkey)
     logsend(method, url)
     r = send(url)
     logrecv(method, r)
     responsebody = String(r.body)
     resdata = JSON.parse(responsebody)
     logjson(resdata)
-    Session(endpoint, developerid, authkey, resdata["session_id"])
+    Session(endpoint, cred.devid, cred.authkey, resdata["session_id"])
 end
 
 function test(session::Session)
@@ -119,15 +109,17 @@ function test(session::Session)
     resdata
 end
 
-function logsend(method::Method.MethodType, url)
-    @info "Sending $(method.name) request..." url
-end
-
-function logrecv(method::Method.MethodType, res)
-    @info "Received $(method.name) response" res.status bodylen=length(res.body)
-end
-function logjson(resdata)
-    @info "Parsed JSON" resdata
+function getgods(session::Session)
+    method = Method.GetGods
+    lang = Language.English
+    url = createurl(method, session, lang)
+    logsend(method, url)
+    r = send(url)
+    logrecv(method, r)
+    body = String(r.body)
+    resdata = JSON.parse(body)
+    # logjson(resdata)
+    resdata
 end
 
 end
