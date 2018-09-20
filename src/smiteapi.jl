@@ -28,99 +28,56 @@ struct Session
 	Id::String
 end
 
-const response_format = ResFormat.Json
-
 include("smiteapi/credentials.jl")
 include("smiteapi/base.jl")
 
-"""
-Simple not authenticated method
-<base>/<method><response_format>
-"""
-function createurl(method::Method.MethodType, endpoint::Endpoint.EndpointType)
-    "$(endpoint.Baseurl)/$(method.name)$(response_format.name)"
-end
-
-"""
-<base>/<method><response_format>/developerid/signature/timestamp
-"""
-function createurl(method::Method.MethodType, endpoint::Endpoint.EndpointType, devid::Int, authkey::String)
-    baseurl = createurl(method, endpoint)
-    timestamp = createtimestamp()
-    signature = createsignature(method, devid, authkey, timestamp)
-    baseurl * "/$(devid)/$(signature)/$timestamp"
-end
-
-"""
-<base>/<method><response_format>/developerid/signature/session/timestamp
-"""
-function createurl(method::Method.MethodType, session::Session)
-    baseurl = createurl(method, session.endpoint)
-    timestamp = createtimestamp()
-    signature = createsignature(method, session, timestamp)
-    baseurl * "/$(session.devID)/$(signature)/$(session.Id)/$timestamp"
-end
-
-function createurl(method::Method.MethodType, session::Session, language::Language.LangType)
-    createurl(method, session) * "/$(language.code)"
-end
-
-function createtimestamp()
-    Dates.format(Dates.now(Dates.UTC), "yyyymmddHHMMSS")
-end
-
-function createsignature(method::Method.MethodType, developerid::Int, authkey::String, timestampUtc::String)
-    MD5.bytes2hex(MD5.md5("$developerid$(method.name)$authkey$timestampUtc"))
-end
-
-function createsignature(method::Method.MethodType, session::Session, timestampUtc::String)
-    createsignature(method, session.devID, session.authKey, timestampUtc)
-end
-
-function ping()
-    method = Method.Ping
-    url = createurl(method, Endpoint.PC)
-    logsend(method, url)
-    r = send(url)
-    logrecv(method, r)
-end
-
-function createsession(endpoint::Endpoint.EndpointType)Union{Session, Nothing}
+function createsession(endpoint::Endpoint.EndpointType; verbose=0, logresjson=true)Union{Session, Nothing}
     cred = loadcredentials()
     method = Method.CreateSession
     url = createurl(method, endpoint, cred.devid, cred.authkey)
-    logsend(method, url)
-    r = send(url)
-    logrecv(method, r)
-    responsebody = String(r.body)
-    resdata = JSON.parse(responsebody; dicttype=OrderedCollections.OrderedDict)
-    logjson(resdata)
+    resdata = send(url)
     Session(endpoint, cred.devid, cred.authkey, resdata["session_id"])
 end
 
-function test(session::Session)
-    method = Method.TestSession
-    url = createurl(method, session)
-    logsend(method, url)
-    r = send(url)
-    logrecv(method, r)
-    responsebody = String(r.body)
-    resdata = JSON.parse(responsebody; dicttype=OrderedCollections.OrderedDict)
-    logjson(resdata)
-    resdata
+function createfunction_base(method::Method.MethodType)
+    (endpoint::Endpoint.EndpointType; verbose=0, logresjson=false) -> begin
+        url = createurl(method, Endpoint.PC)
+        send(url; verbose=verbose, logresjson=logresjson)
+    end
 end
 
-function getgods(session::Session)
-    method = Method.GetGods
-    lang = Language.English
-    url = createurl(method, session, lang)
-    logsend(method, url)
-    r = send(url)
-    logrecv(method, r)
-    body = String(r.body)
-    resdata = JSON.parse(body; dicttype=OrderedCollections.OrderedDict)
-    # logjson(resdata)
-    resdata
+function createfunction(method::Method.MethodType, createurl_args...; verbose=0, logresjson=true)
+    (session::Session) -> begin
+        url = createurl(method, session, createurl_args...)
+        send(url)
+    end
 end
+
+function createfunction_lang(method::Method.MethodType; logresjson=true)
+    (session::Session, lang::Language.LangType) -> begin
+        url = createurl(method, session, lang)
+        send(url)
+    end
+end
+
+"""
+Returns a string (on success)
+For example: SmiteAPI (ver 5.17.4996.0) [PATCH - 5.17] - Ping successful. Server Date:9/21/2018 6:16:32 PM
+"""
+ping = createfunction_base(Method.Ping)
+
+test = createfunction(Method.TestSession)
+serverstatus = createfunction(Method.ServerStatus)
+quota = createfunction(Method.ApiQuota)
+version = createfunction(Method.Version)
+"""20 most recent MOTDs"""
+motds = createfunction(Method.MOTDs)
+"""Lists the 50 most watched / most recent recorded matches."""
+topmatches = createfunction(Method.TopMatches)
+spl = createfunction(Method.SPL)
+
+getgods_en = createfunction(Method.GetGods, Language.English; logresjson=false)
+getgods = createfunction_lang(Method.GetGods; logresjson=false)
+getitems = createfunction_lang(Method.GetItems; logresjson=false)
 
 end

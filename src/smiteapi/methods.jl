@@ -8,6 +8,9 @@ const Ping = MethodType("ping")
 
 # Parameters: Format/DevID/signature/timestamp
 const CreateSession = MethodType("createsession")
+# End
+
+# Parameters: Format/DevID/signature/session/timestamp
 const TestSession = MethodType("testsession")
 const ServerStatus = MethodType("gethirezserverstatus")
 const ApiQuota = MethodType("getdataused")
@@ -15,7 +18,10 @@ const ApiQuota = MethodType("getdataused")
 const Version = MethodType("getpatchinfo")
 # 20 most recent MOTDs
 const MOTDs      = MethodType("getmotd")
+"""Lists the 50 most watched / most recent recorded matches."""
 const TopMatches = MethodType("gettopmatches")
+# Current season
+const SPL = MethodType("getesportsproleaguedetails")
 # End
 
 # Parameters (lang): Format/DevID/signature/session/timestamp/languageCode
@@ -67,8 +73,6 @@ const ClanSearch = MethodType("searchteams")
 # End
 
 # Parameters (misc): Format/DevID/signature/timestamp, plus specified additional parameters
-# Current season
-const SPL = MethodType("getesportsproleaguedetails")
 # /god/queue
 # Current season
 const GodLeaderboard = MethodType("getgodleaderboard")
