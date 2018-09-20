@@ -5,9 +5,7 @@ struct Credentials
     authkey::String
 end
 
-const authfile = ".auth.yaml"
-
-function loadcredentials()::Credentials
-    data = YAML.load(open(authfile))
+function loadcredentials(filename = ".auth.yaml")::Credentials
+    data = YAML.load(open(filename))
     Credentials(data["devid"], data["authkey"])
 end
