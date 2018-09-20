@@ -3,6 +3,7 @@ module SmiteApi
 import MD5
 import Dates
 import JSON
+import OrderedCollections
 
 module Endpoint
 include("smiteapi/endpoints.jl")
@@ -92,7 +93,7 @@ function createsession(endpoint::Endpoint.EndpointType)Union{Session, Nothing}
     r = send(url)
     logrecv(method, r)
     responsebody = String(r.body)
-    resdata = JSON.parse(responsebody)
+    resdata = JSON.parse(responsebody; dicttype=OrderedCollections.OrderedDict)
     logjson(resdata)
     Session(endpoint, cred.devid, cred.authkey, resdata["session_id"])
 end
@@ -104,7 +105,7 @@ function test(session::Session)
     r = send(url)
     logrecv(method, r)
     responsebody = String(r.body)
-    resdata = JSON.parse(responsebody)
+    resdata = JSON.parse(responsebody; dicttype=OrderedCollections.OrderedDict)
     logjson(resdata)
     resdata
 end
@@ -117,7 +118,7 @@ function getgods(session::Session)
     r = send(url)
     logrecv(method, r)
     body = String(r.body)
-    resdata = JSON.parse(body)
+    resdata = JSON.parse(body; dicttype=OrderedCollections.OrderedDict)
     # logjson(resdata)
     resdata
 end
