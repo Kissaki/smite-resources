@@ -2,20 +2,17 @@ module pull
 
 import JSON
 
+include("common.jl")
 include("smiteapi.jl")
 
 SmiteApi.ping()
 
-s = SmiteApi.createsession(SmiteApi.Endpoint.PC)
+s = SmiteApi.loadsession()
 if s == nothing
     error("Failed to create session")
 end
 
-# SmiteApi.test(s)
-
-gods = SmiteApi.getgods(s)
-f = open("data/gods.json", "w")
-JSON.print(f, gods)
-close(f)
+gods = SmiteApi.getgods(s, SmiteApi.Language.English)
+write("data/gods.json", gods)
 
 end

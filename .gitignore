@@ -3,3 +3,4 @@
 /src/bin/
 /src/pkg/
 /.auth.yaml
+/.tmp.session.json

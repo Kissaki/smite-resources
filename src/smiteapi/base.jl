@@ -3,6 +3,12 @@ import JSON
 
 const response_format = ResFormat.Json
 
+function write(datafile, data)
+    f = open(datafile, "w")
+    JSON.print(f, data)
+    close(f)
+end
+
 function send_inner(url::String)
     try
         HTTP.request("GET", url)
