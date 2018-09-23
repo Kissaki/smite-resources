@@ -33,6 +33,12 @@ const GetItems = MethodType("getitems")
 # /player
 const Player = MethodType("getplayer")
 # /player
+# 0 - Offline
+# 1 - In Lobby  (basically anywhere except god selection or in game)
+# 2 - god Selection (player has accepted match and is selecting god before start of game)
+# 3 - In Game (match has started)
+# 4 - Online (player is logged in, but may be blocking broadcast of player state)
+# 5 - Unknown (player not found)
 const PlayerStatus = MethodType("getplayerstatus")
 # /player
 const PlayerMatchHistory = MethodType("getmatchhistory")
