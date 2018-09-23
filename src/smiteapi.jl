@@ -114,4 +114,19 @@ getmatch = createfunction(Method.Match, (matchid::Int) -> "/$matchid")
 getmatches = createfunction(Method.Matches, (matchids::Array{Int}) -> "/$(join(matchids, ","))")
 getmatch_live = createfunction(Method.MatchLive, (matchid::Int) -> "/$matchid")
 
+getgodskins = createfunction(Method.GodSkins, (godid::Int, lang::Language.LangType) -> "/$matchid/$(lang.code)")
+getgodrecommendeditems = createfunction(Method.GodRecommendedItems, (godid::Int, lang::Language.LangType) -> "/$matchid/$(lang.code)")
+
+getclan = createfunction(Method.Clan, (clanid::Int) -> "/$matchid")
+getclanmembers = createfunction(Method.ClanMembers, (clanid::Int) -> "/$matchid")
+searchclan = createfunction(Method.ClanSearch, (searchstring::String) -> "/$searchstring")
+
+"""
+Current season
+"""
+getgodleaderboard = createfunction(Method.GodLeaderboard, (godid::Int, queue::Int) -> "/$godid/$queue")
+getleagueleaderboard = createfunction(Method.LeagueLeaderboards, (queue::Int, tier, season) -> "/$queue/$tier/$season")
+getleagueseasons = createfunction(Method.LeagueSeasons, (queue::Int) -> "/$queue")
+getmatchidsbyqueue = createfunction(Method.MatchIDs, (queue::Int, date, hour) -> "/$queue/$date/$hour")
+
 end
