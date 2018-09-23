@@ -37,6 +37,9 @@ session = SmiteApi.loadsession()
 
 # Kissaki0 playerid
 # write("data/players/player-505271.json", SmiteApi.getplayer(session, 505271))
+# write("data/players/player-505271-achievements.json", SmiteApi.getachievements(session, 505271))
+# write("data/players/player-505271-godranks.json", SmiteApi.getgodranks(session, 505271))
+# write("data/players/player-505271-friends.json", SmiteApi.getfriends(session, 505271))
 
 # write("data/players/player-1230098.json", SmiteApi.getplayer(session, 1230098))
 # write("data/players/player-8340565.json", SmiteApi.getplayer(session, 8340565))
