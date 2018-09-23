@@ -22,7 +22,7 @@ Reuse old sesion if it data exists and is less than 15mins old
 """
 function loadsession(endpoint::Endpoint.EndpointType=SmiteApi.Endpoint.PC, sessionfilename = ".tmp.session.json")
     session::Union{Nothing, Session} = nothing
-    if isfile(sessionfilename) && Dates.unix2datetime(mtime(sessionfilename)) < Dates.now() - Dates.Minute(15)
+    if isfile(sessionfilename) && Dates.unix2datetime(mtime(sessionfilename)) > Dates.now(Dates.UTC) - Dates.Minute(15)
         try
             data = JSON.parsefile(sessionfilename; dicttype=OrderedCollections.OrderedDict)
             session = Session(Endpoint.EndpointType(data["endpoint"]["Baseurl"]), data["devID"], data["authKey"], data["Id"])
