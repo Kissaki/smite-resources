@@ -1,5 +1,6 @@
 import JSON
 import HTTP
+import OrderedCollections
 
 function check_url_exists(url::String)
     @info "Checking url $url…"
