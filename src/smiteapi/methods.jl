@@ -56,7 +56,7 @@ const PlayerAchievements = MethodType("getplayerachievements")
 # Parameters (match): Format/DevID/signature/timestamp/matchid
 const Match = MethodType("getmatchdetails")
 # /matchid,matchid,...
-const MatchBatch = MethodType("getmatchdetailsbatch")
+const Matches = MethodType("getmatchdetailsbatch")
 const MatchLive  = MethodType("getmatchplayerdetails")
 # use getmatchdetails instead
 const MatchDeprecated = MethodType("getdemodetails")

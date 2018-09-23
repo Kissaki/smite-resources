@@ -110,4 +110,8 @@ getgodranks = createfunction(Method.PlayerGodRanks, (nameOrId) -> "/$nameOrId")
 getqueuestats = createfunction(Method.PlayerQueueStats, (nameOrId, queueid) -> "/$nameOrId/$queueid")
 getachievements = createfunction(Method.PlayerAchievements, (playerid) -> "/$playerid")
 
+getmatch = createfunction(Method.Match, (matchid::Int) -> "/$matchid")
+getmatches = createfunction(Method.Matches, (matchids::Array{Int}) -> "/$(join(matchids, ","))")
+getmatch_live = createfunction(Method.MatchLive, (matchid::Int) -> "/$matchid")
+
 end
