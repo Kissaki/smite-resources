@@ -84,12 +84,28 @@ motds = createfunction(Method.MOTDs)
 topmatches = createfunction(Method.TopMatches)
 spl = createfunction(Method.SPL)
 
-getgods_en = createfunction_fixed(Method.GetGods, Language.English)
 getgods = createfunction_lang(Method.GetGods)
 getitems = createfunction_lang(Method.GetItems)
+# Example of how functions may be fixed to a language
+getgods_en = createfunction_fixed(Method.GetGods, Language.English)
 
-getplayer = createfunction(Method.Player, (nameOrId) -> "/$nameOrId")
-getplayer_name = createfunction(Method.Player, (name::String) -> "/$name")
-getplayer_id = createfunction(Method.Player, (id::Int) -> "/$id")
+function createfunctions_playerorid(method::SmiteApi.Method.MethodType)
+    return (
+        createfunction(method, (nameOrId) -> "/$nameOrId"),
+        createfunction(method, (name::String) -> "/$name"),
+        createfunction(method, (id::Int) -> "/$id"),
+    )
+end
+
+(getplayer, getplayer_byname, getplayer_byid) = createfunctions_playerorid(Method.Player)
+# getplayer = createfunction(Method.Player, (nameOrId) -> "/$nameOrId")
+# getplayer_byname = createfunction(Method.Player, (name::String) -> "/$name")
+# getplayer_byid = createfunction(Method.Player, (id::Int) -> "/$id")
+getmatchhistory = createfunction(Method.PlayerMatchHistory, (nameOrId) -> "/$nameOrId")
+getfriends = createfunction(Method.PlayerFriends, (nameOrId) -> "/$nameOrId")
+getgodranks = createfunction(Method.PlayerGodRanks, (nameOrId) -> "/$nameOrId")
+
+getqueuestats = createfunction(Method.PlayerQueueStats, (nameOrId, queueid) -> "/$nameOrId/$queueid")
+getachievements = createfunction(Method.PlayerAchievements, (playerid) -> "/$playerid")
 
 end
