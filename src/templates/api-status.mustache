@@ -30,6 +30,12 @@
                 <li><a href="{{.}}">{{.}}</a></li>
             {{/godsskinscardsmissing}}
         </ul>
+        <p>God skin without card image URL:</p>
+        <ul>
+        {{#godsskinscardsempty}}
+            <li>{{godname}} ({{godid}}): {{skinname}} ({{skinid}})</li>
+        {{/godsskinscardsempty}}
+        </ul>
     {{/goddata}}
     <hr>
     <footer>

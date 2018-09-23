@@ -19,6 +19,7 @@ function check_god_images(datasrc="data/godswithskins.json")
     godsskinscardcount = 0
     godsskinscardmissingcount = 0
     godsskinscardsmissing = []
+    godsskinscardsempty = []
 
     for god in gods
         godscount = godscount + 1
@@ -56,6 +57,8 @@ function check_god_images(datasrc="data/godswithskins.json")
                     godsskinscardmissingcount = godsskinscardmissingcount + 1
                     push!(godsskinscardsmissing, url_skin)
                 end
+            else
+                push!(godsskinscardsempty, Dict("godid"=>god["id"], "godname"=>god["Name"], "skinid"=>skin["skin_id1"], "skinname"=>skin["skin_name"]))
             end
         end
     end
@@ -70,5 +73,6 @@ function check_god_images(datasrc="data/godswithskins.json")
         "godsskinscardcount"=>godsskinscardcount,
         "godsskinscardmissingcount"=>godsskinscardmissingcount,
         "godsskinscardsmissing"=>godsskinscardsmissing,
+        "godsskinscardsempty"=>godsskinscardsempty
     )
 end
