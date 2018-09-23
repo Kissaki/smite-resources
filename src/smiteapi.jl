@@ -1,6 +1,8 @@
 module SmiteApi
 
-import MD5
+include("MD5/MD5.jl")
+
+# import MD5
 import Dates
 import JSON
 import OrderedCollections
