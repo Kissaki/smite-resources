@@ -40,9 +40,13 @@ session = SmiteApi.loadsession()
 # write("data/players/player-505271-achievements.json", SmiteApi.getachievements(session, 505271))
 # write("data/players/player-505271-godranks.json", SmiteApi.getgodranks(session, 505271))
 # write("data/players/player-505271-friends.json", SmiteApi.getfriends(session, 505271))
+# write("data/players/player-505271-matches.json", SmiteApi.getmatchhistory(session, 505271))
 
 # write("data/players/player-1230098.json", SmiteApi.getplayer(session, 1230098))
 # write("data/players/player-8340565.json", SmiteApi.getplayer(session, 8340565))
 # write("data/players/player-9857857.json", SmiteApi.getplayer(session, 9857857))
+
+# write("data/players/player-505271-match-419532815.json", SmiteApi.getmatch(session, 419532815))
+# write("data/players/player-505271-matches.json", SmiteApi.getmatches(session, [419532815, 419529754];verbose=2))
 
 end
