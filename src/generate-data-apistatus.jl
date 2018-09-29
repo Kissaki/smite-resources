@@ -55,6 +55,7 @@ function write(datafile, data)
     close(f)
 end
 
-generate(datafile)
+# generate(datafile)
+generate(datafile; checkgodimages=true, status=true)
 
 end
