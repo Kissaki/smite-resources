@@ -22,6 +22,7 @@ function generate(datafile; checkgodimages=false, status=true)
 
     if checkgodimages
         goddata = check_god_images()
+        goddata["lastchecked"] = Dates.now()
         data["goddata"] = goddata
     end
 
