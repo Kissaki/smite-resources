@@ -22,6 +22,7 @@ include("smiteapi/resformats.jl")
 end
 
 include("smiteapi/session.jl")
+include("smiteapi/session-reuse.jl")
 include("smiteapi/base.jl")
 include("smiteapi/credentials.jl")
 
