@@ -112,11 +112,11 @@ getmatch = createfunction(Method.Match, (matchid::Int) -> "/$matchid")
 getmatches = createfunction(Method.Matches, (matchids::Array{Int}) -> "/$(join(matchids, ","))")
 getmatch_live = createfunction(Method.MatchLive, (matchid::Int) -> "/$matchid")
 
-getgodskins = createfunction(Method.GodSkins, (godid::Int, lang::Language.LangType) -> "/$matchid/$(lang.code)")
-getgodrecommendeditems = createfunction(Method.GodRecommendedItems, (godid::Int, lang::Language.LangType) -> "/$matchid/$(lang.code)")
+getgodskins = createfunction(Method.GodSkins, (godid::Int, lang::Language.LangType) -> "/$godid/$(lang.code)")
+getgodrecommendeditems = createfunction(Method.GodRecommendedItems, (godid::Int, lang::Language.LangType) -> "/$godid/$(lang.code)")
 
-getclan = createfunction(Method.Clan, (clanid::Int) -> "/$matchid")
-getclanmembers = createfunction(Method.ClanMembers, (clanid::Int) -> "/$matchid")
+getclan = createfunction(Method.Clan, (clanid::Int) -> "/$clanid")
+getclanmembers = createfunction(Method.ClanMembers, (clanid::Int) -> "/$clanid")
 searchclan = createfunction(Method.ClanSearch, (searchstring::String) -> "/$searchstring")
 
 """
