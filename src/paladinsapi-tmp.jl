@@ -26,8 +26,21 @@ session = PaladinsApi.loadsession()
 # @info "quota", quota[1]
 #OrderedCollections.OrderedDict{String,Any}("Active_Sessions"=>5,"Concurrent_Sessions"=>50,"Request_Limit_Daily"=>15000,"Session_Cap"=>500,"Session_Time_Limit"=>15,"Total_Requests_Today"=>20,"Total_Sessions_Today"=>10,"ret_msg"=>nothing)
 
-res = PaladinsApi.getchampions(session, PaladinsApi.Language.English)
-write("data/paladins/champions.json", res)
+# champions = PaladinsApi.getchampions(session, PaladinsApi.Language.English)
+# write("data/paladins/champions.json", champions)
+
+# champions = JSON.parsefile("data/paladins/champions.json"; dicttype=OrderedCollections.OrderedDict)
+# for c in champions
+#     iconurl = c["ChampionIcon_URL"]
+#     name = c["Name"]
+#     champid = c["id"]
+#     @info champid name
+
+#     @info "Downloading skins for champion $name ($champid)…"
+#     skins = PaladinsApi.getchampionskins(session, champid, PaladinsApi.Language.English)
+#     write("data/paladins/champion-skin-$champid.json", skins)
+# end
+# @info "Done downloading champion skins"
 
 # res = PaladinsApi.getplayer(session, "Kissaki0")
 # write("data/players/kissaki0.json", res)
