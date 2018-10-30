@@ -4,8 +4,6 @@ import JSON
 import OrderedCollections
 import Mustache
 
-gods = JSON.parsefile("data/godswithskins.json")
-
 function isless_skin(a::Dict{String,Any}, b::Dict{String,Any})
     name1 = a["skin_name"]
     name2 = b["skin_name"]
@@ -75,6 +73,13 @@ function isless_price(a, b)
     return a < b
 end
 
+const inpath = "data/godswithskins.json"
+const template_path = "src/templates/god-skins.mustache"
+const outpath = "god-skins.html"
+
+@info "Reading gods with skin data and generating html file…"
+gods = JSON.parsefile(inpath)
+
 for god in gods
     godskins::Array{Dict{String,Any}} = god["godskins"]
     # Data fixup
@@ -90,19 +95,16 @@ for god in gods
     # Order skins
     sort!(godskins, lt=isless_skin)
     god["godskins"] = godskins
-    println("God skin count: $(god["Name"]) $(god["skincount"])")
 end
-println("godcount: ", length(gods))
-
-const template_path = "src/templates/god-skins.mustache"
 
 res = Mustache.render_from_file(template_path, gods)
 if (res == nothing)
     print("Failed to parse template")
     exit()
 end
-open("god-skins.html", "w") do io
+open(outpath, "w") do io
     write(io, res)
 end
+@info "Done."
 
 end
