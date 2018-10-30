@@ -11,6 +11,7 @@ if s == nothing
     error("Failed to create session")
 end
 
+@info "Downloading gods data…"
 gods = SmiteApi.getgods(s, SmiteApi.Language.English)
 writeifchanged("data/gods.json", gods)
 
