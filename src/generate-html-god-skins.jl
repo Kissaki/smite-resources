@@ -1,7 +1,6 @@
 module gen
 
 import JSON
-# import DataStructures
 import OrderedCollections
 import Mustache
 

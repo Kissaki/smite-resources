@@ -2,7 +2,7 @@ module pull
 
 import CRC32c
 import JSON
-import DataStructures
+import OrderedCollections
 
 include("common.jl")
 include("smiteapi.jl")
@@ -12,7 +12,7 @@ if s == nothing
     error("Failed to create session")
 end
 
-gods = JSON.parsefile("data/gods.json"; dicttype=DataStructures.OrderedDict)
+gods = JSON.parsefile("data/gods.json"; dicttype=OrderedCollections.OrderedDict)
 godcount = length(gods)
 
 @info "Starting to pull god skin data for $godcount gods…"

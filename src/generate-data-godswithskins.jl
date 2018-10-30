@@ -1,11 +1,11 @@
 module godswithskins
 
 import JSON
-import DataStructures
+import OrderedCollections
 
 include("common.jl")
 
-gods = JSON.parsefile("data/gods.json"; dicttype=DataStructures.OrderedDict)
+gods = JSON.parsefile("data/gods.json"; dicttype=OrderedCollections.OrderedDict)
 godcount = length(gods)
 
 @info "Starting to merge god skin data for $godcount gods…"

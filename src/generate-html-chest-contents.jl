@@ -1,10 +1,10 @@
 module gen
 
 import JSON
-import DataStructures
+import OrderedCollections
 import Mustache
 
-# chests = JSON.parsefile("data/chest-data.json"; dicttype=DataStructures.OrderedDict)
+# chests = JSON.parsefile("data/chest-data.json"; dicttype=OrderedCollections.OrderedDict)
 chests = JSON.parsefile("data/chest-data.json")
 gods = JSON.parsefile("data/godswithskins.json")
 
