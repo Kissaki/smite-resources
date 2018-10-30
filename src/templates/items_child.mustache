@@ -1,0 +1,8 @@
+<div class="item">
+    {{> src/templates/items_item-desc.mustache }}
+    <div class="item_childs">
+        {{#childitems}}
+            {{> src/templates/items_child.mustache }}
+        {{/childitems}}
+    </div>
+</div>
