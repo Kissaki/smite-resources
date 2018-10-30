@@ -6,8 +6,6 @@ import JSON
 include("common.jl")
 include("smiteapi.jl")
 
-SmiteApi.ping()
-
 s = SmiteApi.loadsession()
 if s == nothing
     error("Failed to create session")
