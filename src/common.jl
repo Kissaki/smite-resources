@@ -1,3 +1,6 @@
+import CRC32c
+import JSON
+
 function write(datafile, data)
     f = open(datafile, "w")
     JSON.print(f, data)
