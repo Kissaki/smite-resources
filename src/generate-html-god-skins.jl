@@ -6,14 +6,6 @@ import Mustache
 
 gods = JSON.parsefile("data/godswithskins.json")
 
-# gods = JSON.parsefile("data/godswithskins.json"; dicttype=DataStructures.OrderedDict)
-# gods = JSON.parsefile("data/godswithskins.json"; dicttype=OrderedCollections.OrderedDict)
-# function custom_isless(a, b)
-#     isless(a["Name"], ["Name"])
-# end
-# gods = sort!(gods; isless=isless)
-# isless = a, b => isless(a["name"], b["name"])
-
 function isless_skin(a::Dict{String,Any}, b::Dict{String,Any})
     name1 = a["skin_name"]
     name2 = b["skin_name"]
