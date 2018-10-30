@@ -39,7 +39,6 @@ func main() {
 
 	if *pullGeneric {
 		pull(s, apidata.Gods, "gods.json", "/"+apidata.LangEN)
-		pull(s, apidata.Items, "items.json", "/"+apidata.LangEN)
 	}
 
 	if *pullPlayer != "" {
