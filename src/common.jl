@@ -12,6 +12,6 @@ function writeifchanged(datafile, data)
     crc = CRC32c.crc32c(dataStr)
     existing = open(CRC32c.crc32c, datafile)
     if crc != existing
-        write(datafile, gods)
+        write(datafile, data)
     end
 end
