@@ -3,26 +3,26 @@ module godswithskins
 import JSON
 import DataStructures
 
+include("common.jl")
+
 gods = JSON.parsefile("data/gods.json"; dicttype=DataStructures.OrderedDict)
 godcount = length(gods)
 
-println("Count of gods: $godcount")
+@info "Starting to merge god skin data for $godcount gods…"
 
 combined = []
 
+print(string("-"^godcount), "\r")
 for god in gods
-    godname = god["Name"]
     godid = god["id"]
-    println("Handling god $godname (ID $godid)...")
     godskins = JSON.parsefile("data/godskins-$godid.json")
     god["godskins"] = godskins
+    print("X")
 end
+println()
 
-println("Completed handling $godcount gods")
-println("Writing combined data…")
+writeifchanged("data/godswithskins.json", gods)
 
-f = open("data/godswithskins.json", "w")
-JSON.print(f, gods)
-close(f)
+@info "Merge done."
 
 end
