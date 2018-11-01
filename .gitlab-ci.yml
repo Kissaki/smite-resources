@@ -1,22 +1,11 @@
 
 stages:
-  - build_go
   - build_web
   - deploy
-
-build_go:
-  stage: build_go
-  image: golang:latest
-  script:
-    - go build -o bin/smitegods src/cli/smitegods/smitegods.go
-  artifacts:
-    paths:
-      - bin
 
 build_web:
   stage: build_web
   script:
-    - bin/smitegods -updategoddata -devid $SMITE_API_DEVID -authkey $SMITE_API_AUTHKEY
     - mkdir public
     - mkdir public/img
     - mkdir public/data
