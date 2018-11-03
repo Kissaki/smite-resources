@@ -15,6 +15,9 @@ hr {border-top:1px solid #ccc;margin:4px 8px 0;}
 @import "less/relatedpages.less";
 @import "less/footer.less";
 
+.actionbutton {
+    cursor: pointer;
+}
 #filters {
     margin: 2px 4px 8px;
     label {
@@ -38,34 +41,28 @@ hr {border-top:1px solid #ccc;margin:4px 8px 0;}
     margin: 2px 4px;
     border: 1px solid #ccc;
     background-color: #eee;
-    display: grid;
-    grid-template: "icon name count empty" 36px
-    "skins skins skins skins";
-    grid-template-columns: auto auto auto 1fr;
+
+    h2 {
+        display: inline-block;
+    }
 
     &.hidden {
         display: none;
     }
 
     .godname {
-        grid-area: name;
         margin: 2px 4px;
         white-space: nowrap;
         line-height: 32px;
         font-size: 32px;
     }
     .godicon {
-        grid-area: icon;
         margin: 2px 4px;
         width: 32px;
         height: 32px;
         vertical-align: top;
     }
-    .godskincount {
-        grid-area: count;
-    }
     .skins {
-        grid-area: skins;
         display: flex;
         flex-wrap: wrap;
 

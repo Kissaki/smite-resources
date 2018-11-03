@@ -79,6 +79,9 @@ footer p {
   margin: 0;
   padding: 0;
 }
+.actionbutton {
+  cursor: pointer;
+}
 #filters {
   margin: 2px 4px 8px;
 }
@@ -102,32 +105,26 @@ footer p {
   margin: 2px 4px;
   border: 1px solid #ccc;
   background-color: #eee;
-  display: grid;
-  grid-template: "icon name count empty" 36px "skins skins skins skins";
-  grid-template-columns: auto auto auto 1fr;
+}
+.god h2 {
+  display: inline-block;
 }
 .god.hidden {
   display: none;
 }
 .god .godname {
-  grid-area: name;
   margin: 2px 4px;
   white-space: nowrap;
   line-height: 32px;
   font-size: 32px;
 }
 .god .godicon {
-  grid-area: icon;
   margin: 2px 4px;
   width: 32px;
   height: 32px;
   vertical-align: top;
 }
-.god .godskincount {
-  grid-area: count;
-}
 .god .skins {
-  grid-area: skins;
   display: flex;
   flex-wrap: wrap;
 }
