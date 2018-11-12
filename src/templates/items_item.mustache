@@ -1,0 +1,8 @@
+<div class="item item-root" data-id="{{ItemId}}">
+    {{> src/templates/items_item-desc.mustache }}
+    <div class="item_childs">
+        {{#childitems}}
+            {{> src/templates/items_child.mustache }}
+        {{/childitems}}
+    </div>
+</div>

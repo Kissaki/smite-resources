@@ -1,0 +1,27 @@
+<div class="item-desc">
+    {{#itemIcon_URL}}
+    <img class="icon" src="{{itemIcon_URL}}">
+    {{/itemIcon_URL}}
+    {{^itemIcon_URL}}
+    <div class="noicon">no icon</div>
+    {{/itemIcon_URL}}
+    <div class="name">{{DeviceName}}</div>
+    <div class="price">Price: {{Price}} gold</div>
+    <div class="shortdesc">{{ShortDesc}}</div>
+    {{#ItemDescription}}
+        <div class="description">
+            {{#Description}}
+                <p>{{.}}</p>
+            {{/Description}}
+            {{#SecondaryDescription}}
+                <p>{{.}}</p>
+            {{/SecondaryDescription}}
+            {{#Menuitems}}
+                <ul class="item-attributes">
+                    {{Description}}: {{Value}}
+                </ul>
+            {{/Menuitems}}
+        </div>
+    {{/ItemDescription}}
+    {{#StartingItem}}<span class="tag startingitem">Starting Item</span>{{/StartingItem}}
+</div>

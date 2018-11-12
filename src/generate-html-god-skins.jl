@@ -78,7 +78,7 @@ const template_path = "src/templates/god-skins.mustache"
 const outpath = "god-skins.html"
 
 @info "Reading gods with skin data and generating html file…"
-gods = JSON.parsefile(inpath)
+gods = JSON.parsefile(inpath; dicttype=OrderedCollections.OrderedDict)
 
 for god in gods
     godskins::Array{Dict{String,Any}} = god["godskins"]

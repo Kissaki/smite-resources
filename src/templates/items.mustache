@@ -7,30 +7,33 @@
 </head>
 <body>
     <h1>SMITE Items Overview</h1>
-    <label>Filter</label><input type="text" id="item-filter">
-    <ul>
-        {{#.}}
-        <li>
-            <div class="item">
-                {{#itemIcon_URL}}
-                <img class="icon" title="" src="{{itemIcon_URL}}">
-                {{/itemIcon_URL}}
-                {{^itemIcon_URL}}
-                <div class="noicon">no icon</div>
-                {{/itemIcon_URL}}
-                <div class="name">Name: {{DeviceName}}</div>
-                <div class="price">Price: {{Price}}</div>
-                <div class="shortdesc">{{ShortDesc}}</div>
-                <div class="description">
-                <p>{{ItemDescription.Description}}</p>
-                <p>{{ItemDescription.SecondaryDescription}}</p>
-                </div>
-                <div class="type">{{Type}}</div>
-                {{#StartingItem}}<span class="tag startingitem">Starting Item</span>{{/StartingItem}}
-            </div>
-        </li>
-        {{/.}}
-    </ul>
+    <div>
+        <label>Filter</label><input type="text" id="item-filter">
+    </div>
+    <details>
+        <summary>Starter Items</summary>
+        {{#starters}}
+            {{> src/templates/items_item.mustache }}
+        {{/starters}}
+    </details>
+    <details>
+        <summary>Consumables</summary>
+        {{#consumables}}
+            {{> src/templates/items_item.mustache }}
+        {{/consumables}}
+    </details>
+    <details>
+        <summary>Actives</summary>
+        {{#actives}}
+            {{> src/templates/items_item.mustache }}
+        {{/actives}}
+    </details>
+    <details open>
+        <summary>Normal Items</summary>
+        {{#normalitems}}
+            {{> src/templates/items_item.mustache }}
+        {{/normalitems}}
+    </details>
     <footer>
         <p>This interactive overview of SMITE gods has been created by Jan Klass aka <a href="https://github.com/Kissaki">Kissaki</a>. All rights reserved. HTML is generated from a program written in Go. CSS and JavaScript were created bare-bone.</p>
         <p>Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.</p>

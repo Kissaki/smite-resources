@@ -8,6 +8,11 @@ function write(datafile, data)
 end
 
 function writeifchanged(datafile, data)
+    if !isfile(datafile)
+        write(datafile, data)
+        return
+    end
+
     dataStr = JSON.json(data)
     crc = CRC32c.crc32c(dataStr)
     existing = open(CRC32c.crc32c, datafile)
