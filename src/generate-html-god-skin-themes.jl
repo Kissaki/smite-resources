@@ -14,6 +14,14 @@ skin_themes = JSON.parsefile("data/godskin-theme.json")
 themes = Dict()
 uncategorized = []
 
+function add!(theme::String, godskin)
+    global themes
+    if !haskey(themes, theme)
+        themes[theme] = []
+    end
+    push!(themes[theme], godskin)
+end
+
 for god in gods
     godskins::Array{Dict{String,Any}} = god["godskins"]
     # Data fixup
@@ -26,21 +34,22 @@ for god in gods
         skinid = godskin["skin_id1"]
         if haskey(skin_themes, "$skinid")
             theme = skin_themes["$skinid"]
-            global themes
-            if !haskey(themes, theme)
-                themes[theme] = []
-            end
-            push!(themes[theme], godskin)
+            add!(theme, godskin)
         else
             if godskin["skin_name"] == "Standard"
+                add!("standard", godskin)
                 continue
             elseif godskin["skin_name"] == "Golden"
+                add!("golden", godskin)
                 continue
             elseif godskin["skin_name"] == "Legendary"
+                add!("legendary", godskin)
                 continue
             elseif godskin["skin_name"] == "Diamond"
+                add!("diamond", godskin)
                 continue
             elseif godskin["skin_name"] == "Shadow"
+                add!("shadow", godskin)
                 continue
             end
             push!(uncategorized, godskin)
