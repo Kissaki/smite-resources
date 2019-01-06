@@ -101,6 +101,13 @@ footer p {
 #overall-skin-count {
   margin-left: 6px;
 }
+/* IE Fix */
+details {
+  display: block;
+}
+details summary {
+  display: list-item;
+}
 .god {
   margin: 2px 4px;
   border: 1px solid #ccc;
