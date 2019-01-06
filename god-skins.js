@@ -1,3 +1,24 @@
+// Fix for IE11
+if (typeof NodeList.prototype.forEach !== "function" ) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+}
+// Fix for IE
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes#Polyfill
+if (!String.prototype.includes) {
+    Object.defineProperty(String.prototype, 'includes', {
+        value: function(search, start) {
+            if (typeof start !== 'number') {
+                start = 0
+            }
+
+            if (start + search.length > this.length) {
+                return false
+            } else {
+                return this.indexOf(search, start) !== -1
+            }
+        }
+    })
+}
 
 document.dataHandler = {
     init: function(){
