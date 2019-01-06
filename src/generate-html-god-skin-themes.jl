@@ -40,6 +40,8 @@ for god in gods
                 continue
             elseif godskin["skin_name"] == "Diamond"
                 continue
+            elseif godskin["skin_name"] == "Shadow"
+                continue
             end
             push!(uncategorized, godskin)
         end
