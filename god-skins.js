@@ -65,6 +65,18 @@ document.filterHandler = {
         this.elSkinname.value = ''
         this.onFilterUpdate()
     },
+    onFilterGodUpdate: function(){
+        let searchGod = this.elGodname.value.toLowerCase()
+        let gods = this.godEls
+        for (var i = 0; i < gods.length; ++i){
+            let godMeta = gods[i]
+            let god = godMeta.el
+            let godname = godMeta.name
+            let isGodMatch = searchGod.length == 0 ? true : godname.includes(searchGod)
+            
+            god.className = 'god ' + (isGodMatch ? '' : 'hidden')
+        }
+    },
     onFilterUpdate: function(){
         let searchGod = this.elGodname.value.toLowerCase()
         let searchSkin = this.elSkinname.value.toLowerCase()
@@ -102,6 +114,27 @@ document.filterHandler = {
         }
     },
 }
+
+document.toggleAll = {
+    init: function(){
+        document.getElementById('btn-openall').addEventListener('click', this.open.bind(this))
+        document.getElementById('btn-closeall').addEventListener('click', this.close.bind(this))
+    },
+    set: function(isOpen) {
+        var gods = document.querySelectorAll('.god:not(.hidden)')
+        for (var i = 0; i < gods.length; ++i) {
+            var god = gods[i]
+            god.open = isOpen
+        }
+    },
+    open: function() {
+        this.set(true)
+    },
+    close: function() {
+        this.set(false)
+    },
+}
+document.toggleAll.init()
 
 document.imageLoader = {
     observer: null,

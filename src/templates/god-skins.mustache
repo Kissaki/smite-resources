@@ -15,17 +15,20 @@
         <label class="filter-checkbox"><input type="checkbox" id="show-standard"> Show Standard Skin</label>
         <label class="filter-checkbox"><input type="checkbox" id="show-mastery"> Show Mastery Skins</label>
     </div>
-    <div id="gods">
-        {{#.}}
-        <div id="god{{id}}" class="god ">
-            <h2 class="godname">{{Name}}</h2>
-            <span class="godskincount">(?/{{skincount}})</span>
-            <img class="godicon" src="{{{godIcon_URL}}}" alt="">
-            <div id="skins3492" class="skins">
+    {{#.}}
+        <details id="god{{id}}" class="god ">
+            <summary><!--
+                --><h2>
+                    <img class="godicon" src="{{{godIcon_URL}}}" alt=""><!--
+                    --><span class="godname">{{Name}}</span><!--
+                    --><span class="godskincount">(?/{{skincount}})</span>
+                </h2><!--
+            --></summary>
+            <div id="skins{{id}}" class="skins">
             {{{Godskins}}}
                 {{#godskins}}
                 <div class="skin">
-                    <h2 class="skinname">{{skin_name}}</h2>
+                    <h3 class="skinname">{{skin_name}}</h3>
                     <div class="obtainability">{{obtainability}}</div>
                     {{#godSkin_URL}}<a class="skincard" href="{{{.}}}" title=""><img class="skincard" src="img/god-skin-card-loading.png" data-src="{{{.}}}" alt=""></a>{{/godSkin_URL}}
                     {{^godSkin_URL}}<div class="skincard skincard-missing">missing card art</div>{{/godSkin_URL}}
@@ -34,9 +37,10 @@
                 </div>
                 {{/godskins}}
             </div>
-        </div>
-        {{/.}}
-    </div>
+        </details>
+    {{/.}}
+    <input id="btn-openall" class="actionbutton" type="button" value="Open all">
+    <input id="btn-closeall" class="actionbutton" type="button" value="Close all">
     <hr>
     <footer>
         <p>This interactive overview of SMITE god skins has been created by Jan Klass aka Kissaki. All rights reserved.</p>
