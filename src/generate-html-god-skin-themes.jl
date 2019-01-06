@@ -32,6 +32,15 @@ for god in gods
             end
             push!(themes[theme], godskin)
         else
+            if godskin["skin_name"] == "Standard"
+                continue
+            elseif godskin["skin_name"] == "Golden"
+                continue
+            elseif godskin["skin_name"] == "Legendary"
+                continue
+            elseif godskin["skin_name"] == "Diamond"
+                continue
+            end
             push!(uncategorized, godskin)
         end
     end
