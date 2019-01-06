@@ -141,18 +141,18 @@ document.toggleAll = {
         document.getElementById('btn-openall').addEventListener('click', this.open.bind(this))
         document.getElementById('btn-closeall').addEventListener('click', this.close.bind(this))
     },
-    set: function(isOpen) {
-        var gods = document.querySelectorAll('.god:not(.hidden)')
+    set: function(isOpen, qualifier) {
+        var gods = document.querySelectorAll('.god' + qualifier)
         for (var i = 0; i < gods.length; ++i) {
             var god = gods[i]
             god.open = isOpen
         }
     },
     open: function() {
-        this.set(true)
+        this.set(true, ':not(.hidden)')
     },
     close: function() {
-        this.set(false)
+        this.set(false, '')
     },
 }
 document.toggleAll.init()
