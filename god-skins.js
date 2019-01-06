@@ -1,7 +1,5 @@
 
 document.dataHandler = {
-    SRC_GODSWITHSKINS: 'data/godswithskins.json',
-    elGods: null,
     init: function(){
         document.filterHandler.init()
         document.imageLoader.init()
