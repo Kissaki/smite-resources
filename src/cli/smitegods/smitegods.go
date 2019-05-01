@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"hash/adler32"
@@ -13,7 +12,6 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"time"
 
 	"../../apidata"
 	"../../apidata/gods"
@@ -22,7 +20,6 @@ import (
 
 const (
 	fileGods      = "data/gods.json"
-	fileChangelog = "changes.json"
 )
 
 var updateGodData = flag.Bool("updategoddata", false, "Specifies whether the God data should be updated form the SMITE API. This requires specifying the developer ID and authentication key.")
@@ -33,42 +30,6 @@ var outFile = flag.String("target", "smitegods.html", "Filename that the HTML go
 // Default Request Handler
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<h1>Hello %s!</h1>", r.URL.Path[1:])
-}
-
-func reverse(arr Changelog) {
-	// Counting forward from the front, and backward from the back,
-	// swap every nth element with the one on the other side
-	// until we reach the middle.
-	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
-		arr[i], arr[j] = arr[j], arr[i]
-	}
-}
-
-func addChangelogEntry(description string) (err error) {
-	d, err := ioutil.ReadFile(fileChangelog)
-	if err != nil {
-		return
-	}
-
-	log := Changelog{}
-	err = json.Unmarshal(d, &log)
-	if err != nil {
-		return
-	}
-
-	change := Change{Time: time.Now().Format("02.01.2006"), Description: description}
-	reverse(log)
-	log = append(log, change)
-	reverse(log)
-
-	logJSON, err := json.Marshal(&log)
-	if err != nil {
-		return
-	}
-
-	ioutil.WriteFile(fileChangelog, logJSON, 0666)
-
-	return
 }
 
 func APITestAndGodsDownload() {
@@ -82,7 +43,6 @@ func APITestAndGodsDownload() {
 	godsOld, err := ioutil.ReadFile(fileGods)
 	if err != nil || adler32.Checksum(godsOld) != adler32.Checksum([]byte(godsNew)) {
 		fmt.Println("Writing new god data to gods.json")
-		addChangelogEntry("Data update")
 		ioutil.WriteFile(fileGods, []byte(godsNew), 0666)
 	} else {
 		fmt.Println("Pulled god data is not different from the stored data.")
@@ -94,30 +54,6 @@ func httpListen() {
 	http.ListenAndServe(":8080", nil)
 }
 
-func parseChangelog() (log Changelog, err error) {
-	jsonData, err := ioutil.ReadFile(fileChangelog)
-	if err != nil {
-		return nil, err
-	}
-	err = json.Unmarshal(jsonData, &log)
-	if err != nil {
-		return nil, err
-	}
-	for _, a := range log {
-		a.Description = a.Description
-	}
-	return
-}
-
-// Change represents a change to the content
-type Change struct {
-	Time        string
-	Description string
-}
-
-// Changelog is a list of dated changes
-type Changelog []Change
-
 // TemplateData contains the data used in the HTML templates to generate the resulting HTML
 type TemplateData struct {
 	Pantheons []string
@@ -127,13 +63,12 @@ type TemplateData struct {
 	Assoc                map[string]map[string]gods.Gods
 	ResourceQualifierCSS string
 	ResourceQualifierJS  string
-	Changelog            []Change
 }
 
 type IntSet map[int]struct{}
 type StringSet map[string]struct{}
 
-func CreateTemplateData(godsList gods.Gods, changelog Changelog) TemplateData {
+func CreateTemplateData(godsList gods.Gods) TemplateData {
 	rolesUnique := make(StringSet)
 	godData := make(map[string]map[string]gods.Gods)
 	// Unique check
@@ -192,7 +127,7 @@ func CreateTemplateData(godsList gods.Gods, changelog Changelog) TemplateData {
 	}
 	resourceQualifierJS := fJS.ModTime().UTC().Format("20060102150405")
 
-	return TemplateData{pantheons, roles, godData, resourceQualifierCSS, resourceQualifierJS, changelog}
+	return TemplateData{pantheons, roles, godData, resourceQualifierCSS, resourceQualifierJS}
 }
 
 func LogToFile() {
@@ -231,8 +166,6 @@ func ToCSSClass(str string) string {
 }
 
 func main() {
-	//	apidata.LogToFile()
-
 	if initFlags() != nil {
 		os.Exit(1)
 	}
@@ -242,11 +175,6 @@ func main() {
 	}
 
 	godlist, err := godhandling.ParseGods(fileGods)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	changelog, err := parseChangelog()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -268,15 +196,10 @@ func main() {
 	writer := bufio.NewWriter(file)
 	defer writer.Flush()
 
-	err = tmpl.Execute(writer, CreateTemplateData(godlist, changelog))
+	err = tmpl.Execute(writer, CreateTemplateData(godlist))
 	if err != nil {
 		log.Fatalln("Failed to execute HTML template with data: ", err)
 	}
 
 	log.Println("DONE")
-
-	//	for _, god := range gods {
-	//		fmt.Println(god.Name, god.Pantheon, god.Roles, god.Type, god.OnFreeRotation, god.GodIconURL, god.GodCardURL)
-	//	}
-	//	httpListen()
 }
