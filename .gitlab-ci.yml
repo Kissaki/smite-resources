@@ -22,7 +22,7 @@ deploy_prod:
   image: registry.gitlab.com/kissaki/docker-hugo:latest
   before_script:
   - eval $(ssh-agent -s)
-  - echo "$SFTP_PRIVKEY" | tr -d '\r' | ssh-add - > /dev/null
+  - echo "$SFTP_PRIVKEY" | tr -d '\r' | ssh-add -k -t 10 -
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   - echo "$SFTP_KNOWNHOSTS" > ~/.ssh/known_hosts
@@ -30,6 +30,8 @@ deploy_prod:
   script:
     - cd public
     - lftp -c "open -u $SFTP_USERNAME,NONE -p $SFTP_PORT sftp://$SFTP_HOST ; mirror --reverse . $SFTP_PATH"
+  after_script:
+  - ssh-add -D
   environment:
     name: production
     url: https://kcode.de/smite/smitegods.html
