@@ -162,7 +162,7 @@ func initFlags() error {
 }
 
 func ToCSSClass(str string) string {
-	return strings.TrimSpace(strings.ToLower(str))
+	return strings.ReplaceAll(strings.TrimSpace(strings.ToLower(str)), " ", "")
 }
 
 func main() {
