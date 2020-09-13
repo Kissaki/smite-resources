@@ -50,7 +50,7 @@ namespace KCode.SMITEClient
 
         private static void DownloadGods(RequestClient c, string basePath) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: "gods.json", c => c.GetGodsAsync());
         private static void DownloadItems(RequestClient c, string basePath) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: "items.json", c => c.GetItemsAsync());
-        private static void DownloadGodSkins(RequestClient c, string basePath, int godId) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: $"godskins-{godId}.json", c => c.GetGodSkinsAsync(godId));
+        private static void DownloadGodSkins(RequestClient c, string basePath, int godId) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: $"godskins/godskins-{godId}.json", c => c.GetGodSkinsAsync(godId));
 
         private static void GenerateGodsHtml() => GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods());
         private static void GenerateGodSkinsHtml() => GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins());

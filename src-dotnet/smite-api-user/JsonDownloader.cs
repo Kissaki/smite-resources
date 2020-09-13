@@ -29,6 +29,7 @@ namespace KCode.SMITEClient
             var fi = TargetFile(filenameOrRelPath);
             if (!fi.Exists || DateTime.UtcNow - fi.LastWriteTimeUtc > UpdateAfter)
             {
+                fi.Directory.Create();
                 File.WriteAllText(fi.FullName, requestMethod(_client).Result);
                 return true;
             }
