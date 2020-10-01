@@ -3,4 +3,10 @@
 /src/bin/
 /src/pkg/
 /.auth.yaml
-/.tmp.session.json
+/.tmp*
+/src-dotnet/.vs/
+/src-dotnet/*/bin/
+/src-dotnet/*/obj/
+/src-dotnet/KCode.SMITEAPI.Generator/methods
+/src-dotnet/KCode.SMITEAPI.Generator/openapi.yaml
+*.csproj.user

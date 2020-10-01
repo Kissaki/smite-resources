@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEClient", "smite-api-user\KCode.SMITEClient.csproj", "{82A8FEB2-9160-43E3-B395-E8336295007E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEAPI", "KCode.SMITEAPI\KCode.SMITEAPI.csproj", "{F93742E2-BD96-4AA5-AC91-24174C2D9484}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEAPI.Generator", "KCode.SMITEAPI.Generator\KCode.SMITEAPI.Generator.csproj", "{E3DFE7CD-D44D-47BF-8C9D-DD5EF1B987A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEAPITest", "KCode.SMITEAPITest\KCode.SMITEAPITest.csproj", "{782CD454-21D5-4FB2-82D1-06798714354E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCode.HiRezAPI", "KCode.HiRezAPI\KCode.HiRezAPI.csproj", "{EDF27E2A-E713-4B55-87D9-D7454462EED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCode.PaladinsAPI", "KCode.PaladinsAPI\KCode.PaladinsAPI.csproj", "{1F30774A-A775-434C-AAD8-405FA286A0DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82A8FEB2-9160-43E3-B395-E8336295007E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A8FEB2-9160-43E3-B395-E8336295007E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A8FEB2-9160-43E3-B395-E8336295007E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A8FEB2-9160-43E3-B395-E8336295007E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F93742E2-BD96-4AA5-AC91-24174C2D9484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F93742E2-BD96-4AA5-AC91-24174C2D9484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F93742E2-BD96-4AA5-AC91-24174C2D9484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F93742E2-BD96-4AA5-AC91-24174C2D9484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3DFE7CD-D44D-47BF-8C9D-DD5EF1B987A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3DFE7CD-D44D-47BF-8C9D-DD5EF1B987A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3DFE7CD-D44D-47BF-8C9D-DD5EF1B987A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3DFE7CD-D44D-47BF-8C9D-DD5EF1B987A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{782CD454-21D5-4FB2-82D1-06798714354E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782CD454-21D5-4FB2-82D1-06798714354E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782CD454-21D5-4FB2-82D1-06798714354E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{782CD454-21D5-4FB2-82D1-06798714354E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF27E2A-E713-4B55-87D9-D7454462EED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF27E2A-E713-4B55-87D9-D7454462EED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF27E2A-E713-4B55-87D9-D7454462EED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF27E2A-E713-4B55-87D9-D7454462EED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7CDA3D9-715D-40D2-99A8-E37AEB9CE6DE}
+	EndGlobalSection
+EndGlobal

@@ -466,3 +466,6 @@ input[type=text] {
 #god-overlay .ability-description {
   padding-left: 1em;
 }
+.ability-description .description-primary {
+  white-space: pre-line;
+}

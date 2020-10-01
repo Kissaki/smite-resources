@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "smite-api-user": {
+      "commandName": "Project",
+      "workingDirectory": "$(SolutionDir)\\.."
+    }
+  }
+}

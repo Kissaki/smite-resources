@@ -1,0 +1,104 @@
+﻿@using RazorLight
+@using static KCode.SMITEClient.HtmlGenerating.HtmlViewHelpers
+@using System.Linq;
+@inherits TemplatePage<KCode.SMITEClient.HtmlGenerating.ItemsTemplates.ItemsViewModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SMITE Items</title>
+    <link rel="stylesheet" href="smiteitems.css">
+</head>
+<body>
+    <h1>SMITE Items Overview</h1>
+    <div>
+        <label>Filter</label><input type="text" id="item-filter">
+    </div>
+    <details class="items-container">
+        <summary>Starter Items</summary>
+        <div class="items">
+            @foreach (var item in Model.StarterItems)
+            {
+                await IncludeAsync("ItemsTemplates/Item.cshtml", item);
+            }
+        </div>
+    </details>
+    <details class="items-container">
+        <summary>Consumables</summary>
+        <div class="items consumables" style="display: grid; grid-template: auto / 100px 100px 100px 100px; justify-content: start; grid-gap: 8px;">
+            @{
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Healing Potion"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Mana Potion"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Multi Potion"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Baron's Brew"));
+            }
+
+            @{
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Chalice of Healing"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Chalice of Mana"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Multi Potion"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Chalice of the Oracle"));
+            }
+
+            @{
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Ward"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Sentry Ward"));
+            }
+            <div></div>
+            <div></div>
+
+            @{
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Hand of the Gods"));
+            }
+            <div></div>
+            <div></div>
+            <div></div>
+
+            @{
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Potion of Power"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Elixir of Speed"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Elixir of Power"));
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Elixir of Defense"));
+            }
+
+            @{
+                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Scare Tactics"));
+            }
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+</details>
+    <details class="items-container">
+        <summary>Relics</summary>
+        <div class="items">
+            @foreach (var item in Model.Relics)
+            {
+                await IncludeAsync("ItemsTemplates/Item.cshtml", item);
+            }
+            </div>
+    </details>
+    <details class="items-container" open>
+        <summary>Normal Items</summary>
+        <div class="items">
+            @foreach (var item in Model.NormalItems)
+            {
+            <div class="item-tree" style="display: grid; align-content: start;">
+                @foreach (var treeitem in item.AllTreeItems)
+                {
+                    <div class="item-tree-node" style="grid-area: @(treeitem.ItemTier) / @(treeitem.CrossPos + 1);">
+                        @{ await IncludeAsync("ItemsTemplates/Item.cshtml", treeitem); }
+                    </div>
+                }
+            </div>
+            }
+        </div>
+    </details>
+    <footer>
+        <p>This interactive overview of SMITE gods has been created by Jan Klass aka <a href="https://github.com/Kissaki">Kissaki</a>. All rights reserved. HTML is generated from a program written in Go. CSS and JavaScript were created bare-bone.</p>
+        <p>Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.</p>
+        <p><a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.</p>
+    </footer>
+    <script src="smiteitems.js"></script>
+</body>
+</html>

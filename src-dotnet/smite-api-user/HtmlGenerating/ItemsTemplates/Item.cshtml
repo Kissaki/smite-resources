@@ -1,0 +1,114 @@
+﻿@using RazorLight
+@inherits TemplatePage<KCode.SMITEClient.Data.ItemModel>
+<div class="item" data-id="@Model.ItemId" data-isactive="@Model.IsActive">
+    <div class="item-desc">
+        @if (Model.IconUrl.Length > 0)
+        {
+            <img class="icon" src="@Model.IconUrl" alt="@Model.Name">
+        }
+        else
+        {
+            <div class="noicon">no icon</div>
+        }
+        <div class="name">@Model.Name</div>
+        @if (Model.Price != 0)
+        {
+            <div class="price">💰 Price: @Model.Price</div>
+        }
+        else
+        {
+            <div class="price">💰 Price: <i>none</i></div>
+        }
+        <div class="properties">
+            @foreach (var prop in Model.Properties)
+            {
+                if (prop.Key == "Health")
+                {
+                    <span class="propkey propkey-health" style="color: green;" aria-label="@prop.Key">HP</span>
+                }
+                else if (prop.Key == "HP5")
+                {
+                    <span class="propkey propkey-mp5" style="color: green;" aria-label="@prop.Key">HP5</span>
+                }
+                else if (prop.Key == "Mana")
+                {
+                    <span class="propkey propkey-mana" style="color: blue;" aria-label="@prop.Key">MP</span>
+                }
+                else if (prop.Key == "MP5")
+                {
+                    <span class="propkey propkey-mp5" style="color: blue;" aria-label="@prop.Key">MP5</span>
+                }
+                else if (prop.Key == "Movement Speed")
+                {
+                    <span class="propkey propkey-movementspeed" style="" aria-label="@prop.Key">MvSpd</span>
+                }
+                else if (prop.Key == "Attack Speed")
+                {
+                    <span class="propkey propkey-attackspeed" style="" aria-label="@prop.Key">AtkSpd</span>
+                }
+                else if (prop.Key == "Cooldown Reduction")
+                {
+                    <span class="propkey propkey-cooldownreduction" style="" aria-label="@prop.Key">CdRd</span>
+                }
+                else if (prop.Key == "Physical Power")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Phys Pwr</span>
+                }
+                else if (prop.Key == "Magical Power")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Mag Pen</span>
+                }
+                else if (prop.Key == "Physical Penetration")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Phys Pen</span>
+                }
+                else if (prop.Key == "Magical Penetration")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Mag Pwr</span>
+                }
+                else if (prop.Key == "Physical Protection")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Phys Prot</span>
+                }
+                else if (prop.Key == "Magical Protection")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Mag Prot</span>
+                }
+                else if (prop.Key == "Crowd Control Reduction")
+                {
+                    <span class="propkey propkey-" style="" aria-label="@prop.Key">CrwdCtrlRd</span>
+                }
+                else
+                {
+                    <span class="propkey" style="">@prop.Key</span>
+                }
+                <span>@prop.Value</span>
+            }
+        </div>
+        @*<div class="item-tags">
+            @if (Model.IsStartingItem)
+            {
+                <span class="tag startingitem">Starting Item</span>
+            }
+            @(new Microsoft.AspNetCore.Html.HtmlString(string.Join("", Model.Properties.Keys.Select(x => $@"<span class="" tag"">{x}</span>"))))
+        </div>*@
+        <details class="description shortdesc"><summary>ShortDesc</summary>@Model.ShortDesc</details>
+        @if (!string.IsNullOrWhiteSpace(Model.SecondaryDescription))
+        {
+            <details class="description passive"><summary>Passive</summary><p>@Model.SecondaryDescription</p></details>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <details class="description fulldesc">
+                <summary>Desc</summary>
+                <div class="description">
+                    <p>@Model.Description</p>
+                </div>
+            </details>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.RestrictedRoles) && Model.RestrictedRoles != "no restrictions")
+        {
+            <details><summary>Role Restr</summary>@Model.RestrictedRoles</details>
+        }
+    </div>
+</div>

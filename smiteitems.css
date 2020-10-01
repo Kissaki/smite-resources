@@ -79,21 +79,38 @@ footer p {
   margin: 0;
   padding: 0;
 }
+.items-container {
+  border: 1px dotted #ccc;
+}
+.items-container summary {
+  display: block;
+}
+.items {
+  display: flex;
+}
+.item-tree {
+  border: 1px solid red;
+  margin: 8px;
+}
+.item-tree-node {
+  border: 1px solid cyan;
+  margin: 8px;
+}
 .item {
-  display: grid;
-  grid-template: "desc children .";
-  grid-template-columns: auto auto 1fr;
-  grid-gap: 1em;
+  padding: 4px;
   background-color: #dddddd;
 }
+.item .icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+}
 .item.item-root {
-  margin: 10px;
+  margin: 12px;
+  padding: 12px;
 }
 .item .item-desc {
-  grid-area: desc;
-  display: inline-block;
-  width: 160px;
-  height: 400px;
   /* Icon size: 128x128 */
   /* .item .icon, .godnoicon { display:block; width:100%; } */
   /* .item .shortdesc {} */
@@ -116,18 +133,21 @@ footer p {
   overflow: hidden;
 }
 .item .item-desc .description {
-  overflow: scroll;
-  height: 102px;
-  width: 128px;
   font-size: 0.8em;
   line-height: 1em;
 }
-.item .item-desc .tag.startingitem {
-  background-color: #000088;
-  color: #ffffff;
+.item .item-desc .properties {
+  display: grid;
+  grid-template: auto / auto 1fr;
 }
-.item .item_childs {
-  grid-area: children;
+.item .item-desc .propkey {
+  margin-right: 6px;
+}
+.item .tag {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #cccccc;
+  color: #333333;
 }
 .data-block {
   background: #fafafa;

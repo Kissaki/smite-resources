@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KCode.SMITEAPI.Generator": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}

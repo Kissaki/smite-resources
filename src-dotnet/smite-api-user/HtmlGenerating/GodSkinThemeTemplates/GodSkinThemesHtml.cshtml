@@ -1,0 +1,73 @@
+﻿@using RazorLight
+@using static KCode.SMITEClient.HtmlGenerating.HtmlViewHelpers
+@inherits TemplatePage<(KCode.SMITEClient.Data.GodJsonModel[] gods, KCode.SMITEClient.Data.SkinThemeMapping mapping)>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SMITE God Skin Themes</title>
+	<link rel="stylesheet" href="@GetResourceRef("god-skin-themes.css")" />
+</head>
+<body>
+	<aside id="relatedpages">See also: <a href="god-skins.html">SMITE God Skins</a><a href="smitegods.html">SMITE Gods Overview Table</a><a href="godstats.html">SMITE God Stats</a></aside>
+    <h1>SMITE God Skin Themes<span id="overall-skin-count"></span></h1>
+    <p class="intro">The list of themes and categorization of skins into these categories is a <b>manual process</b>. As such, this list may need some feedback, input, help, and may be partially and/or temporarily outdated.</p>
+    <p class="intro">If you want to contribute; help improve the list, please contact me directly.</p>
+    @{ var allThemes = Model.mapping.Values.Distinct().OrderBy(x => x); }
+    @if (allThemes.Count() == 0)
+    {
+        <p>No skin theme data available…</p>
+    }
+    @foreach (var theme in allThemes.Where(x => x != "uncategorized"))
+    {
+        var skinIds = Model.mapping.Where(x => x.Value == theme).Select(x => x.Key).ToArray();
+        <details id="skintheme-@theme" class="skintheme">
+            <summary><h2 class="skinthemename">@theme</h2></summary>
+            <div class="skins">
+                @foreach (var skin in Model.gods.SelectMany(x => x.Skins).Where(x => skinIds.Contains(x.Id1)))
+                {
+                <div class="godskin" data-skinid="@skin.Id1">
+                    <div class="godlabel"><img class="godicon" src="@skin.GodIconUri" />@skin.GodName</div>
+                    <h3 class="skinname">@skin.Name</h3>
+                    <div class="obtainability">@skin.Obtainability</div>
+                    @if (skin.CardUri.ToString() == "")
+                    {
+                        <div class="skincard skincard-missing">missing card art</div>
+                    }
+                    else
+                    {
+                        <a class="skincard" href="@skin.CardUri" title=""><img class="skincard" src="img/god-skin-card-loading.png" data-src="@skin.CardUri" alt=""></a>
+                    }
+                    @if (skin.PriceFavor > 0)
+                    {
+                    <div class="price price-favor">@skin.PriceFavor favor</div>
+                    }
+                    @if (skin.PriceGems > 0)
+                    {
+                    <div class="price price-gems">@skin.PriceGems gems</div>
+                    }
+                </div>
+                }
+            </div>
+        </details>
+    }
+    <hr>
+    <details>
+        @{ var uncatSkins = Model.gods.SelectMany(x => x.Skins).Where(x => !Model.mapping.ContainsKey(x.Id1)); }
+        <summary>Uncategorized (@uncatSkins.Count())</summary>
+        <ul class="uncategorized">
+            @foreach (var skin in uncatSkins)
+            {
+                <li>@skin.GodName: [@skin.Id1] @skin.Name @if (skin.CardUri.ToString() != "") { <text><a href="@skin.CardUri">Card</a></text> } else { <text>(No Card)</text> } (@skin.Obtainability, @skin.PriceFavor @skin.PriceGems)</li>
+            }
+        </ul>
+    </details>
+    <hr>
+    <footer>
+        <p>This interactive overview of SMITE god skins has been created by Jan Klass aka Kissaki. All rights reserved.</p>
+        <p>Data provided by <a href="http://www.hirezstudios.com">Hi-Rez</a>. ©2015 Hi-Rez Studios, Inc. All rights reserved.</p>
+        <p><a href="http://www.smitegame.com">SMITE</a> is a trademark or registered trademark of Hi­Rez Studios, Inc. in the United States and other countries.</p>
+    </footer>
+    <script src="god-skin-themes.js"></script>
+</body>
+</html>
