@@ -20,68 +20,11 @@
             <div class="price">💰 Price: <i>none</i></div>
         }
         <div class="properties">
+            @{
+            }
             @foreach (var prop in Model.Properties)
             {
-                if (prop.Key == "Health")
-                {
-                    <span class="propkey propkey-health" style="color: green;" aria-label="@prop.Key">HP</span>
-                }
-                else if (prop.Key == "HP5")
-                {
-                    <span class="propkey propkey-mp5" style="color: green;" aria-label="@prop.Key">HP5</span>
-                }
-                else if (prop.Key == "Mana")
-                {
-                    <span class="propkey propkey-mana" style="color: blue;" aria-label="@prop.Key">MP</span>
-                }
-                else if (prop.Key == "MP5")
-                {
-                    <span class="propkey propkey-mp5" style="color: blue;" aria-label="@prop.Key">MP5</span>
-                }
-                else if (prop.Key == "Movement Speed")
-                {
-                    <span class="propkey propkey-movementspeed" style="" aria-label="@prop.Key">MvSpd</span>
-                }
-                else if (prop.Key == "Attack Speed")
-                {
-                    <span class="propkey propkey-attackspeed" style="" aria-label="@prop.Key">AtkSpd</span>
-                }
-                else if (prop.Key == "Cooldown Reduction")
-                {
-                    <span class="propkey propkey-cooldownreduction" style="" aria-label="@prop.Key">CdRd</span>
-                }
-                else if (prop.Key == "Physical Power")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Phys Pwr</span>
-                }
-                else if (prop.Key == "Magical Power")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Mag Pen</span>
-                }
-                else if (prop.Key == "Physical Penetration")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Phys Pen</span>
-                }
-                else if (prop.Key == "Magical Penetration")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Mag Pwr</span>
-                }
-                else if (prop.Key == "Physical Protection")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Phys Prot</span>
-                }
-                else if (prop.Key == "Magical Protection")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">Mag Prot</span>
-                }
-                else if (prop.Key == "Crowd Control Reduction")
-                {
-                    <span class="propkey propkey-" style="" aria-label="@prop.Key">CrwdCtrlRd</span>
-                }
-                else
-                {
-                    <span class="propkey" style="">@prop.Key</span>
-                }
+                <span class="propkey propkey-@prop.CssClass" @(prop.Color != null ? new Microsoft.AspNetCore.Html.HtmlString($@"style=""color: {prop.Color};""") : Microsoft.AspNetCore.Html.HtmlString.Empty) aria-label="@prop.FullLabel ">@prop.Caption</span>
                 <span>@prop.Value</span>
             }
         </div>

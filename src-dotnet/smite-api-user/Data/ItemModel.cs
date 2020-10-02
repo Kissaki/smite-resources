@@ -33,7 +33,7 @@ namespace KCode.SMITEClient.Data
         public string Description { get; set; } = default!;
         public string? SecondaryDescription { get; set; } = default!;
         // e.g. Health: +75
-        public ImmutableDictionary<string, string> Properties { get; set; } = default!;
+        public IEnumerable<ItemProperty> Properties { get; set; } = default!;
         public int Price { get; set; }
 
         public int BranchWidth => Children.Select(x => x.BranchWidth).DefaultIfEmpty(1).Sum();
@@ -84,8 +84,84 @@ namespace KCode.SMITEClient.Data
             ShortDesc = model.ShortDesc;
             Description = model.Description.Description;
             SecondaryDescription = model.Description.SecondaryDescription;
-            Properties = ImmutableDictionary.CreateRange(model.Description.Properties.Select(x => KeyValuePair.Create(x.Description, x.Value)));
+            Properties = model.Description.Properties
+                .ToDictionary(x => FixItemPropertyName(x.Description), x => x.Value)
+                .Where(x => !string.IsNullOrEmpty(x.Key))
+                .Select(x => ConvertProperty(x)).OrderBy(x => GetPropIndex(x)).ToImmutableArray();
             Price = model.Price;
+        }
+
+        private static string FixItemPropertyName(string description)
+        {
+            return description.Trim(' ', ':').Replace("protection", "Protection");
+        }
+
+        private static int GetPropIndex(ItemProperty x)
+        {
+            return x.FullLabel switch
+            {
+                "Health" => 4,
+                "HP5" => 8,
+                "Maximum Health" => 10,
+                "Mana" => 12,
+                "MP5" => 16,
+                "Maximum Mana" => 18,
+                "HP5 & MP5" => 19,
+                "Movement Speed" => 20,
+                "Attack Speed" => 24,
+                "Cooldown Reduction" => 28,
+                "Physical Power" => 32,
+                "Magical Power" => 36,
+                "Physical Penetration" => 40,
+                "Magical Penetration" => 44,
+                "Protections" => 46,
+                "Physical Protection" => 48,
+                "Magical Protection" => 52,
+                "Crowd Control Reduction" => 56,
+                "Physical Lifesteal" => 60,
+                "Magical Lifesteal" => 64,
+                "Critical Strike Chance" => 68,
+                "Penetration" => 72,
+                "Unlocks at level 10" => 80,
+                _ => throw new NotImplementedException($"Property index for {x.FullLabel} not implemented"),
+                //_ => throw new NotImplementedException($"Property index for {x.FullLabel} not implemented"),
+            };
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "CSS class lowercase by convention")]
+        private static ItemProperty ConvertProperty(KeyValuePair<string, string> pair)
+        {
+            var (name, value) = pair;
+            return new ItemProperty
+            {
+                Caption = name switch
+                {
+                    "Health" => "HP",
+                    "Mana" => "MP",
+                    "Movement Speed" => "MvSpd",
+                    "Attack Speed" => "AtkSpd",
+                    "Cooldown Reduction" => "CdRd",
+                    "Physical Power" => "Phys Pwr",
+                    "Magical Power" => "Mag Pwr",
+                    "Physical Penetration" => "Phys Pen",
+                    "Magical Penetration" => "Mag Pen",
+                    "Physical Protection" => "Phys Prot",
+                    "Magical Protection" => "Mag Prot",
+                    "Crowd Control Reduction" => "CrwdCtrlRd",
+                    _ => name,
+                },
+                FullLabel = name,
+                Value = value,
+                Color = name switch
+                {
+                    "Health" => "green",
+                    "HP5" => "green",
+                    "Mana" => "blue",
+                    "MP5" => "blue",
+                    _ => null,
+                },
+                CssClass = name.Replace(" ", "", StringComparison.InvariantCultureIgnoreCase).ToLowerInvariant(),
+            };
         }
 
         public string ToPrint(int indent = 0)
