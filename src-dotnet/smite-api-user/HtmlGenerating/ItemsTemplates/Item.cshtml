@@ -20,8 +20,6 @@
             <div class="price">💰 Price: <i>none</i></div>
         }
         <div class="properties">
-            @{
-            }
             @foreach (var prop in Model.Properties)
             {
                 <span class="propkey propkey-@prop.CssClass" @(prop.Color != null ? new Microsoft.AspNetCore.Html.HtmlString($@"style=""color: {prop.Color};""") : Microsoft.AspNetCore.Html.HtmlString.Empty) aria-label="@prop.FullLabel ">@prop.Caption</span>
