@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using KCode.SMITEAPI;
-using KCode.SMITEAPI.ResultTypes;
 using KCode.SMITEClient.Data;
 using KCode.SMITEClient.HtmlGenerating;
 using YamlDotNet.RepresentationModel;
@@ -33,6 +36,8 @@ namespace KCode.SMITEClient
             //Console.WriteLine(c.TestSessionAsync().Result);
 
             DownloadGods(c, basePath: "data");
+            //DownloadGodIcons(basePath: "data");
+            GenerateGodIconSprite(basePath: "data");
             GenerateGodsHtml();
 
             DownloadAllGodSkinsForStoredGods(c, basePath: "data");
@@ -46,6 +51,80 @@ namespace KCode.SMITEClient
 
             Console.WriteLine("Done. Waiting for ENTER to exit…");
             Console.ReadLine();
+        }
+
+        private static void GenerateGodIconSprite(string basePath)
+        {
+            var diSource = new DirectoryInfo(Path.Combine(basePath, "godicon"));
+            var files = diSource.EnumerateFiles("*.jpg");
+
+            var colcount = 20;
+            var rows = (files.Count() + colcount - 1) / colcount;
+            using var bitmap = new Bitmap(width: 128 * colcount, height: 128 * rows);
+            using var canvas = Graphics.FromImage(bitmap);
+            canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            var i = 0;
+            foreach (var fi in files)
+            {
+                using var image = Image.FromFile(fi.FullName);
+                // Apparently Discordia is different
+                //if (image.Width != 128 || image.Height != 128) throw new InvalidOperationException($"Unexpected god icon size difference");
+                canvas.DrawImage(image, destRect: new Rectangle(x: (i % colcount) * 128, y: (i / colcount) * 128, width: 128, height: 128), new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                ++i;
+            }
+
+            canvas.Save();
+            bitmap.Save(Path.Combine(basePath, "godicons.jpg"), ImageFormat.Jpeg);
+        }
+
+        private static void DownloadGodIcons(string basePath)
+        {
+            var gods = new DataStore().ReadGods();
+            var dir = new DirectoryInfo(Path.Combine(basePath, "godicon"));
+            dir.Create();
+            using var c = new HttpClient();
+            foreach (var god in gods.Where(x => x.GodIconUrl != null).OrderBy(x => x.GodIconUrl!.PathAndQuery))
+            {
+                var iconUri = god.GodIconUrl!;
+                using var req = new HttpRequestMessage(HttpMethod.Get, requestUri: iconUri);
+
+                var filename = Path.GetFileName(iconUri.AbsoluteUri);
+                var fi = new FileInfo(Path.Combine(dir.FullName, filename));
+                if (fi.Exists)
+                {
+                    req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("image/*"));
+                    req.Headers.IfModifiedSince = fi.LastWriteTime;
+                    var existingModifiedUnixTime = new DateTimeOffset(fi.LastWriteTimeUtc);
+                    var etag = $@"""{existingModifiedUnixTime.ToUnixTimeSeconds()}""";
+                    req.Headers.IfNoneMatch.Add(new EntityTagHeaderValue(etag, isWeak: false));
+                }
+
+                var res = c.SendAsync(req).Result;
+                if (res == null)
+                {
+                    Console.Error.WriteLine($"WARNING: Failed to download icon {req.RequestUri}. Response object is null.");
+                    continue;
+                }
+                if (!res.IsSuccessStatusCode)
+                {
+                    if (res.StatusCode == HttpStatusCode.NotModified)
+                    {
+                        Console.WriteLine($"{fi.Name} ✓ {res.StatusCode}");
+                        continue;
+                    }
+                    Console.WriteLine($"{fi.Name} x {res.StatusCode}");
+                    Console.Error.WriteLine($"WARNING: Failed to download icon {req.RequestUri}. {res.StatusCode} {res.Content.ReadAsStringAsync().Result}");
+                    continue;
+                }
+                using var fs = fi.OpenWrite();
+                using var s = res.Content.ReadAsStreamAsync().Result;
+                s.CopyTo(fs);
+                fs.Close();
+                s.Close();
+                fi.LastWriteTimeUtc = DateTimeOffset.FromUnixTimeSeconds(long.Parse(res.Headers.ETag.Tag.Trim('"'), CultureInfo.InvariantCulture)).UtcDateTime;
+                Console.WriteLine($"{fi.Name} ✓ {res.StatusCode}");
+            }
         }
 
         private static void DownloadGods(RequestClient c, string basePath) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: "gods.json", c => c.GetGodsAsync());
