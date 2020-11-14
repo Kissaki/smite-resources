@@ -7,7 +7,6 @@ namespace KCode.SMITEClient.Data
     [Serializable]
     public class GodJsonModel
     {
-#pragma warning disable CA1819 // Properties should not return arrays
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
@@ -179,6 +178,5 @@ namespace KCode.SMITEClient.Data
         [JsonPropertyName("godskins")]
         public GodSkin[]? Skins { get; set; }
         #endregion Extension
-#pragma warning restore CA1819 // Properties should not return arrays
     }
 }

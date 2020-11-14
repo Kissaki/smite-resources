@@ -6,7 +6,6 @@ using System.Text;
 
 namespace KCode.SMITEClient.Data
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "<Pending>")]
     public class ItemModel
     {
         public ItemModel? Parent { get; set; }
@@ -128,7 +127,6 @@ namespace KCode.SMITEClient.Data
             };
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "CSS class lowercase by convention")]
         private static ItemProperty ConvertProperty(KeyValuePair<string, string> pair)
         {
             var (name, value) = pair;

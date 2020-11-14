@@ -3,9 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace KCode.SMITEClient.Data
 {
-    [SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "<Pending>")]
-    [SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "<Pending>")]
-    [SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "<Pending>")]
     public class ItemJsonModel
     {
         public class ItemDescription

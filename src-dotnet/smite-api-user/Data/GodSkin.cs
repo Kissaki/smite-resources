@@ -96,7 +96,6 @@ namespace KCode.SMITEClient.Data
             return false;
         }
 
-        [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations", Justification = "Currently unused")]
         public override int GetHashCode() => throw new NotImplementedException();
         public static bool operator ==(GodSkin left, GodSkin right) => left is null ? right is null : left.CompareTo(right) == 0;
         public static bool operator !=(GodSkin left, GodSkin right) => !(left == right);
