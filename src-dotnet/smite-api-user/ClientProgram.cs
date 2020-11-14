@@ -52,11 +52,11 @@ namespace KCode.SMITEClient
         private static void DownloadItems(RequestClient c, string basePath) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: "items.json", c => c.GetItemsAsync());
         private static void DownloadGodSkins(RequestClient c, string basePath, int godId) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: $"godskins/godskins-{godId}.json", c => c.GetGodSkinsAsync(godId));
 
-        private static void GenerateGodsHtml() => GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods());
-        private static void GenerateGodSkinsHtml() => GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins());
-        private static void GenerateItemsHtml() => ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems());
+        private static void GenerateGodsHtml() => GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
+        private static void GenerateGodSkinsHtml() => GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
+        private static void GenerateItemsHtml() => ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
 
-        private static void GenerateGodSkinThemeHtml() => GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins(), new DataStore().ReadGodSkinThemes());
+        private static void GenerateGodSkinThemeHtml() => GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
 
         private static void DownloadAllGodSkinsForStoredGods(RequestClient c, string basePath)
         {
