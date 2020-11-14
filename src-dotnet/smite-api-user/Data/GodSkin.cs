@@ -37,7 +37,11 @@ namespace KCode.SMITEClient.Data
         public int CompareTo([AllowNull] GodSkin other)
         {
             // If other is not a valid object reference, then this instance is greater
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8604 // Possible null reference argument.
             if (other == null) return 1;
+#pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             var name1 = Name;
             var name2 = other.Name;
