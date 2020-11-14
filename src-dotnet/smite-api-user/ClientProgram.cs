@@ -77,17 +77,18 @@ namespace KCode.SMITEClient
             ds.WriteGodsWithSkins(gods);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
         private static void DownloadPlayer(RequestClient c, int playerId, string dataDirPath)
         {
             var playerPath = Path.Combine(dataDirPath, "player", playerId.ToString(provider: null));
             var d = new JsonDownloader(c, playerPath);
 
-            //d.Update(filenameOrRelPath: "player.json", c => c.GetPlayerAsync(playerId));
-            //d.Update(filenameOrRelPath: "godranks.json", c => c.GetPlayerGodRanksAsync(playerId));
-            //d.Update(filenameOrRelPath: "friends.json", c => c.GetPlayerFriendsAsync(playerId));
-            //d.Update(filenameOrRelPath: "achievements.json", c => c.GetPlayerAchievementsAsync(playerId));
-            //d.Update(filenameOrRelPath: "status.json", c => c.GetPlayerStatusAsync(playerId));
-            //d.Update(filenameOrRelPath: "matchhistory.json", c => c.GetPlayerMatchHistoryAsync(playerId));
+            d.Update(filenameOrRelPath: "player.json", c => c.GetPlayerAsync(playerId));
+            d.Update(filenameOrRelPath: "godranks.json", c => c.GetPlayerGodRanksAsync(playerId));
+            d.Update(filenameOrRelPath: "friends.json", c => c.GetPlayerFriendsAsync(playerId));
+            d.Update(filenameOrRelPath: "achievements.json", c => c.GetPlayerAchievementsAsync(playerId));
+            d.Update(filenameOrRelPath: "status.json", c => c.GetPlayerStatusAsync(playerId));
+            d.Update(filenameOrRelPath: "matchhistory.json", c => c.GetPlayerMatchHistoryAsync(playerId));
         }
     }
 }
