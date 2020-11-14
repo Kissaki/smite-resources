@@ -6,6 +6,8 @@
     <RootNamespace>KCode.SMITEClient</RootNamespace>
     <Nullable>enable</Nullable>
     <PreserveCompilationContext>true</PreserveCompilationContext>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="RazorLight" Version="2.0.0-beta9" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>
