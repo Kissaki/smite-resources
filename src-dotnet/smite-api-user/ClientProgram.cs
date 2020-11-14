@@ -70,6 +70,7 @@ namespace KCode.SMITEClient
         {
             var ds = new DataStore();
             var gods = ds.ReadGodsWithSkins();
+            if (gods == null) throw new InvalidOperationException("Could not read gods with skins data");
             foreach (var god in gods)
             {
                 god.Skins = ds.ReadGodSkins(god.Id);
