@@ -68,6 +68,7 @@ namespace KCode.SMITEAPI
             var t = CreateSessionAsync();
             var result = t.Result;
             var res = JsonSerializer.Deserialize<CreateSessionResult>(result);
+            if (res == null) throw new InvalidOperationException("Coult not create session result object from result data. Deserialize returned null.");
             if (res.ResultMessage != "Approved") throw new InvalidOperationException($"Creating an authentication session failed. Result: {res.ResultMessage}");
             _session.SessionId = res.SessionId;
             _session.AuthDateTime = res.TimestampParsed;

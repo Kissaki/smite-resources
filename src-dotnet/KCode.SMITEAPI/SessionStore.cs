@@ -46,7 +46,7 @@ namespace KCode.SMITEAPI
             if (!fi.Exists) return null;
 
             var json = File.ReadAllText(fi.FullName);
-            var read = JsonSerializer.Deserialize<SessionObject>(json).ToSession();
+            var read = JsonSerializer.Deserialize<SessionObject>(json)?.ToSession();
 
             if (read?.IsValidForAWhile ?? false) return read;
 
