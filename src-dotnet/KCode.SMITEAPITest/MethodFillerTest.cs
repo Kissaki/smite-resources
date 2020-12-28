@@ -8,7 +8,7 @@ namespace KCode.SMITEAPITest
     public class MethodFillerTest
     {
         [Fact]
-        public void Test1()
+        public void MethodsAndSessionDataTest()
         {
             var filler = Methods.Createsession.Fill();
             filler._timestamp = "20200220202020";
