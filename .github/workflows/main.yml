@@ -13,11 +13,24 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: SFTP Deploy
-        uses: wlixcc/SFTP-Deploy-Action@1.1
-        with:
-          username: ${{ secrets.SSH_USERNAME }}
-          server: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: ./*.html ./*.css ./*.js img
-          remote_path: ${{ secrets.TARGET_PATH }}
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          TARGET_PATH: ${{ secrets.TARGET_PATH }}
+        run: |
+          mkdir public public/img public/data
+          cp *.html *.css *.js public
+          cp roles-pantheons-spritesheet.png 4bfba3d77789a9ec16129032096c7f12.woff public
+          cp -r img/* public/img
+          cp -r data/*.json public/data
+          eval $(ssh-agent -s)
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -k -t 10 -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SFTP_KNOWNHOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          cd public
+          lftp -c "open -u $SSH_USERNAME,NONE -p $SSH_PORT sftp://$SSH_HOST ; mirror --reverse . $TARGET_PATH"
+          ssh-add -D
