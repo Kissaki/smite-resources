@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     environment: Live
 
@@ -27,10 +27,5 @@ jobs:
           cp -r data/*.json public/data
           eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -k -t 10 -
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          echo "$SFTP_KNOWNHOSTS" > ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-          cd public
-          lftp -c "open -u $SSH_USERNAME,NONE -p $SSH_PORT sftp://$SSH_HOST ; mirror --reverse . $TARGET_PATH"
+          echo "put -r ./public/* $TARGET_PATH" | sftp -b - -P $SSH_PORT -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST
           ssh-add -D
