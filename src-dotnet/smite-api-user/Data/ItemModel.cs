@@ -97,41 +97,10 @@ namespace KCode.SMITEClient.Data
 
         private static int GetPropIndex(ItemProperty x)
         {
-            return x.FullLabel switch
-            {
-                "Health" => 4,
-                "HP5" => 8,
-                "Maximum Health" => 10,
-                "Mana" => 12,
-                "MP5" => 16,
-                "Maximum Mana" => 18,
-                "HP5 & MP5" => 19,
-                "Movement Speed" => 20,
-                "Basic Attack Damage" => 22,
-                "Attack Speed" => 24,
-                "Cooldown Reduction" => 28,
-                "Physical Power" => 32,
-                "Physical power" => 32,
-                "Magical Power" => 36,
-                "Magical power" => 36,
-                "Physical Penetration" => 40,
-                "Magical Penetration" => 44,
-                "Damage Reduction" => 45,
-                "Flat Damage Reduction" => 46,
-                "Protections" => 47,
-                "Physical Protection" => 48,
-                "Magical Protection" => 52,
-                "Magical Protections" => 52,
-                "Crowd Control Reduction" => 56,
-                "Physical Lifesteal" => 60,
-                "Physical lifesteal" => 60,
-                "Magical Lifesteal" => 64,
-                "Critical Strike Chance" => 68,
-                "Penetration" => 72,
-                "Unlocks at level 10" => 80,
-                _ => throw new NotImplementedException($"Property index for `{x.FullLabel}` not implemented"),
-                //_ => throw new NotImplementedException($"Property index for {x.FullLabel} not implemented"),
-            };
+            var needle = x.FullLabel.ToUpperInvariant();
+            var index = Array.FindIndex(DataReference.ItemProperties, x => x.ToUpperInvariant() == needle);
+            if (index == -1) throw new NotImplementedException($"Could not get property index for unknown property `{x.FullLabel}`");
+            return index;
         }
 
         private static ItemProperty ConvertProperty(KeyValuePair<string, string> pair)
