@@ -122,6 +122,7 @@ namespace KCode.SMITEClient.Data
                     "Physical Protection" => "Phys Prot",
                     "Magical Protection" => "Mag Prot",
                     "Crowd Control Reduction" => "CrwdCtrlRd",
+                    "Physical Critical Strike Chance" => "Phys Crit",
                     _ => name,
                 },
                 FullLabel = name,
