@@ -10,7 +10,7 @@ namespace KCode.SMITEClient
         private readonly RequestClient _client;
         private readonly string _basePath;
 
-        public TimeSpan UpdateAfter { get; set; } = TimeSpan.FromDays(1);
+        public TimeSpan UpdateAfter { get; set; } = TimeSpan.FromHours(20);
 
         public JsonDownloader(RequestClient c, string basePath)
         {
