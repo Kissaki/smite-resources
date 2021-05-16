@@ -113,7 +113,7 @@ namespace KCode.SMITEAPI.Generator
                 },
                 Servers = new List<OpenApiServer>
                 {
-                    new OpenApiServer { Url = "http://api.smitegame.com/smiteapi.svc" }
+                    new OpenApiServer { Url = "https://api.smitegame.com/smiteapi.svc" }
                 },
                 Paths = new OpenApiPaths(),
             };
