@@ -102,6 +102,8 @@
         <div class="name">Conduit Gem</div>
             <div class="price">💰 Price: 700</div>
         <div class="properties">
+                <span class="propkey propkey-mana" style="color: blue;" aria-label="Mana ">MP</span>
+                <span>&#x2B;100</span>
                 <span class="propkey propkey-mp5" style="color: blue;" aria-label="MP5 ">MP5</span>
                 <span>&#x2B;10</span>
                 <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
@@ -131,7 +133,7 @@
                 <span>&#x2B;30</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Basic Attacks restore health and mana.</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Hitting an enemy with a Basic Attack restores 2 Health (&#x2B;0.4% of your Maximum Health) and 1 Mana (&#x2B;1% of your Maximum Mana). Basic Attacks that deal AoE damage restore half as much for each enemy hit after the first. Can be upgraded at level 20.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Hitting an enemy with a Basic Attack restores 2 Health (&#x2B;0.4% of your Maximum Health) and 1 Mana (&#x2B;1% of your Maximum Mana). Basic Attacks that deal damage in an AoE restore less health (75% for Melee Attacks, 50% for Ranged Attacks) for each enemy hit after the first. Can be upgraded at level 20.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -227,11 +229,13 @@
         <div class="name">Leather Cowl</div>
             <div class="price">💰 Price: 700</div>
         <div class="properties">
+                <span class="propkey propkey-mp5" style="color: blue;" aria-label="MP5 ">MP5</span>
+                <span>&#x2B;7</span>
                 <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
                 <span>&#x2B;5%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical power ">Physical power</span>
                 <span>&#x2B;15</span>
-                <span class="propkey propkey-physicallifesteal"  aria-label="Physical lifesteal ">Physical lifesteal</span>
+                <span class="propkey propkey-physicallifesteal"  aria-label="Physical Lifesteal ">Physical Lifesteal</span>
                 <span>&#x2B;10%</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Stalk alone, fight together.</details>
@@ -267,7 +271,7 @@
                 <span>&#x2B;10</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Basic attack hits burn enemies. Jungle Monsters take extra damage.</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Enemies hit by your Basic Attacks are burned, taking 12 Physical Damage over 2s and have their Attack Speed reduced by 3.5%. Jungle Monsters take 4x the amount of damage and restore 15 Health and Mana when they die if they are burned. This effect can stack up to 4 times. Can be upgraded at level 20.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Enemies hit by your Basic Attacks are burned, taking 16 Physical Damage (&#x2B;5% of your Physical and Magical Power) over 2s and have their Attack Speed reduced by 4.5%. Jungle Monsters take 4x the amount of damage and restore 3% Health and 5% Mana when they die if they are burned. This effect can stack up to 3 times. Can be upgraded at level 20.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -326,16 +330,16 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/sentinels-gift.jpg" alt="Sentinel&#x27;s Gift">
         <div class="name">Sentinel&#x27;s Gift</div>
-            <div class="price">💰 Price: 600</div>
+            <div class="price">💰 Price: 550</div>
         <div class="properties">
                 <span class="propkey propkey-health" style="color: green;" aria-label="Health ">HP</span>
                 <span>&#x2B;75</span>
                 <span class="propkey propkey-mp5" style="color: blue;" aria-label="MP5 ">MP5</span>
                 <span>&#x2B;7</span>
                 <span class="propkey propkey-physicalprotection"  aria-label="Physical Protection ">Phys Prot</span>
-                <span>&#x2B;7</span>
+                <span>&#x2B;10</span>
                 <span class="propkey propkey-magicalprotection"  aria-label="Magical Protection ">Mag Prot</span>
-                <span>&#x2B;7</span>
+                <span>&#x2B;10</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Assists provide health, mana, and gold.</details>
             <details class="description passive"><summary>Passive</summary><p>PASSIVE - Getting the assist for an enemy minion or jungle monster dying will provide 7 Bonus gold and restore 12 Health and 8 Mana. If you are not within 30 units of an allied god for 20 seconds this passive is disabled until you are near an allied god again. Can be upgraded at level 17.</p></details>
@@ -373,8 +377,8 @@
                 <span class="propkey propkey-magicalprotection"  aria-label="Magical Protection ">Mag Prot</span>
                 <span>&#x2B;15</span>
         </div>
-        <details class="description shortdesc"><summary>ShortDesc</summary>Hit an enemy to reduce their healing taken.</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Enemy gods that you hit have their healing taken reduced by 20% for 6s. Can be upgraded at level 20.</p></details>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Hit an enemy to steal their healing.</details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Enemy Gods that you hit have their healing taken reduced by 15% for 6s. You are healed for 100% of the healing reduced. Can be upgraded at level 20.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -390,11 +394,11 @@
             <div class="price">💰 Price: 700</div>
         <div class="properties">
                 <span class="propkey propkey-health" style="color: green;" aria-label="Health ">HP</span>
-                <span>&#x2B;75</span>
+                <span>&#x2B;100</span>
                 <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
                 <span>&#x2B;30</span>
                 <span class="propkey propkey-physicalprotection"  aria-label="Physical Protection ">Phys Prot</span>
-                <span>&#x2B;10</span>
+                <span>&#x2B;15</span>
                 <span class="propkey propkey-magicallifesteal"  aria-label="Magical Lifesteal ">Magical Lifesteal</span>
                 <span>&#x2B;5%</span>
         </div>
@@ -408,7 +412,7 @@
             </details>
     </div>
 </div>
-<div class="item" data-id="19518" data-isactive="True">
+<div class="item" data-id="20698" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/war-flag.jpg" alt="War Flag">
         <div class="name">War Flag</div>
@@ -424,7 +428,7 @@
                 <span>&#x2B;20</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Assists empower you and your allies.</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Getting an assist for a minion or jungle monster dying restores 6 Health and 6 Mana to all allies within 55 units of you and provides allies 1% Movement Speed and 2% Attack Speed for 10s. This effect stacks up to 10 times. Can be upgraded at level 17.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Getting an assist when an enemy dies provides a stack that gives 1% Movement Speed and 2% Attack Speed for 8s to nearby allies up to 10 stacks. While at or above 4 stacks each time you damage an enemy god you restore 15 Health and Mana to nearby allies within 55 units and gain 8 gold. Can be upgraded at level 17.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -437,7 +441,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/warding-sigil.jpg" alt="Warding Sigil">
         <div class="name">Warding Sigil</div>
-            <div class="price">💰 Price: 700</div>
+            <div class="price">💰 Price: 600</div>
         <div class="properties">
                 <span class="propkey propkey-health" style="color: green;" aria-label="Health ">HP</span>
                 <span>&#x2B;75</span>
@@ -470,7 +474,7 @@
                 <span>&#x2B;10</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Steal your opponent&#x27;s health through combat.</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Damaging an enemy god steals 30 health away from your target and restores 25 mana. This effect can only occur once every 8s. Can be upgraded at level 20.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Damaging an enemy god steals 35 health (&#x2B;1 per level) away from your target and restores 25 mana. This effect can only occur once every 8s. Can be upgraded at level 20.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -698,23 +702,6 @@
             <details class="description passive"><summary>Passive</summary><p>&#xD;&#xA;This consumable increases your Physical Power by 40, Magical Power by 70 and Cooldown Reduction by 10% for 5 minutes or until you are killed. </p></details>
     </div>
 </div>
-<div class="item" data-id="16878" data-isactive="True">
-    <div class="item-desc">
-            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/elixir-of-speed.jpg" alt="Elixir of Speed">
-        <div class="name">Elixir of Speed</div>
-            <div class="price">💰 Price: 1500</div>
-        <div class="properties">
-        </div>
-        <details class="description shortdesc"><summary>ShortDesc</summary>Provides a Speed Buff</details>
-            <details class="description passive"><summary>Passive</summary><p>This consumable increases your Movement Speed by 18% permanently. This effect disables Movement Speed from Boots or Shoes.</p></details>
-            <details class="description fulldesc">
-                <summary>Desc</summary>
-                <div class="description">
-                    <p>This consumable increases your Movement Speed.</p>
-                </div>
-            </details>
-    </div>
-</div>
 <div class="item" data-id="7803" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/elixir-of-power.jpg" alt="Elixir of Power">
@@ -927,7 +914,7 @@
                 <span class="propkey propkey-magicalprotection"  aria-label="Magical Protection ">Mag Prot</span>
                 <span>&#x2B;30</span>
                 <span class="propkey propkey-crowdcontrolreduction"  aria-label="Crowd Control Reduction ">CrwdCtrlRd</span>
-                <span>&#x2B;20%</span>
+                <span>&#x2B;10%</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Periodic immunity to Slow effects.</details>
             <details class="description passive"><summary>Passive</summary><p>PASSIVE - When hit by a Slow, you are immune to Slows and your movement speed is increased by 20% for 4s.  Only occurs once every 30 seconds.</p></details>
@@ -1018,7 +1005,7 @@
             </div>
             <div class="item-tree" style="display: grid; align-content: start;">
                     <div class="item-tree-node" style="grid-area: 1 / 1;">
-<div class="item" data-id="9624" data-isactive="True">
+<div class="item" data-id="9624" data-isactive="False">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/boots.jpg" alt="Boots">
         <div class="name">Boots</div>
@@ -1038,7 +1025,7 @@
 </div>
                     </div>
                     <div class="item-tree-node" style="grid-area: 2 / 1;">
-<div class="item" data-id="9625" data-isactive="True">
+<div class="item" data-id="9625" data-isactive="False">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/combat-boots.jpg" alt="Combat Boots">
         <div class="name">Combat Boots</div>
@@ -1856,6 +1843,136 @@
             </div>
             <div class="item-tree" style="display: grid; align-content: start;">
                     <div class="item-tree-node" style="grid-area: 1 / 1;">
+<div class="item" data-id="9847" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/emerald-ring.jpg" alt="Emerald Ring">
+        <div class="name">Emerald Ring</div>
+            <div class="price">💰 Price: 600</div>
+        <div class="properties">
+                <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
+                <span>&#x2B;5%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;25</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Magical Power</details>
+            <details class="description fulldesc">
+                <summary>Desc</summary>
+                <div class="description">
+                    <p>Magical Power and Attack Speed.</p>
+                </div>
+            </details>
+    </div>
+</div>
+                    </div>
+                    <div class="item-tree-node" style="grid-area: 2 / 1;">
+<div class="item" data-id="9848" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/enchanted-ring.jpg" alt="Enchanted Ring">
+        <div class="name">Enchanted Ring</div>
+            <div class="price">💰 Price: 700</div>
+        <div class="properties">
+                <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
+                <span>&#x2B;15%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;55</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Magical Power and Movement Speed</details>
+    </div>
+</div>
+                    </div>
+                    <div class="item-tree-node" style="grid-area: 3 / 1;">
+<div class="item" data-id="8564" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/demonic-grip.jpg" alt="Demonic Grip">
+        <div class="name">Demonic Grip</div>
+            <div class="price">💰 Price: 1000</div>
+        <div class="properties">
+                <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
+                <span>&#x2B;30%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;75</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Basic Attacks reduce Magical Protection</details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Your Basic Attacks reduce your target&#x27;s Magical Protection by 10% for 3s (max 3 Stacks).</p></details>
+            <details class="description fulldesc">
+                <summary>Desc</summary>
+                <div class="description">
+                    <p>This item makes your Basic Attacks reduce the Magical Protection of your target.</p>
+                </div>
+            </details>
+    </div>
+</div>
+                    </div>
+                    <div class="item-tree-node" style="grid-area: 3 / 2;">
+<div class="item" data-id="14840" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/hastened-ring.jpg" alt="Hastened Ring">
+        <div class="name">Hastened Ring</div>
+            <div class="price">💰 Price: 1400</div>
+        <div class="properties">
+                <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
+                <span>&#x2B;7%</span>
+                <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
+                <span>&#x2B;25%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;70</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Successful Basic Attacks causes you to be immune from Basic Attack Movement Penalty.</details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Hitting an enemy God with a Basic Attack grants Haste for 6s, causing you to be immune from Basic Attack Movement Penalty. (Internal Cooldown 25s)</p></details>
+            <details class="description fulldesc">
+                <summary>Desc</summary>
+                <div class="description">
+                    <p>This item gives the owner increased movement speed and attack speed.</p>
+                </div>
+            </details>
+    </div>
+</div>
+                    </div>
+                    <div class="item-tree-node" style="grid-area: 3 / 3;">
+<div class="item" data-id="18191" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/ring-of-hecate.jpg" alt="Ring of Hecate">
+        <div class="name">Ring of Hecate</div>
+            <div class="price">💰 Price: 1200</div>
+        <div class="properties">
+                <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
+                <span>&#x2B;25%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;90</span>
+                <span class="propkey propkey-magicallifesteal"  aria-label="Magical Lifesteal ">Magical Lifesteal</span>
+                <span>&#x2B;15%</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Attack Speed and Lifesteal</details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Each successful basic attack applies a hex to enemies and empowers you, increasing your power by 5% and reducing the power of your opponent by 5% for 5s. (Max. 3 Stacks).</p></details>
+    </div>
+</div>
+                    </div>
+                    <div class="item-tree-node" style="grid-area: 3 / 4;">
+<div class="item" data-id="9351" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/telkhines-ring.jpg" alt="Telkhines Ring">
+        <div class="name">Telkhines Ring</div>
+            <div class="price">💰 Price: 1400</div>
+        <div class="properties">
+                <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
+                <span>&#x2B;25%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;100</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Bonus Magical Basic Attack damage</details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Your Basic Attacks deal bonus damage of 10 &#x2B; 15% of your Magical Power. This effect does not hit structures.</p></details>
+            <details class="description fulldesc">
+                <summary>Desc</summary>
+                <div class="description">
+                    <p>Successful Basic Attacks deal bonus Magical Damage.</p>
+                </div>
+            </details>
+    </div>
+</div>
+                    </div>
+            </div>
+            <div class="item-tree" style="display: grid; align-content: start;">
+                    <div class="item-tree-node" style="grid-area: 1 / 1;">
 <div class="item" data-id="10190" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/enchanted-buckler.jpg" alt="Enchanted Buckler">
@@ -2077,17 +2194,17 @@
         <div class="name">Shogun&#x27;s Kusari</div>
             <div class="price">💰 Price: 950</div>
         <div class="properties">
+                <span class="propkey propkey-health" style="color: green;" aria-label="Health ">HP</span>
+                <span>&#x2B;150</span>
                 <span class="propkey propkey-mp5" style="color: blue;" aria-label="MP5 ">MP5</span>
                 <span>&#x2B;20</span>
                 <span class="propkey propkey-cooldownreduction"  aria-label="Cooldown Reduction ">CdRd</span>
                 <span>&#x2B;10%</span>
                 <span class="propkey propkey-magicalprotection"  aria-label="Magical Protection ">Mag Prot</span>
                 <span>&#x2B;60</span>
-                <span class="propkey propkey-crowdcontrolreduction"  aria-label="Crowd Control Reduction ">CrwdCtrlRd</span>
-                <span>&#x2B;20%</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Attack Speed Aura</details>
-            <details class="description passive"><summary>Passive</summary><p>AURA - Allied gods within 70 units have their Attack Speed increased by 25%.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>AURA - Allied gods within 70 units have their Attack Speed increased by 30%.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -2141,7 +2258,7 @@
     </div>
 </div>
                     </div>
-                    <div class="item-tree-node" style="grid-area: 2 / 2;">
+                    <div class="item-tree-node" style="grid-area: 2 / 3;">
 <div class="item" data-id="17351" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/honed-edge.jpg" alt="Honed Edge">
@@ -2163,7 +2280,7 @@
     </div>
 </div>
                     </div>
-                    <div class="item-tree-node" style="grid-area: 2 / 4;">
+                    <div class="item-tree-node" style="grid-area: 2 / 5;">
 <div class="item" data-id="17352" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/knights-shield.jpg" alt="Knight&#x27;s Shield">
@@ -2188,10 +2305,10 @@
 </div>
                     </div>
                     <div class="item-tree-node" style="grid-area: 3 / 1;">
-<div class="item" data-id="17354" data-isactive="True">
+<div class="item" data-id="17354" data-isactive="False">
     <div class="item-desc">
-            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/staff-of-myrddin.jpg" alt="Staff of Myrddin">
-        <div class="name">Staff of Myrddin</div>
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/s7-staff-of-myrddin.jpg" alt="S7 Staff of Myrddin">
+        <div class="name">S7 Staff of Myrddin</div>
             <div class="price">💰 Price: 1200</div>
         <div class="properties">
                 <span class="propkey propkey-cooldownreduction"  aria-label="Cooldown Reduction ">CdRd</span>
@@ -2213,6 +2330,31 @@
 </div>
                     </div>
                     <div class="item-tree-node" style="grid-area: 3 / 2;">
+<div class="item" data-id="20694" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/staff-of-myrddin.jpg" alt="Staff of Myrddin">
+        <div class="name">Staff of Myrddin</div>
+            <div class="price">💰 Price: 1200</div>
+        <div class="properties">
+                <span class="propkey propkey-cooldownreduction"  aria-label="Cooldown Reduction ">CdRd</span>
+                <span>&#x2B;10%</span>
+                <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
+                <span>&#x2B;95</span>
+                <span class="propkey propkey-magicalpenetration"  aria-label="Magical Penetration ">Mag Pen</span>
+                <span>&#x2B;10%</span>
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>On ultimate use you can sling spells rapidly.</details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - When your ultimate ability has finished casting you gain Myrddin&#x27;s Brilliance which provides 80% Uncapped Cooldown Reduction, decaying to 40% Uncapped Cooldown Reduction over 7s. Uncapped Cooldown Reduction overrides normal Cooldown Reduction. At the end of the 7s you lose Myrddin&#x27;s Brilliance. This can only occur once every 45s.</p></details>
+            <details class="description fulldesc">
+                <summary>Desc</summary>
+                <div class="description">
+                    <p>On ultimate use your next ability has no cooldown.</p>
+                </div>
+            </details>
+    </div>
+</div>
+                    </div>
+                    <div class="item-tree-node" style="grid-area: 3 / 3;">
 <div class="item" data-id="17356" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/arondight.jpg" alt="Arondight">
@@ -2236,7 +2378,7 @@
     </div>
 </div>
                     </div>
-                    <div class="item-tree-node" style="grid-area: 3 / 3;">
+                    <div class="item-tree-node" style="grid-area: 3 / 4;">
 <div class="item" data-id="17357" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/fail-not.jpg" alt="Fail-not">
@@ -2264,7 +2406,7 @@
     </div>
 </div>
                     </div>
-                    <div class="item-tree-node" style="grid-area: 3 / 4;">
+                    <div class="item-tree-node" style="grid-area: 3 / 5;">
 <div class="item" data-id="17355" data-isactive="True">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/pridwen.jpg" alt="Pridwen">
@@ -2492,7 +2634,7 @@
                 <span>&#x2B;15</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Grants bonus Regeneration after Knockup</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - If you are hit by a Knockup, Knockback, Pull, or Grab you gain 15% of your max Health over the next 5 seconds. This effect does not trigger on Vortexes. Can only occur once every 45s.&#xA;&#xA;PASSIVE - Regenerates 0.5% of your max health every second.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - If you are hit by a Knockup, Knockback, Pull, or Grab you gain 8% of your max Health over the next 5 seconds. This effect does not trigger on Vortexes. Can only occur once every 45s.&#xA;&#xA;PASSIVE - Regenerates 0.5% of your max health every second.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -2688,7 +2830,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/tyrannical-plate-helm.jpg" alt="Tyrannical Plate Helm">
         <div class="name">Tyrannical Plate Helm</div>
-            <div class="price">💰 Price: 1000</div>
+            <div class="price">💰 Price: 800</div>
         <div class="properties">
                 <span class="propkey propkey-health" style="color: green;" aria-label="Health ">HP</span>
                 <span>&#x2B;100</span>
@@ -2737,7 +2879,7 @@
             <div class="price">💰 Price: 950</div>
         <div class="properties">
                 <span class="propkey propkey-health" style="color: green;" aria-label="Health ">HP</span>
-                <span>&#x2B;150</span>
+                <span>&#x2B;200</span>
                 <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
                 <span>&#x2B;20</span>
                 <span class="propkey propkey-physicalprotection"  aria-label="Physical Protection ">Phys Prot</span>
@@ -2880,7 +3022,7 @@
                 <span>&#x2B;20%</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Nearby enemies take damage over time</details>
-            <details class="description passive"><summary>Passive</summary><p>AURA - ALL enemies within 25 units are dealt 40 Magical Damage per second.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>AURA - ALL enemies within 25 units are dealt 30 (&#x2B;1 Per Level) Magical Damage per second.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -3018,7 +3160,7 @@
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
                 <span>&#x2B;7%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
-                <span>&#x2B;25</span>
+                <span>&#x2B;35</span>
                 <span class="propkey propkey-physicalpenetration"  aria-label="Physical Penetration ">Phys Pen</span>
                 <span>&#x2B;20%</span>
                 <span class="propkey propkey-physicallifesteal"  aria-label="Physical Lifesteal ">Physical Lifesteal</span>
@@ -3041,7 +3183,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/stone-cutting-sword.jpg" alt="Stone Cutting Sword">
         <div class="name">Stone Cutting Sword</div>
-            <div class="price">💰 Price: 1050</div>
+            <div class="price">💰 Price: 950</div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
                 <span>&#x2B;7%</span>
@@ -3292,7 +3434,7 @@
                 <span class="propkey propkey-mp5" style="color: blue;" aria-label="MP5 ">MP5</span>
                 <span>&#x2B;20</span>
                 <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
-                <span>&#x2B;90</span>
+                <span>&#x2B;80</span>
                 <span class="propkey propkey-magicalpenetration"  aria-label="Magical Penetration ">Mag Pen</span>
                 <span>&#x2B;20%</span>
         </div>
@@ -3351,7 +3493,7 @@
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
                 <span>&#x2B;8%</span>
                 <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
-                <span>&#x2B;90</span>
+                <span>&#x2B;80</span>
                 <span class="propkey propkey-magicalpenetration"  aria-label="Magical Penetration ">Mag Pen</span>
                 <span>&#x2B;20%</span>
         </div>
@@ -3387,12 +3529,12 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/heavy-mace.jpg" alt="Heavy Mace">
         <div class="name">Heavy Mace</div>
-            <div class="price">💰 Price: 900</div>
+            <div class="price">💰 Price: 800</div>
         <div class="properties">
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;25</span>
                 <span class="propkey propkey-physicalpenetration"  aria-label="Physical Penetration ">Phys Pen</span>
-                <span>&#x2B;10</span>
+                <span>&#x2B;5</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Physical Power and Penetration.</details>
     </div>
@@ -3425,7 +3567,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/brawlers-beat-stick.jpg" alt="Brawler&#x27;s Beat Stick">
         <div class="name">Brawler&#x27;s Beat Stick</div>
-            <div class="price">💰 Price: 800</div>
+            <div class="price">💰 Price: 900</div>
         <div class="properties">
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;40</span>
@@ -3448,7 +3590,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/jotunns-wrath.jpg" alt="Jotunn&#x27;s Wrath">
         <div class="name">Jotunn&#x27;s Wrath</div>
-            <div class="price">💰 Price: 800</div>
+            <div class="price">💰 Price: 900</div>
         <div class="properties">
                 <span class="propkey propkey-mana" style="color: blue;" aria-label="Mana ">MP</span>
                 <span>&#x2B;150</span>
@@ -3474,7 +3616,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/the-crusher.jpg" alt="The Crusher">
         <div class="name">The Crusher</div>
-            <div class="price">💰 Price: 850</div>
+            <div class="price">💰 Price: 950</div>
         <div class="properties">
                 <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
                 <span>&#x2B;20%</span>
@@ -3521,7 +3663,7 @@
             <div class="price">💰 Price: <i>none</i></div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;8%</span>
+                <span>&#x2B;2%</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Starting Acorn</details>
             <details class="description passive"><summary>Passive</summary><p>This item can be upgraded from anywhere and replaces Boots for Ratatoskr.</p></details>
@@ -3536,7 +3678,7 @@
             <div class="price">💰 Price: 700</div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;10%</span>
+                <span>&#x2B;4%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;10</span>
         </div>
@@ -3553,7 +3695,7 @@
             <div class="price">💰 Price: 700</div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;10%</span>
+                <span>&#x2B;4%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;15</span>
         </div>
@@ -3571,7 +3713,7 @@
                 <span class="propkey propkey-maximumhealth"  aria-label="Maximum Health ">Maximum Health</span>
                 <span>&#x2B;10%</span>
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;20%</span>
+                <span>&#x2B;6%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;25</span>
         </div>
@@ -3588,7 +3730,7 @@
             <div class="price">💰 Price: 1350</div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;20%</span>
+                <span>&#x2B;6%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;25</span>
                 <span class="propkey propkey-protections"  aria-label="Protections ">Protections</span>
@@ -3607,7 +3749,7 @@
             <div class="price">💰 Price: 1350</div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;20%</span>
+                <span>&#x2B;6%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;35</span>
                 <span class="propkey propkey-criticalstrikechance"  aria-label="Critical Strike Chance ">Critical Strike Chance</span>
@@ -3626,7 +3768,7 @@
             <div class="price">💰 Price: 1350</div>
         <div class="properties">
                 <span class="propkey propkey-movementspeed"  aria-label="Movement Speed ">MvSpd</span>
-                <span>&#x2B;20%</span>
+                <span>&#x2B;6%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;45</span>
         </div>
@@ -3665,9 +3807,9 @@
             <div class="price">💰 Price: 750</div>
         <div class="properties">
                 <span class="propkey propkey-magicalpower"  aria-label="Magical Power ">Mag Pwr</span>
-                <span>&#x2B;30</span>
+                <span>&#x2B;40</span>
                 <span class="propkey propkey-magicalpenetration"  aria-label="Magical Penetration ">Mag Pen</span>
-                <span>&#x2B;10</span>
+                <span>&#x2B;5</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Magical Power and Penetration.</details>
     </div>
@@ -4044,7 +4186,7 @@
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/transcendence.jpg" alt="Transcendence">
         <div class="name">Transcendence</div>
-            <div class="price">💰 Price: 1250</div>
+            <div class="price">💰 Price: 1400</div>
         <div class="properties">
                 <span class="propkey propkey-mana" style="color: blue;" aria-label="Mana ">MP</span>
                 <span>&#x2B;300</span>
@@ -4206,22 +4348,23 @@
             <div class="price">💰 Price: 1450</div>
         <div class="properties">
                 <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
-                <span>&#x2B;15%</span>
+                <span>&#x2B;25%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
                 <span>&#x2B;40</span>
                 <span class="propkey propkey-physicalpenetration"  aria-label="Physical Penetration ">Phys Pen</span>
                 <span>&#x2B;10%</span>
                 <span class="propkey propkey-physicalprotection"  aria-label="Physical Protection ">Phys Prot</span>
-                <span>&#x2B;20</span>
+                <span>&#x2B;35</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>When dropping low, go Berserk.</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - If you drop below 40% HP you become Berserk for 5s. Berserk provides 30 Physical Power and 20% Attack Speed.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Can only be built by Assassins or Warriors. If you drop below 40% HP you become Berserk for 5s. Berserk provides 30 Physical Power and 20% Attack Speed.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
                     <p>When dropping low, go Berserk.</p>
                 </div>
             </details>
+            <details><summary>Role Restr</summary>hunter</details>
     </div>
 </div>
                     </div>
@@ -4278,7 +4421,7 @@
             </div>
             <div class="item-tree" style="display: grid; align-content: start;">
                     <div class="item-tree-node" style="grid-area: 1 / 1;">
-<div class="item" data-id="9631" data-isactive="True">
+<div class="item" data-id="9631" data-isactive="False">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/shoes.jpg" alt="Shoes">
         <div class="name">Shoes</div>
@@ -4298,7 +4441,7 @@
 </div>
                     </div>
                     <div class="item-tree-node" style="grid-area: 2 / 1;">
-<div class="item" data-id="9632" data-isactive="True">
+<div class="item" data-id="9632" data-isactive="False">
     <div class="item-desc">
             <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/magic-shoes.jpg" alt="Magic Shoes">
         <div class="name">Magic Shoes</div>
@@ -4507,7 +4650,7 @@
                 <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
                 <span>&#x2B;25%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
-                <span>&#x2B;35</span>
+                <span>&#x2B;40</span>
                 <span class="propkey propkey-physicalpenetration"  aria-label="Physical Penetration ">Phys Pen</span>
                 <span>&#x2B;10%</span>
         </div>
@@ -4526,10 +4669,10 @@
                 <span class="propkey propkey-attackspeed"  aria-label="Attack Speed ">AtkSpd</span>
                 <span>&#x2B;30%</span>
                 <span class="propkey propkey-physicalpower"  aria-label="Physical Power ">Phys Pwr</span>
-                <span>&#x2B;30</span>
+                <span>&#x2B;35</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Basic Attacks weaken enemies</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Every successful Basic Attack increases your Physical Power by 15 and reduces the attack speed of your opponent by 10% for 5s. (Max. 3 Stacks)</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - Every successful Basic Attack increases your Physical Power by 15 and reduces the attack speed of your opponent by 7% for 5s. (Max. 3 Stacks)</p></details>
     </div>
 </div>
                     </div>
@@ -5278,7 +5421,7 @@
                 <span>&#x2B;12%</span>
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Build stacks to get bonus damage and healing</details>
-            <details class="description passive"><summary>Passive</summary><p>PASSIVE - On successful hit of an Ability you gain 1 stack. At 4 Stacks your next Ability that damages an enemy God will deal bonus damage equal to 30% of your Magical power to each God hit, and will heal yourself and allies within 20 units for 40% of your Magical Power and will consume the 4 stacks.</p></details>
+            <details class="description passive"><summary>Passive</summary><p>PASSIVE - On successful hit of an Ability you gain 1 stack. At 4 Stacks your next Ability that damages an enemy God will deal bonus damage equal to 25% of your Magical power to each God hit, and will heal yourself and allies within 20 units for 40% of your Magical Power and will consume the 4 stacks.</p></details>
             <details class="description fulldesc">
                 <summary>Desc</summary>
                 <div class="description">
@@ -5608,6 +5751,36 @@
         </div>
         <details class="description shortdesc"><summary>ShortDesc</summary>Bonus Gold, Health, and Mana on minion assist.</details>
             <details class="description passive"><summary>Passive</summary><p>PASSIVE - Being within assist range of a minion or jungle camp monster death without dealing the killing blow awards 5 bonus gold, and also restores &#x2B;12 Health and &#x2B;10 Mana. </p></details>
+    </div>
+</div>
+                    </div>
+            </div>
+            <div class="item-tree" style="display: grid; align-content: start;">
+                    <div class="item-tree-node" style="grid-area: 1 / 1;">
+<div class="item" data-id="20781" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/worn-boots.jpg" alt="Worn Boots">
+        <div class="name">Worn Boots</div>
+            <div class="price">💰 Price: 9999</div>
+        <div class="properties">
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Removed from the battleground.</details>
+            <details class="description passive"><summary>Passive</summary><p>&lt;font color=&#x27;#9E9E6E&#x27;&gt;The worn leather of these boots hint at power that has long since faded. &lt;font color=&#x27;#CE6E6E&#x27;&gt;Boots have been removed and the Movement Speed that would have been provided by Boots is instead gained over your first 7 levels.</p></details>
+    </div>
+</div>
+                    </div>
+            </div>
+            <div class="item-tree" style="display: grid; align-content: start;">
+                    <div class="item-tree-node" style="grid-area: 1 / 1;">
+<div class="item" data-id="20780" data-isactive="True">
+    <div class="item-desc">
+            <img class="icon" src="https://webcdn.hirezstudios.com/smite/item-icons/worn-shoes.jpg" alt="Worn Shoes">
+        <div class="name">Worn Shoes</div>
+            <div class="price">💰 Price: 9999</div>
+        <div class="properties">
+        </div>
+        <details class="description shortdesc"><summary>ShortDesc</summary>Removed from the battleground.</details>
+            <details class="description passive"><summary>Passive</summary><p>&lt;font color=&#x27;#9E9E6E&#x27;&gt;The frayed threads of these shoes hint at power that has long since faded. &lt;font color=&#x27;#CE6E6E&#x27;&gt;Shoes have been removed and the Movement Speed that would have been provided by Shoes is instead gained over your first 7 levels.</p></details>
     </div>
 </div>
                     </div>

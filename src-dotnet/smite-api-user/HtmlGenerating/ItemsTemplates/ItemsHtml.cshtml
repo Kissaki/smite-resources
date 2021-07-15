@@ -56,7 +56,6 @@
 
             @{
                 await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Potion of Power"));
-                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Elixir of Speed"));
                 await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Elixir of Power"));
                 await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Elixir of Defense"));
             }
