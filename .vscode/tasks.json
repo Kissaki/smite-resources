@@ -1,33 +1,49 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
+    "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "Generate HTML Smitegods",
-            "command": "bin/smitegods.exe"
+            "label": "Generate HTML Smitegods",
+            "command": "bin/smitegods.exe",
+            "problemMatcher": []
         },
         {
-            "taskName": "build smitegods",
-            "isBuildCommand": true,
-            "command": "go.exe",
-            "args": ["build", "-o","bin/smitegods.exe", "src/cli/smitegods/smitegods.go"],
-            "isShellCommand": true,
-            "showOutput": "always"
-        },
-        {
-            "taskName": "build pullsmitedata",
-            "command": "go.exe",
-            "args": ["build", "-o","bin/pullsmitedata.exe", "src/cli/pullsmitedata/pullsmitedata.go"],
-            "isShellCommand": true,
-            "showOutput": "always"
-        },
-        {
-            "taskName": "go fmt",
+            "label": "build smitegods",
+            "type": "shell",
             "command": "go.exe",
             "args": [
-                "fmt", "src"
-            ]
+                "build",
+                "-o",
+                "bin/smitegods.exe",
+                "src/cli/smitegods/smitegods.go"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "build pullsmitedata",
+            "type": "shell",
+            "command": "go.exe",
+            "args": [
+                "build",
+                "-o",
+                "bin/pullsmitedata.exe",
+                "src/cli/pullsmitedata/pullsmitedata.go"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "go fmt",
+            "command": "go.exe",
+            "args": [
+                "fmt",
+                "src"
+            ],
+            "problemMatcher": []
         }
     ]
 }
