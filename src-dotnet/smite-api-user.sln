@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEClient", "smite-api-user\KCode.SMITEClient.csproj", "{82A8FEB2-9160-43E3-B395-E8336295007E}"
 EndProject
@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEAPI.Generator", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.SMITEAPITest", "KCode.SMITEAPITest\KCode.SMITEAPITest.csproj", "{782CD454-21D5-4FB2-82D1-06798714354E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCode.HiRezAPI", "KCode.HiRezAPI\KCode.HiRezAPI.csproj", "{EDF27E2A-E713-4B55-87D9-D7454462EED9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.HiRezAPI", "KCode.HiRezAPI\KCode.HiRezAPI.csproj", "{EDF27E2A-E713-4B55-87D9-D7454462EED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCode.PaladinsAPI", "KCode.PaladinsAPI\KCode.PaladinsAPI.csproj", "{1F30774A-A775-434C-AAD8-405FA286A0DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KCode.PaladinsAPI", "KCode.PaladinsAPI\KCode.PaladinsAPI.csproj", "{1F30774A-A775-434C-AAD8-405FA286A0DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpriteGenerators", "SpriteGenerators\SpriteGenerators.csproj", "{F263DC9D-0883-4BA1-A02C-BF295F70EC3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F30774A-A775-434C-AAD8-405FA286A0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F263DC9D-0883-4BA1-A02C-BF295F70EC3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F263DC9D-0883-4BA1-A02C-BF295F70EC3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F263DC9D-0883-4BA1-A02C-BF295F70EC3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F263DC9D-0883-4BA1-A02C-BF295F70EC3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

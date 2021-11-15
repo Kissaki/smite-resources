@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +9,7 @@ namespace KCode.SMITEClient.Data
 {
     internal class GodIcons
     {
-        private readonly DirectoryInfo _dataDirPath;
+        private readonly string _combinedImagePath;
         private readonly DirectoryInfo _dataDirPath;
 
         public GodIcons(string basePath)
@@ -72,26 +69,29 @@ namespace KCode.SMITEClient.Data
 
         public void GenerateGodIconSprite()
         {
-            var files = _dataDirPath.EnumerateFiles("*.jpg");
+            var files = _dataDirPath.EnumerateFiles("*.jpg").OrderBy(x => x.Name);
+            using var bitmap = SpriteGenerator.GenerateForBitmaps(files, squareItemSize: 128, maxColCount: null);
+            bitmap.Save(_combinedImagePath, ImageFormat.Jpeg);
 
-            var colcount = 20;
-            var rows = (files.Count() + colcount - 1) / colcount;
-            using var bitmap = new Bitmap(width: 128 * colcount, height: 128 * rows);
-            using var canvas = Graphics.FromImage(bitmap);
-            canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            var indexPath = Path.ChangeExtension(_combinedImagePath, ".json");
+            File.WriteAllText(indexPath, string.Join("\n", files.Select(x => x.Name) + "\n"));
 
-            var i = 0;
-            foreach (var fi in files)
+            //ConvertSpriteTo("webp");
+            ConvertSpriteTo("avif");
+        }
+
+        private void ConvertSpriteTo(string fileExtension)
+        {
+            SixLabors.ImageSharp.Formats.IImageEncoder encoder = fileExtension switch
             {
-                using var image = Image.FromFile(fi.FullName);
-                // Apparently Discordia is different
-                //if (image.Width != 128 || image.Height != 128) throw new InvalidOperationException($"Unexpected god icon size difference");
-                canvas.DrawImage(image, destRect: new Rectangle(x: (i % colcount) * 128, y: (i / colcount) * 128, width: 128, height: 128), new Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
-                ++i;
-            }
+                "webp" => new Shorthand.ImageSharp.WebP.WebPEncoder(),
+                "avif" => new Shorthand.ImageSharp.AVIF.AVIFEncoder(),
+                _ => throw new ArgumentException($"Unrecognized value {fileExtension}", nameof(fileExtension)),
+            };
 
-            canvas.Save();
-            bitmap.Save(Path.Combine(basePath, "godicons.jpg"), ImageFormat.Jpeg);
+            var srcImg = SixLabors.ImageSharp.Image.Load(_combinedImagePath);
+            using var outStream = File.OpenWrite(Path.ChangeExtension(_combinedImagePath, fileExtension));
+            srcImg.Save(outStream, encoder);
         }
     }
 }
