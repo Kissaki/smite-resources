@@ -89,17 +89,18 @@ namespace KCode.SMITEClient
                 var iconUri = god.GodIconUrl!;
                 using var req = new HttpRequestMessage(HttpMethod.Get, requestUri: iconUri);
 
-                var filename = Path.GetFileName(iconUri.AbsoluteUri);
-                var fi = new FileInfo(Path.Combine(dir.FullName, filename));
+                var fileurl = Path.GetFileName(iconUri.AbsoluteUri);
+                var fi = new FileInfo(Path.Combine(dir.FullName, fileurl));
                 if (fi.Exists)
                 {
                     req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("image/*"));
                     req.Headers.IfModifiedSince = fi.LastWriteTime;
-                    var existingModifiedUnixTime = new DateTimeOffset(fi.LastWriteTimeUtc);
-                    var etag = $@"""{existingModifiedUnixTime.ToUnixTimeSeconds()}""";
-                    req.Headers.IfNoneMatch.Add(new EntityTagHeaderValue(etag, isWeak: false));
-                }
 
+                    //var existingModifiedUnixTime = new DateTimeOffset(fi.LastWriteTimeUtc);
+                    //var etag = $@"""{existingModifiedUnixTime.ToUnixTimeSeconds()}""";
+                    //req.Headers.IfNoneMatch.Add(new EntityTagHeaderValue(etag, isWeak: false));
+                }
+                
                 var res = c.SendAsync(req).Result;
                 if (res == null)
                 {
@@ -122,7 +123,7 @@ namespace KCode.SMITEClient
                 s.CopyTo(fs);
                 fs.Close();
                 s.Close();
-                fi.LastWriteTimeUtc = DateTimeOffset.FromUnixTimeSeconds(long.Parse(res.Headers.ETag.Tag.Trim('"'), CultureInfo.InvariantCulture)).UtcDateTime;
+                //fi.LastWriteTimeUtc = DateTimeOffset.FromUnixTimeSeconds(long.Parse(res.Headers.ETag.Tag.Trim('"'), CultureInfo.InvariantCulture)).UtcDateTime;
                 Console.WriteLine($"{fi.Name} ✓ {res.StatusCode}");
             }
         }
