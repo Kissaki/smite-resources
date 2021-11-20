@@ -1,8 +1,5 @@
 ﻿using KCode.SMITEClient.Data;
 using KCode.SMITEClient.HtmlGenerating.ItemsTemplates;
-using System;
-using System.IO;
-using System.Linq;
 
 namespace KCode.SMITEClient.HtmlGenerating
 {

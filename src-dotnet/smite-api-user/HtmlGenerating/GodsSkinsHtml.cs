@@ -1,6 +1,4 @@
 ﻿using KCode.SMITEClient.Data;
-using System;
-using System.IO;
 
 namespace KCode.SMITEClient.HtmlGenerating
 {

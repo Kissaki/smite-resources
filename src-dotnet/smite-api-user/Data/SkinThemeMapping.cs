@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace KCode.SMITEClient.Data
+﻿namespace KCode.SMITEClient.Data
 {
     /// <summary>skinId1 => theme</summary>
     public class SkinThemeMapping : Dictionary<int, string>

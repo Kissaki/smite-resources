@@ -1,7 +1,5 @@
 ﻿using KCode.SMITEAPI.ResultTypes;
 using KCode.SMITEClient.HtmlGenerating.GodTemplates;
-using System.IO;
-using System.Linq;
 
 namespace KCode.SMITEClient.HtmlGenerating
 {

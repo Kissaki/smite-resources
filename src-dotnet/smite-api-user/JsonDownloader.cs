@@ -1,7 +1,4 @@
 ﻿using KCode.SMITEAPI;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace KCode.SMITEClient
 {

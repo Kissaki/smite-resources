@@ -1,5 +1,4 @@
 ﻿using KCode.SMITEAPI.ResultTypes;
-using System;
 using System.Text.Json.Serialization;
 
 namespace KCode.SMITEClient.Data

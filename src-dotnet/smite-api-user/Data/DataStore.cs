@@ -1,7 +1,4 @@
 ﻿using KCode.SMITEAPI.ResultTypes;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
 
 namespace KCode.SMITEClient.Data
