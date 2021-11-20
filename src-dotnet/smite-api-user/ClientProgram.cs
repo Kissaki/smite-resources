@@ -95,7 +95,12 @@ internal static class Program
         var invalid = new List<(Uri, string)>();
 
         var godUrls = GetRemoteUrls();
-        var missing = godUrls.Where(x => x.url == null).Select(x => $"Missing image url value for god {x.god.Name} (id {x.god.Id})").ToImmutableArray();
+        var missing = godUrls
+            .Where(x => x.url == null || x.url.OriginalString.Length == 0)
+            // Ignore all Diamond. Legendary, Shadow card URLs, as none are present
+            .Where(x => !x.context.Contains("skin Diamond") && !x.context.Contains("skin Legendary") && !x.context.Contains("skin Shadow"))
+            .Select(x => $"Missing image url value {x.context} for god {x.god.Name} (id {x.god.Id})")
+            .ToImmutableArray();
         var urls = godUrls.Select(x => x.url).Where(x => x != null && x.OriginalString.Length > 0).Cast<Uri>().ToImmutableArray();
 
         var i = 0;
@@ -111,21 +116,21 @@ internal static class Program
 
         Write(missing, invalid);
 
-        static IEnumerable<(GodJsonModel god, Uri? url)> GetRemoteUrls()
+        static IEnumerable<(GodJsonModel god, Uri? url, string context)> GetRemoteUrls()
         {
             var ds = new DataStore();
             foreach (var god in ds.ReadGodsWithSkins())
             {
-                yield return (god, god.GodIconUrl);
-                yield return (god, god.GodCardUrl);
-                yield return (god, god.GodAbility1Url);
-                yield return (god, god.GodAbility2Url);
-                yield return (god, god.GodAbility3Url);
-                yield return (god, god.GodAbility4Url);
-                yield return (god, god.GodAbility5Url);
+                yield return (god, god.GodIconUrl, nameof(god.GodIconUrl));
+                yield return (god, god.GodCardUrl, nameof(god.GodCardUrl));
+                yield return (god, god.GodAbility1Url, nameof(god.GodAbility1Url));
+                yield return (god, god.GodAbility2Url, nameof(god.GodAbility2Url));
+                yield return (god, god.GodAbility3Url, nameof(god.GodAbility3Url));
+                yield return (god, god.GodAbility4Url, nameof(god.GodAbility4Url));
+                yield return (god, god.GodAbility5Url, nameof(god.GodAbility5Url));
                 foreach (var skin in god.Skins)
                 {
-                    yield return (god, skin.CardUri);
+                    yield return (god, skin.CardUri, $"skin {skin.Name} {skin.Id1} {nameof(skin.CardUri)}");
                 }
             }
         }
