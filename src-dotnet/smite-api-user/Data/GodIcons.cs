@@ -74,7 +74,7 @@ namespace KCode.SMITEClient.Data
             bitmap.Save(_combinedImagePath, ImageFormat.Jpeg);
 
             var indexPath = Path.ChangeExtension(_combinedImagePath, ".json");
-            File.WriteAllText(indexPath, string.Join("\n", files.Select(x => x.Name) + "\n"));
+            File.WriteAllText(indexPath, string.Join("\n", files.Select(x => x.Name)) + "\n");
 
             //ConvertSpriteTo("webp");
             ConvertSpriteTo("avif");

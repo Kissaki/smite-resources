@@ -1,75 +1,51 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using KCode.SMITEAPI;
+﻿using KCode.SMITEAPI;
+using KCode.SMITEClient.AuthConfig;
 using KCode.SMITEClient.Data;
 using KCode.SMITEClient.HtmlGenerating;
-using YamlDotNet.RepresentationModel;
 
 namespace KCode.SMITEClient
 {
-    class Program
+    internal static class Program
     {
         public static void Main()
         {
-            var fi = new FileInfo(".auth.yaml");
-            if (!fi.Exists) throw new InvalidOperationException("Missing auth config file");
-
-            var yaml = new YamlStream();
-            using var f = File.OpenText(fi.FullName);
-            yaml.Load(f);
-
-            var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
-            var devId = int.Parse(mapping.Children["devid"].ToString(), provider: null);
-            var authKey = mapping.Children["authkey"].ToString();
+            var auth = AuthConfigReader.Read();
 
             using var c = new RequestClient();
-            c.Configure(devId, authKey);
-            //Console.WriteLine(c.SendPingAsync().Result);
-            //Console.WriteLine(c.TestSessionAsync().Result);
-
-            DownloadGods(c, basePath: "data");
-            var godIcons = new GodIcons(basePath: "data");
-            //godIcons.DownloadGodIcons();
-            godIcons.GenerateGodIconSprite();
-            GenerateGodsHtml();
-
-            DownloadAllGodSkinsForStoredGods(c, basePath: "data");
-            GenerateGodsWithSkinsFromStore();
-            GenerateGodSkinsHtml();
-
-            GenerateGodSkinThemeHtml();
-
-            DownloadItems(c, basePath: "data");
-            GenerateItemsHtml();
+            c.Configure(auth.DevId, auth.AuthKey);
+            var downloader = new JsonDownloader(c, "data");
+            RunWith(c, downloader);
 
             Console.WriteLine("Done. Waiting for ENTER to exit…");
             Console.ReadLine();
         }
 
+        private static void RunWith(RequestClient c, JsonDownloader downloader)
+        {
+            //Console.WriteLine(c.SendPingAsync().Result);
+            //Console.WriteLine(c.TestSessionAsync().Result);
 
-        private static void DownloadGods(RequestClient c, string basePath) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: "gods.json", c => c.GetGodsAsync());
-        private static void DownloadItems(RequestClient c, string basePath) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: "items.json", c => c.GetItemsAsync());
-        private static void DownloadGodSkins(RequestClient c, string basePath, int godId) => new JsonDownloader(c, basePath).Update(filenameOrRelPath: $"godskins/godskins-{godId}.json", c => c.GetGodSkinsAsync(godId));
+            downloader.Update(filenameOrRelPath: "gods.json", c => c.GetGodsAsync());
+            var godIcons = new GodIcons(basePath: "data");
+            //godIcons.DownloadGodIcons();
+            godIcons.GenerateGodIconSprite();
+            GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
 
-        private static void GenerateGodsHtml() => GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
-        private static void GenerateGodSkinsHtml() => GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
-        private static void GenerateItemsHtml() => ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
+            DownloadAllGodSkinsForStoredGods(downloader);
+            GenerateGodsWithSkinsFromStore();
+            GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
 
-        private static void GenerateGodSkinThemeHtml() => GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
+            GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
 
-        private static void DownloadAllGodSkinsForStoredGods(RequestClient c, string basePath)
+            downloader.Update(filenameOrRelPath: "items.json", c => c.GetItemsAsync());
+            ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
+        }
+
+        private static void DownloadAllGodSkinsForStoredGods(JsonDownloader d)
         {
             foreach (var godId in new DataStore().ReadGods().Select(x => x.Id))
             {
-                DownloadGodSkins(c, basePath, godId: godId);
+                d.Update(filenameOrRelPath: $"godskins/godskins-{godId}.json", c => c.GetGodSkinsAsync(godId));
             }
         }
 
