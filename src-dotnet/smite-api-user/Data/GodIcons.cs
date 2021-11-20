@@ -6,20 +6,13 @@ using System.Net.Http.Headers;
 
 namespace KCode.SMITEClient.Data
 {
-    internal class GodIcons
+    internal static class GodIcons
     {
-        private readonly string _combinedImagePath;
-        private readonly DirectoryInfo _dataDirPath;
-
-        public GodIcons(string basePath)
+        public static void DownloadGodIcons(string targetDir)
         {
-            _combinedImagePath = Path.Combine(basePath, "godicons");
-            _dataDirPath = new DirectoryInfo(Path.Combine(basePath, "godicon"));
-            _dataDirPath.Create();
-        }
+            var di = new DirectoryInfo(targetDir);
+            di.Create();
 
-        public void DownloadGodIcons()
-        {
             var gods = new DataStore().ReadGods();
             using var c = new HttpClient();
             foreach (var god in gods.Where(x => x.GodIconUrl != null).OrderBy(x => x.GodIconUrl!.PathAndQuery))
@@ -27,7 +20,7 @@ namespace KCode.SMITEClient.Data
                 var iconUri = god.GodIconUrl!;
                 var fileurl = Path.GetFileName(iconUri.AbsoluteUri);
 
-                var fi = new FileInfo(Path.Combine(_dataDirPath.FullName, fileurl));
+                var fi = new FileInfo(Path.Combine(di.FullName, fileurl));
                 if (fi.Exists && fi.LastWriteTime > DateTime.Today)
                 {
                     Console.WriteLine($"DEBUG: Not checking for updated god icon as the local file was already updated today {fi.Name}");
@@ -72,25 +65,25 @@ namespace KCode.SMITEClient.Data
             }
         }
 
-        public void GenerateGodIconSprites()
+        public static void GenerateGodIconSprites(IOrderedEnumerable<FileInfo> files, string targetFilePathNoExtension)
         {
-            var files = _dataDirPath.EnumerateFiles("*.jpg").OrderBy(x => x.Name);
+            var spriteBase = targetFilePathNoExtension;
             var squareItemSize = 128;
             Console.WriteLine($"Generating sprite for {files.Count()} files of square size {squareItemSize}...");
             using var bitmap = SpriteGenerator.GenerateForBitmaps(files, squareItemSize);
-            bitmap.Save(_combinedImagePath + ".png", ImageFormat.Png);
-            bitmap.Save(_combinedImagePath + ".jpg", ImageFormat.Jpeg);
+            bitmap.Save(spriteBase + ".png", ImageFormat.Png);
+            bitmap.Save(spriteBase + ".jpg", ImageFormat.Jpeg);
 
             Console.WriteLine("Writing sprite data files...");
-            File.WriteAllText(_combinedImagePath + ".spriteorder", string.Join("\n", files.Select(x => x.Name)) + "\n");
-            File.WriteAllText(_combinedImagePath + ".json", @"{""images"":[{" + string.Join("},{", files.Select((x, i) => $@"""name"":""{x.Name}"",""x"":{i * squareItemSize}")) + "}]}");
+            File.WriteAllText(spriteBase + ".spriteorder", string.Join("\n", files.Select(x => x.Name)) + "\n");
+            File.WriteAllText(spriteBase + ".json", @"{""images"":[{" + string.Join("},{", files.Select((x, i) => $@"""name"":""{x.Name}"",""x"":{i * squareItemSize}")) + "}]}");
 
             Console.WriteLine("Converting sprites to additional image formats...");
-            var pWebp = Process.Start("ffmpeg.exe", $@"-hide_banner -y -i ""{_combinedImagePath}.png"" ""{_combinedImagePath}.webp""");
+            var pWebp = Process.Start("ffmpeg.exe", $@"-hide_banner -y -i ""{spriteBase}.png"" ""{spriteBase}.webp""");
             pWebp.WaitForExit();
             if (pWebp.ExitCode != 0) Console.WriteLine($"ERROR: Sprite webp conversion with ffmpeg.exe failed with exit code {pWebp.ExitCode}");
 
-            var pAvif = Process.Start("avifenc.exe", $@"""{_combinedImagePath}.png"" ""{_combinedImagePath}.avif""");
+            var pAvif = Process.Start("avifenc.exe", $@"""{spriteBase}.png"" ""{spriteBase}.avif""");
             pAvif.WaitForExit();
             if (pAvif.ExitCode != 0) Console.WriteLine($"ERROR: Sprite avif conversion with avifenc.exe failed with exit code {pAvif.ExitCode}");
         }

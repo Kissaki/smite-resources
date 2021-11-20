@@ -44,8 +44,7 @@ internal static class Program
         }
         if (menu.DownloadIcons)
         {
-            var godIcons = new GodIcons(basePath: "data");
-            godIcons.DownloadGodIcons();
+            GodIcons.DownloadGodIcons("img/godicon");
         }
         if (menu.CheckRemoteImages)
         {
@@ -53,8 +52,8 @@ internal static class Program
         }
         if (menu.CombineIcons)
         {
-            var godIcons = new GodIcons(basePath: "data");
-            godIcons.GenerateGodIconSprites();
+            var files = new DirectoryInfo("img/godicon").EnumerateFiles("*.jpg").OrderBy(x => x.Name);
+            GodIcons.GenerateGodIconSprites(files, "img/godicons");
         }
         if (menu.GenerateHtml)
         {
