@@ -54,7 +54,7 @@ internal static class Program
         if (menu.CombineIcons)
         {
             var godIcons = new GodIcons(basePath: "data");
-            godIcons.GenerateGodIconSprite();
+            godIcons.GenerateGodIconSprites();
         }
         if (menu.GenerateHtml)
         {

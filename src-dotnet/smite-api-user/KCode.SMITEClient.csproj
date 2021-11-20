@@ -16,9 +16,6 @@
 
   <ItemGroup>
     <PackageReference Include="RazorLight" Version="2.0.0-rc.3" />
-    <PackageReference Include="Shorthand.ImageSharp.AVIF" Version="0.1.0" />
-    <PackageReference Include="Shorthand.ImageSharp.WebP" Version="2.2.1" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
