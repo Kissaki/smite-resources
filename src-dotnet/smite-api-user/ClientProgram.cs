@@ -4,6 +4,7 @@ using KCode.SMITEClient.Data;
 using KCode.SMITEClient.HtmlGenerating;
 using System.Collections.Immutable;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
 
 namespace KCode.SMITEClient;
@@ -91,19 +92,19 @@ internal static class Program
     private static async Task CheckRemoteImage()
     {
         using var c = new HttpClient();
-        var invalid = new List<Uri>();
+        var invalid = new List<(Uri, string)>();
 
         var godUrls = GetRemoteUrls();
         var missing = godUrls.Where(x => x.url == null).Select(x => $"Missing image url value for god {x.god.Name} (id {x.god.Id})").ToImmutableArray();
         var urls = godUrls.Select(x => x.url).Where(x => x != null && x.OriginalString.Length > 0).Cast<Uri>().ToImmutableArray();
 
-        const int chunkSize = 10;
         var i = 0;
-        foreach (var urlChunk in urls.Chunk(chunkSize))
+        foreach (var url in urls)
         {
-            Console.WriteLine($"{i * chunkSize}/{urls.Length}...");
-            Task.WaitAll(urlChunk.Select(x => CheckUri(c, x)).ToArray());
-            await Task.Delay(200);
+            Console.WriteLine($"{i}/{urls.Length}...");
+            var err = CheckUri(c, url);
+            if (err != null) invalid.Add((url, err));
+            await Task.Delay(50);
             ++i;
         }
         Console.WriteLine($"Remote image check concluded with {missing.Length} missing and {invalid.Count} invalid.");
@@ -129,18 +130,19 @@ internal static class Program
             }
         }
 
-        static async Task<string?> CheckUri(HttpClient c, Uri uri)
+        static string? CheckUri(HttpClient c, Uri uri)
         {
-            var res = await c.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
-            return res.StatusCode == System.Net.HttpStatusCode.OK ? null : $"Err status code {res.StatusCode}";
+            var res = c.Send(new HttpRequestMessage(HttpMethod.Head, uri));
+            Console.WriteLine($"{(res.StatusCode == HttpStatusCode.OK ? "OK" : "ERR")} {uri}");
+            return res.StatusCode == HttpStatusCode.OK ? null : $"Err status code {res.StatusCode}";
         }
 
-        static void Write(ImmutableArray<string> missing, List<Uri> invalid)
+        static void Write(ImmutableArray<string> missing, List<(Uri, string)> invalid)
         {
             var filename = "invalid-urls.html";
             Console.WriteLine($"Writing result to {filename}");
             var missingHtml = missing.Length == 0 ? "none" : $"<ul><li>{string.Join("</li><li>", missing)}</li></ul>";
-            var invalidHtml = invalid.Count == 0 ? "none" : $"<ul><li>{string.Join("</li><li>", invalid)}</li></ul>";
+            var invalidHtml = invalid.Count == 0 ? "none" : $"<ul><li>{string.Join("</li><li>", invalid.Select(x => $"{x.Item2} {x.Item1}"))}</li></ul>";
             File.WriteAllText(filename, $"<h1>Image Check Issue Results</h1><h2>Missing</h2>{missingHtml}<h2>Invalid</h2>{invalidHtml}");
         }
     }
