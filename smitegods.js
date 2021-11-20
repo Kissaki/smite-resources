@@ -234,10 +234,12 @@ godDefailsOverlay = {
 			return
 		}
 		this.overlayContainer.classList.remove('active')
+		this.overlayContainer.innerHTML = ''
 	},
 	onCloseExplicit: function(ev)
 	{
 		this.overlayContainer.classList.remove('active')
+		this.overlayContainer.innerHTML = ''
 	},
 	onClick: function(sender)
 	{
