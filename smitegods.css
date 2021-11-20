@@ -1,3 +1,6 @@
+:root {
+  color-scheme: light dark;
+}
 @font-face {
   font-family: Smiticons;
   src: url(4bfba3d77789a9ec16129032096c7f12.woff);
