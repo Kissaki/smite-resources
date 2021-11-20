@@ -4,6 +4,8 @@ namespace KCode.SMITEClient.Menus;
 
 public class MenuLogic
 {
+    public bool SendPing { get; private set; }
+    public bool TestAuth { get; private set; }
     public bool DownloadData { get; private set; } = true;
     public bool GenerateData { get; private set; } = true;
     public bool DownloadIcons { get; private set; }
@@ -28,25 +30,31 @@ public class MenuLogic
                 switch (value)
                 {
                     case 1:
+                        SendPing = !SendPing;
+                        break;
+                    case 2:
+                        TestAuth = !TestAuth;
+                        break;
+                    case 3:
                         DownloadData = !DownloadData;
                         if (DownloadData)
                         {
                             GenerateData = true;
                         }
                         break;
-                    case 2:
+                    case 4:
                         GenerateData = !GenerateData;
                         break;
-                    case 3:
+                    case 5:
                         DownloadIcons = !DownloadIcons;
                         break;
-                    case 4:
+                    case 6:
                         CheckRemoteImages = !CheckRemoteImages;
                         break;
-                    case 5:
+                    case 7:
                         CombineIcons = !CombineIcons;
                         break;
-                    case 6:
+                    case 8:
                         GenerateHtml = !GenerateHtml;
                         break;
                 }
@@ -57,12 +65,14 @@ public class MenuLogic
     private void Print()
     {
         Console.WriteLine("Current choices:");
-        PrintOption(1, c => c.DownloadData);
-        PrintOption(2, c => c.GenerateData);
-        PrintOption(3, c => c.DownloadIcons);
-        PrintOption(4, c => c.CheckRemoteImages);
-        PrintOption(5, c => c.CombineIcons);
-        PrintOption(6, c => c.GenerateHtml);
+        PrintOption(1, c => c.SendPing);
+        PrintOption(2, c => c.TestAuth);
+        PrintOption(3, c => c.DownloadData);
+        PrintOption(4, c => c.GenerateData);
+        PrintOption(5, c => c.DownloadIcons);
+        PrintOption(6, c => c.CheckRemoteImages);
+        PrintOption(7, c => c.CombineIcons);
+        PrintOption(8, c => c.GenerateHtml);
 
         void PrintOption(int id, Expression<Func<MenuLogic, bool>> expr)
         {

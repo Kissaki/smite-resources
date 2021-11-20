@@ -16,10 +16,27 @@ internal static class Program
         var menu = new MenuLogic();
         menu.Run();
 
-        if (menu.DownloadData)
+        if (menu.SendPing || menu.TestAuth || menu.DownloadData)
         {
-            var auth = AuthConfigReader.Read();
-            DownloadData(auth);
+            using var c = new RequestClient();
+            if (menu.SendPing)
+            {
+                Console.WriteLine(c.SendPingAsync().Result);
+            }
+            if (menu.TestAuth || menu.DownloadData)
+            {
+                var auth = AuthConfigReader.Read();
+                c.Configure(auth.DevId, auth.AuthKey);
+                if (menu.TestAuth)
+                {
+                    Console.WriteLine(c.TestSessionAsync().Result);
+                }
+                if (menu.DownloadData)
+                {
+                    var downloader = new JsonDownloader(c, "data");
+                    DownloadData(downloader);
+                }
+            }
         }
         if (menu.GenerateData)
         {
@@ -53,15 +70,8 @@ internal static class Program
         Console.ReadLine();
     }
 
-    private static void DownloadData(Auth auth)
+    private static void DownloadData(JsonDownloader downloader)
     {
-        using var c = new RequestClient();
-        c.Configure(auth.DevId, auth.AuthKey);
-
-        //Console.WriteLine(c.SendPingAsync().Result);
-        //Console.WriteLine(c.TestSessionAsync().Result);
-
-        var downloader = new JsonDownloader(c, "data");
 
         downloader.Update("gods.json", c => c.GetGodsAsync());
 
