@@ -1,8 +1,8 @@
 ﻿using KCode.SMITEAPI;
-using KCode.SMITEAPI.ResultTypes;
 using KCode.SMITEClient.AuthConfig;
 using KCode.SMITEClient.Data;
 using KCode.SMITEClient.HtmlGenerating;
+using System.Collections.Immutable;
 using System.Linq.Expressions;
 using System.Net.Http;
 
@@ -40,20 +40,6 @@ internal static class Program
         downloader.Update(filenameOrRelPath: "items.json", c => c.GetItemsAsync());
     }
 
-    private static void GenerateFiles()
-    {
-        var godIcons = new GodIcons(basePath: "data");
-        godIcons.GenerateGodIconSprite();
-
-        GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
-        GenerateGodsWithSkinsFromStore();
-        GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
-
-        GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
-
-        ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
-    }
-
     private static void DownloadAllGodSkinsForStoredGods(JsonDownloader d)
     {
         foreach (var godId in new DataStore().ReadGods().Select(x => x.Id))
@@ -88,53 +74,74 @@ internal static class Program
         d.Update(filenameOrRelPath: "matchhistory.json", c => c.GetPlayerMatchHistoryAsync(playerId));
     }
 
+    private static void GenerateFiles()
+    {
+        var godIcons = new GodIcons(basePath: "data");
+        godIcons.GenerateGodIconSprite();
+
+        GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
+        GenerateGodsWithSkinsFromStore();
+        GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
+
+        GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
+
+        ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
+    }
+
     private static async Task CheckRemoteImage()
     {
         using var c = new HttpClient();
-        var missing = new List<string>();
         var invalid = new List<Uri>();
-        foreach (var god in new DataStore().ReadGods())
+
+        var godUrls = GetRemoteUrls();
+        var missing = godUrls.Where(x => x.url == null).Select(x => $"Missing image url value for god {x.god.Name} (id {x.god.Id})").ToImmutableArray();
+        var urls = godUrls.Select(x => x.url).Where(x => x != null && x.OriginalString.Length > 0).Cast<Uri>().ToImmutableArray();
+
+        const int chunkSize = 10;
+        var i = 0;
+        foreach (var urlChunk in urls.Chunk(chunkSize))
         {
-            await Check(c, god, god => god.GodIconUrl, missing, invalid);
-            await Check(c, god, god => god.GodCardUrl, missing, invalid);
-            await Check(c, god, god => god.GodAbility1Url, missing, invalid);
-            await Check(c, god, god => god.GodAbility2Url, missing, invalid);
-            await Check(c, god, god => god.GodAbility3Url, missing, invalid);
-            await Check(c, god, god => god.GodAbility4Url, missing, invalid);
-            await Check(c, god, god => god.GodAbility5Url, missing, invalid);
-            await Task.Delay(1000);
+            Console.WriteLine($"{i * chunkSize}/{urls.Length}...");
+            Task.WaitAll(urlChunk.Select(x => CheckUri(c, x)).ToArray());
+            await Task.Delay(200);
+            ++i;
         }
+        Console.WriteLine($"Remote image check concluded with {missing.Length} missing and {invalid.Count} invalid.");
 
-        var missingHtml = missing.Count == 0 ? "" : $"<h1>Missing</h1><ul><li>{string.Join("</li><li>", missing)}</li></ul>";
-        var invalidHtml = invalid.Count == 0 ? "" : $"<h1>Invalid</h1><ul><li>{string.Join("</li><li>", invalid)}</li></ul>";
-        File.WriteAllText("invalid-urls.html", $"{missingHtml}{invalidHtml}");
+        Write(missing, invalid);
 
-        static async Task Check(HttpClient c, GodResult god, Expression<Func<GodResult, Uri?>> accessor, List<string> missing, List<Uri> invalid)
+        static IEnumerable<(GodJsonModel god, Uri? url)> GetRemoteUrls()
         {
-            var fn = accessor.Compile();
-            var uri = fn.Invoke(god);
-            if (uri == null)
+            var ds = new DataStore();
+            foreach (var god in ds.ReadGodsWithSkins())
             {
-                missing.Add($"Missing {nameof(god.GodIconUrl)} for god {god.Id} {god.Name}");
-                Console.WriteLine($"INFO: Image MISSING {uri.AbsolutePath}");
-                return;
+                yield return (god, god.GodIconUrl);
+                yield return (god, god.GodCardUrl);
+                yield return (god, god.GodAbility1Url);
+                yield return (god, god.GodAbility2Url);
+                yield return (god, god.GodAbility3Url);
+                yield return (god, god.GodAbility4Url);
+                yield return (god, god.GodAbility5Url);
+                foreach (var skin in god.Skins)
+                {
+                    yield return (god, skin.CardUri);
+                }
             }
-
-            var err = await CheckUri(c, uri);
-            if (err != null)
-            {
-                invalid.Add(uri);
-                Console.WriteLine($"INFO: Image INVALID {uri.AbsolutePath}");
-                return;
-            }
-
-            Console.WriteLine($"INFO: Image OK {uri.AbsolutePath}");
         }
 
         static async Task<string?> CheckUri(HttpClient c, Uri uri)
         {
             var res = await c.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
             return res.StatusCode == System.Net.HttpStatusCode.OK ? null : $"Err status code {res.StatusCode}";
+        }
+
+        static void Write(ImmutableArray<string> missing, List<Uri> invalid)
+        {
+            var filename = "invalid-urls.html";
+            Console.WriteLine($"Writing result to {filename}");
+            var missingHtml = missing.Length == 0 ? "none" : $"<ul><li>{string.Join("</li><li>", missing)}</li></ul>";
+            var invalidHtml = invalid.Count == 0 ? "none" : $"<ul><li>{string.Join("</li><li>", invalid)}</li></ul>";
+            File.WriteAllText(filename, $"<h1>Image Check Issue Results</h1><h2>Missing</h2>{missingHtml}<h2>Invalid</h2>{invalidHtml}");
         }
     }
 }
