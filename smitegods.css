@@ -207,18 +207,6 @@ i.icon {
 .icon-xbox:before {
   content: "\E92A";
 }
-.icon-pantheon.icon-arthurian {
-  background: url(img/pantheon/arthurian.png) center center no-repeat;
-  background-size: contain;
-}
-.icon-yoruba {
-  background: url(img/pantheon/yoruba.png) center center no-repeat;
-  background-size: contain;
-}
-.icon-greatoldones {
-  background: url(img/pantheon/greatoldones.png) center center no-repeat;
-  background-size: contain;
-}
 * {
   border: 0;
   margin: 0;
@@ -313,7 +301,9 @@ footer p {
 .godicon,
 .godnoicon {
   display: block;
-  width: 100%;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
 }
 .godnoicon {
   background-color: lightblue;
@@ -368,9 +358,6 @@ footer p {
   top: 0px;
   left: 0px;
   border-radius: 0 0 2px 0;
-}
-#god-icon-size-value {
-  width: auto;
 }
 .icon-pantheon {
   width: 100px;
@@ -465,7 +452,4 @@ input[type=text] {
 }
 #god-overlay .ability-description {
   padding-left: 1em;
-}
-.ability-description .description-primary {
-  white-space: pre-line;
 }

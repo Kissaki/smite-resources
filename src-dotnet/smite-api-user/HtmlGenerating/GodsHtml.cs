@@ -1,15 +1,16 @@
 ﻿using KCode.SMITEAPI.ResultTypes;
 using KCode.SMITEClient.HtmlGenerating.GodTemplates;
+using System.Collections.Immutable;
 
 namespace KCode.SMITEClient.HtmlGenerating
 {
     internal static class GodsHtml
 	{
-		public static void GenerateGodsHtml(string targetFile, GodResult[] gods)
+		public static void GenerateGodsHtml(string targetFile, GodResult[] gods, (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, int> itemOffsets) godIconSprites)
 		{
 			var (pantheons, roles) = ParseGods(gods);
 
-			var model = new GodsViewModel(gods, pantheons, roles);
+			var model = new GodsViewModel(gods, pantheons, roles, godIconSprites);
 			var content = RazorBase.Render(templatePath: "GodTemplates/GodsHtml.cshtml", model).Result;
 			File.WriteAllText(targetFile, content);
 		}

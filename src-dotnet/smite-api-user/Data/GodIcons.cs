@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +9,8 @@ namespace KCode.SMITEClient.Data
 {
     internal static class GodIcons
     {
+        private const int squareItemSize = 128;
+
         public static void DownloadGodIcons(string targetDir)
         {
             var di = new DirectoryInfo(targetDir);
@@ -68,7 +71,6 @@ namespace KCode.SMITEClient.Data
         public static void GenerateGodIconSprites(IOrderedEnumerable<FileInfo> files, string targetFilePathNoExtension)
         {
             var spriteBase = targetFilePathNoExtension;
-            var squareItemSize = 128;
             Console.WriteLine($"Generating sprite for {files.Count()} files of square size {squareItemSize}...");
             using var bitmap = SpriteGenerator.GenerateForBitmaps(files, squareItemSize);
             bitmap.Save(spriteBase + ".png", ImageFormat.Png);
@@ -86,6 +88,28 @@ namespace KCode.SMITEClient.Data
             var pAvif = Process.Start("avifenc.exe", $@"""{spriteBase}.png"" ""{spriteBase}.avif""");
             pAvif.WaitForExit();
             if (pAvif.ExitCode != 0) Console.WriteLine($"ERROR: Sprite avif conversion with avifenc.exe failed with exit code {pAvif.ExitCode}");
+        }
+
+        public static (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, int> itemOffsets) ReadSpriteData(string spriteBasePath)
+        {
+            var spriteFiles = GetOrderedSpriteFiles(spriteBasePath);
+            var itemOffsets = File.ReadAllLines(spriteBasePath + ".spriteorder").Select((x, i) => (file: x, offset: i * squareItemSize)).ToImmutableDictionary(x => x.file, x => x.offset);
+            return (spriteFiles.ToImmutableArray(), itemOffsets);
+
+            static IEnumerable<string> GetOrderedSpriteFiles(string spriteBasePath)
+            {
+                foreach (var ext in new[] { ".avif", ".webp", ".jpg", ".png", })
+                {
+                    var filepath = spriteBasePath + ext;
+                    if (!File.Exists(filepath))
+                    {
+                        Console.WriteLine($"WARNING: Missing sprite file {filepath}");
+                        continue;
+                    }
+
+                    yield return filepath;
+                }
+            }
         }
     }
 }

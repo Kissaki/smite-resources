@@ -1,4 +1,5 @@
 ﻿using KCode.SMITEAPI.ResultTypes;
+using System.Collections.Immutable;
 
 namespace KCode.SMITEClient.HtmlGenerating.GodTemplates
 {
@@ -9,12 +10,16 @@ namespace KCode.SMITEClient.HtmlGenerating.GodTemplates
         public string[] Pantheons { get; }
         public string[] Roles { get; }
 #pragma warning restore CA1819 // Properties should not return arrays
+        public ImmutableArray<string> GodIconSpriteFiles { get; }
+        public ImmutableDictionary<string, int> GodIconSpriteOffsets { get; }
 
-        public GodsViewModel(GodResult[] gods, string[] pantheons, string[] roles)
+        public GodsViewModel(GodResult[] gods, string[] pantheons, string[] roles, (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, int> itemOffsets) godIconSprites)
         {
             Gods = gods;
             Pantheons = pantheons;
             Roles = roles;
+            GodIconSpriteFiles = godIconSprites.spriteFiles;
+            GodIconSpriteOffsets = godIconSprites.itemOffsets;
         }
     }
 }

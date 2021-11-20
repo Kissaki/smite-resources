@@ -22,17 +22,6 @@
 		Free Rotation: <span id="legend_freerotation">FR</span>
 	</div>
 
-	<form id="options" class="data-block">
-		<h2>Display Options</h2>
-		<fieldset>
-			<div class="option">
-				<label for="god-icon-size">God Icon Size:</label>
-				<input id="god-icon-size" type="range" min="32" max="128" value="64" step="16" />
-				<span id="god-icon-size-value"></span> px
-				<input id="god-icon-size-clear" type="button" value="⌧">
-			</div>
-		</fieldset>
-	</form>
 	<form id="filters" class="data-block">
 		<h2>Filters</h2>
 		<fieldset>
@@ -122,7 +111,24 @@
 												}
 												else
 												{
-													<img class="godicon" title="" src="@god.GodIconUrl">
+													if (@Model.GodIconSpriteFiles.Length > 0)
+													{
+														<picture class="godicon">
+															<source srcset="img/godicons.avif" type="image/avif">
+															<source srcset="img/godicons.webp" type="image/webp">
+															<source srcset="img/godicons.png" type="image/png">
+															@{
+																var iconfilename = god.GodIconUrl.AbsolutePath.Substring(god.GodIconUrl.AbsolutePath.LastIndexOf('/') + 1);
+																// Half because we show them in half size
+																var offset = Model.GodIconSpriteOffsets[iconfilename] / 2;
+															}
+															<img src="img/godicons.jpg" data-offset="@offset" style="transform: translateX(-@(offset)px) scale(0.5) translate(-50%,-50%);">
+														</picture>
+													}
+													else
+													{
+														<img src="@god.GodIconUrl" alt="@god.Name god icon image">
+													}
 												}
 												<div class="godname">@god.Name</div>
 												<a class="godinfo-handle">(i)</a>

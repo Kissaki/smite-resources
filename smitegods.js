@@ -8,40 +8,6 @@ function forEveryGod(fn)
 	}
 }
 
-godIconSizeChanger = {
-	init: function() {
-		document.querySelector('#god-icon-size').addEventListener('input', this.onGodiconsizeChanged.bind(this));
-		document.querySelector('#god-icon-size-clear').addEventListener('click', this.onGodiconsizeClear.bind(this))
-		this.onGodiconsizeChanged();
-	},
-	onGodiconsizeChanged: function()
-	{
-		var value = document.querySelector('#god-icon-size').value;
-		document.querySelector('#god-icon-size-value').innerHTML = value;
-		this.setSize(value)
-	},
-	setSize: function(sizePx)
-	{
-		var newSizeCss = sizePx + 'px';
-		var updateSize = function(god)
-		{
-			god.style.width = newSizeCss;
-			var pseudoIcon = god.querySelector('.godnoicon');
-			if (pseudoIcon !== null)
-			{
-				pseudoIcon.style.height = newSizeCss
-			}
-		}
-		forEveryGod(updateSize);
-	},
-	onGodiconsizeClear: function()
-	{
-		document.querySelector('#god-icon-size').value = '64';
-		this.onGodiconsizeChanged();
-	},
-}
-godIconSizeChanger.init()
-
 function setVisible(el, visible)
 {
 	el.style.display = visible ? '' : 'none';

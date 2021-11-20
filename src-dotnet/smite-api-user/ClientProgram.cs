@@ -57,7 +57,8 @@ internal static class Program
         }
         if (menu.GenerateHtml)
         {
-            GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
+            Console.WriteLine("Generating HTML...");
+            GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!, GodIcons.ReadSpriteData("img/godicons"));
             GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
 
             GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
