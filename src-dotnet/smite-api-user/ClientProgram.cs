@@ -2,8 +2,8 @@
 using KCode.SMITEClient.AuthConfig;
 using KCode.SMITEClient.Data;
 using KCode.SMITEClient.HtmlGenerating;
+using KCode.SMITEClient.Menus;
 using System.Collections.Immutable;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 
@@ -13,10 +13,41 @@ internal static class Program
 {
     public static void Main()
     {
-        var auth = AuthConfigReader.Read();
-        DownloadData(auth);
-        CheckRemoteImage().Wait();
-        GenerateFiles();
+        var menu = new MenuLogic();
+        menu.Run();
+
+        if (menu.DownloadData)
+        {
+            var auth = AuthConfigReader.Read();
+            DownloadData(auth);
+        }
+        if (menu.GenerateData)
+        {
+            GenerateGodsWithSkinsFromStore();
+        }
+        if (menu.DownloadIcons)
+        {
+            var godIcons = new GodIcons(basePath: "data");
+            godIcons.DownloadGodIcons();
+        }
+        if (menu.CheckRemoteImages)
+        {
+            CheckRemoteImage().Wait();
+        }
+        if (menu.CombineIcons)
+        {
+            var godIcons = new GodIcons(basePath: "data");
+            godIcons.GenerateGodIconSprite();
+        }
+        if (menu.GenerateHtml)
+        {
+            GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
+            GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
+
+            GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
+
+            ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
+        }
 
         Console.WriteLine("Done. Waiting for ENTER to exit…");
         Console.ReadLine();
@@ -33,8 +64,6 @@ internal static class Program
         var downloader = new JsonDownloader(c, "data");
 
         downloader.Update("gods.json", c => c.GetGodsAsync());
-        var godIcons = new GodIcons(basePath: "data");
-        godIcons.DownloadGodIcons();
 
         DownloadAllGodSkinsForStoredGods(downloader);
 
@@ -73,20 +102,6 @@ internal static class Program
         d.Update(filenameOrRelPath: "achievements.json", c => c.GetPlayerAchievementsAsync(playerId));
         d.Update(filenameOrRelPath: "status.json", c => c.GetPlayerStatusAsync(playerId));
         d.Update(filenameOrRelPath: "matchhistory.json", c => c.GetPlayerMatchHistoryAsync(playerId));
-    }
-
-    private static void GenerateFiles()
-    {
-        var godIcons = new GodIcons(basePath: "data");
-        godIcons.GenerateGodIconSprite();
-
-        GodsHtml.GenerateGodsHtml(targetFile: "smitegods.html", new DataStore().ReadGods()!);
-        GenerateGodsWithSkinsFromStore();
-        GodsSkinsHtml.GenerateGodsHtml("god-skins.html", new DataStore().ReadGodsWithSkins()!);
-
-        GodSkinThemeHtml.Generate("god-skin-themes.html", new DataStore().ReadGodsWithSkins()!, new DataStore().ReadGodSkinThemes());
-
-        ItemsHtml.Generate(targetFile: "smiteitems.html", items: new DataStore().ReadItems()!);
     }
 
     private static async Task CheckRemoteImage()
