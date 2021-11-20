@@ -246,6 +246,7 @@ godDefailsOverlay = {
 		var god = sender.target.parentElement
 		var deepCopy = true
 		var details = god.querySelector('.goddetails').cloneNode(deepCopy)
+		details.querySelectorAll('img').forEach(img => img.src = img.dataset.src)
 		this.overlayContainer.innerHTML = '<div id="god-overlay-close-handle">X</div>'
 		this.overlayContainer.querySelector('#god-overlay-close-handle').addEventListener('click', this.onCloseExplicit.bind(this))
 		this.overlayContainer.appendChild(details)
