@@ -10,3 +10,4 @@
 /src-dotnet/KCode.SMITEAPI.Generator/methods
 /src-dotnet/KCode.SMITEAPI.Generator/openapi.yaml
 *.csproj.user
+/src-blazor/
