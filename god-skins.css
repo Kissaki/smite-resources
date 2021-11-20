@@ -69,6 +69,21 @@ hr {
   border-color: #aaaaff;
   color: #000;
 }
+@media (prefers-color-scheme: dark) {
+  #relatedpages {
+    background-color: #2d2d2d;
+  }
+  #relatedpages a {
+    background-color: #000086;
+    border-color: #000086;
+    color: #ddd;
+  }
+  #relatedpages a:hover {
+    background-color: #00f;
+    border-color: #00f;
+    color: #fff;
+  }
+}
 footer {
   font-size: 0.9em;
   line-height: 1.2em;

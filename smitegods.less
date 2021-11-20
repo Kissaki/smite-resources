@@ -5,7 +5,11 @@
 
 * {border:0; margin:0; padding:0; text-decoration:none;}
 
-html {padding:8px 8px 16px; font-size:100%; line-height:1.3em;}
+html { padding:8px 8px 16px; font-size:100%; line-height:1.3em; }
+html { color: #000; background-color: #fff;}
+@media (prefers-color-scheme: dark) {
+	html { color: #ddd; background-color: #0d0d0d;}
+}
 h1 {font-size:1.6em; line-height:1.6em; margin:0.2em 0 0.1em;}
 h2 {font-size:1.4em; line-height:1.4em; margin:0.3em 0 0.1em;}
 
@@ -21,7 +25,10 @@ aside { font-style:italic; }
 @import "less/relatedpages.less";
 @import "less/footer.less";
 
-.god {display:inline-block; position:relative; background-color:#dddddd; }
+.god {
+	display:inline-block; position:relative; background-color:#dddddd;
+	@media (prefers-color-scheme: dark) { background-color: #333;}
+}
 .god a {display:block;}
 /* .god:hover::after {content:attr(title); color:#000000; background-color:#ffffff; display:block; width:100%; height:12px; position:absolute;} */
 /* Icon size: 128x128 */
@@ -40,6 +47,9 @@ aside { font-style:italic; }
 	padding:8px 4px;
 	margin:4px;
 	border:2px solid transparent;
+	@media (prefers-color-scheme: dark) {
+		background: #2d2d2d;
+	}
 }
 .data-block h2 {
 	margin:0 0 0.1em;
@@ -78,6 +88,9 @@ input[type=button], input[type=text] {
 	background:#dddddd;
 	padding:2px 4px;
 	cursor:pointer;
+	@media (prefers-color-scheme: dark) {
+		background: #463f3f;
+	}
 }
 .icon-role {
 	vertical-align: middle;
@@ -86,18 +99,33 @@ input[type=button], input[type=text] {
 
 #role-column-assassin, #filter-role-option-assassin {
 	background: @color-assassin;
+	@media (prefers-color-scheme: dark) {
+		background: darken(@color-assassin, 30%);
+	}
 }
 #role-column-warrior, #filter-role-option-warrior {
 	background:@color-warrior;
+	@media (prefers-color-scheme: dark) {
+		background: darken(@color-warrior, 40%);
+	}
 }
 #role-column-hunter, #filter-role-option-hunter {
 	background:@color-hunter;
+	@media (prefers-color-scheme: dark) {
+		background: darken(@color-hunter, 40%);
+	}
 }
 #role-column-mage, #filter-role-option-mage {
 	background:@color-mage;
+	@media (prefers-color-scheme: dark) {
+		background: darken(@color-mage, 30%);
+	}
 }
 #role-column-guardian, #filter-role-option-guardian {
 	background:@color-guardian;
+	@media (prefers-color-scheme: dark) {
+		background: darken(@color-guardian, 30%);
+	}
 }
 
 .god .goddetails {
@@ -136,6 +164,9 @@ input[type=button], input[type=text] {
 		max-width: 500px;
 		background-color: #fff;
 		padding: 10px;
+		@media (prefers-color-scheme: dark) {
+			background-color: #333;
+		}
 	}
 	
 	.caption { font-size:0.6em; line-height:1em; }

@@ -50,3 +50,18 @@ thead th:nth-child(1) {
   border-color: #aaaaff;
   color: #000;
 }
+@media (prefers-color-scheme: dark) {
+  #relatedpages {
+    background-color: #2d2d2d;
+  }
+  #relatedpages a {
+    background-color: #000086;
+    border-color: #000086;
+    color: #ddd;
+  }
+  #relatedpages a:hover {
+    background-color: #00f;
+    border-color: #00f;
+    color: #fff;
+  }
+}
