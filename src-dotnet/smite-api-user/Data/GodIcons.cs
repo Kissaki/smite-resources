@@ -26,10 +26,16 @@ namespace KCode.SMITEClient.Data
             foreach (var god in gods.Where(x => x.GodIconUrl != null).OrderBy(x => x.GodIconUrl!.PathAndQuery))
             {
                 var iconUri = god.GodIconUrl!;
-                using var req = new HttpRequestMessage(HttpMethod.Get, requestUri: iconUri);
-
                 var fileurl = Path.GetFileName(iconUri.AbsoluteUri);
+
                 var fi = new FileInfo(Path.Combine(_dataDirPath.FullName, fileurl));
+                if (fi.Exists && fi.LastWriteTime > DateTime.Today)
+                {
+                    Console.WriteLine($"DEBUG: Not checking for updated god icon as the local file was already updated today {fi.Name}");
+                    continue;
+                }
+
+                using var req = new HttpRequestMessage(HttpMethod.Get, requestUri: iconUri);
                 if (fi.Exists)
                 {
                     req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("image/*"));
