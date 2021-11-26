@@ -11,7 +11,7 @@ public class MenuLogic
     public bool DownloadIcons { get; private set; }
     public bool CheckRemoteImages { get; private set; }
     public bool CombineIcons { get; private set; }
-    public bool GenerateHtml { get; private set; }
+    public bool GenerateHtml { get; private set; } = true;
 
     public void Run()
     {
