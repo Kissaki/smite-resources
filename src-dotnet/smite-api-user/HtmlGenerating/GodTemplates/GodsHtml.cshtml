@@ -113,7 +113,7 @@
 												{
 													if (@Model.GodIconSpriteFiles.Length > 0)
 													{
-														@*<picture class="godicon">
+														<picture class="godicon">
 															<source srcset="img/godicons.avif" type="image/avif">
 															<source srcset="img/godicons.webp" type="image/webp">
 															<source srcset="img/godicons.png" type="image/png">
@@ -123,8 +123,8 @@
 																var offset = Model.GodIconSpriteOffsets[iconfilename] / 2;
 															}
 															<img src="img/godicons.jpg" data-offset="@offset" style="transform: translateX(-@(offset)px) scale(0.5) translate(-50%,-50%);">
-														</picture>*@
-														<img class="godicon" src="@god.GodIconUrl" title="@god.Name god icon">
+														</picture>
+														@*<img class="godicon" src="@god.GodIconUrl" title="@god.Name god icon">*@
 													}
 													else
 													{
