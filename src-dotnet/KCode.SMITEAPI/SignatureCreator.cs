@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KCode.SMITEAPI
 {
-    internal class SignatureCreator
+    internal static class SignatureCreator
     {
         public static string Create(int devId, string methodName, string authKey, string timestamp) => Hash(CreateString(devId, methodName, authKey, timestamp));
         internal static string CreateString(int devId, string methodName, string authKey, string timestamp) => $"{devId}{methodName}{authKey}{timestamp}";
