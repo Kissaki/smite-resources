@@ -65,6 +65,12 @@ namespace KCode.SMITEClient.Data
                         "Normal" => 1,
                         _ => -1,
                     },
+                    "Crossover" => othobt switch
+                    {
+                        "Normal" => 1,
+                        "Limited" => 1,
+                        _ => -1,
+                    },
                     "Limited" => 1,
                     _ => throw new NotImplementedException($"Unexpected skin obtainability value {obt}"),
                 };
