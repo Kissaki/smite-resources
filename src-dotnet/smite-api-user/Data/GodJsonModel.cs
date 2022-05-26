@@ -48,7 +48,7 @@ namespace KCode.SMITEClient.Data
         public double? Mp5PerLevel { get; set; }
 
         [JsonPropertyName("MagicProtection")]
-        public int? MagicProtection { get; set; }
+        public double? MagicProtection { get; set; }
 
         [JsonPropertyName("MagicProtectionPerLevel")]
         public double? MagicProtectionPerLevel { get; set; }
@@ -78,7 +78,7 @@ namespace KCode.SMITEClient.Data
         public double? PhysicalPowerPerLevel { get; set; }
 
         [JsonPropertyName("PhysicalProtection")]
-        public int? PhysicalProtection { get; set; }
+        public double? PhysicalProtection { get; set; }
 
         [JsonPropertyName("PhysicalProtectionPerLevel")]
         public double? PhysicalProtectionPerLevel { get; set; }
