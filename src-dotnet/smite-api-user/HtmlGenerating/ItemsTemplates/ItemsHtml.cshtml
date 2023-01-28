@@ -28,7 +28,7 @@
         <summary>Consumables</summary>
         <div class="items consumables" style="display: grid; grid-template: auto / 100px 100px 100px 100px; justify-content: start; grid-gap: 8px;">
             @{
-                await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Healing Potion"));
+                //await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Healing Potion"));
                 await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Mana Potion"));
                 await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Multi Potion"));
                 await IncludeAsync("ItemsTemplates/Item.cshtml", Model.Consumables.Single(x => x.Name == "Baron's Brew"));

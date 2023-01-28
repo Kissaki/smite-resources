@@ -88,7 +88,7 @@ namespace KCode.SMITEClient.Data
 
         private static string FixItemPropertyName(string description)
         {
-            return description.Trim(' ', ':').Replace("protection", "Protection");
+            return description.Trim(' ', ':').Replace("protection", "Protection").Replace("CCR", "Crowd Control Reduction");
         }
 
         private static int GetPropIndex(ItemProperty x)
