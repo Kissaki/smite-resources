@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace KCode.SMITEClient.Data
@@ -57,23 +58,14 @@ namespace KCode.SMITEClient.Data
             var othobt = other.Obtainability;
             if (obt != othobt)
             {
-                return obt switch
+                IEnumerable<string> obtOrder = ImmutableArray.Create("Normal", "Unlimited", "Crossover", "Exclusive", "Limtied");
+                foreach (var x in obtOrder)
                 {
-                    "Normal" => -1,
-                    "Exclusive" => othobt switch
-                    {
-                        "Normal" => 1,
-                        _ => -1,
-                    },
-                    "Crossover" => othobt switch
-                    {
-                        "Normal" => 1,
-                        "Limited" => 1,
-                        _ => -1,
-                    },
-                    "Limited" => 1,
-                    _ => throw new NotImplementedException($"Unexpected skin obtainability value {obt}"),
-                };
+                    // This obtainability comes before other
+                    if (x == obt) return -1;
+                    // Other obtainability comes before this
+                    if (x == othobt) return 1;
+                }
             }
 
             var aFavor = PriceFavor;
