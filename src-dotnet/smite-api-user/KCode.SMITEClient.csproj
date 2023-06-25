@@ -4,10 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7-windows</TargetFramework>
     <RootNamespace>KCode.SMITEClient</RootNamespace>
-    <Nullable>enable</Nullable>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
