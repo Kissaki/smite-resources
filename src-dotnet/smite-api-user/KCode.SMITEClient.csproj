@@ -22,12 +22,4 @@
     <ProjectReference Include="..\KCode.SMITEAPI\KCode.SMITEAPI.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EditorConfigFiles Remove="c:\dev\smitegods\src-dotnet\smite-api-user\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="c:\dev\smitegods\src-dotnet\smite-api-user\.editorconfig" />
-  </ItemGroup>
-
 </Project>
