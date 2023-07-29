@@ -78,7 +78,8 @@ namespace KCode.SMITEClient.Data
 
             Console.WriteLine("Writing sprite data files...");
             File.WriteAllText(spriteBase + ".spriteorder", string.Join("\n", files.Select(x => x.Name)) + "\n");
-            File.WriteAllText(spriteBase + ".json", @"{""images"":[{" + string.Join("},{", files.Select((x, i) => $@"""name"":""{x.Name}"",""x"":{i * squareItemSize}")) + "}]}");
+            var asJson = files.Select((x, i) => $@"""name"":""{x.Name}"",""x"":{i % SpriteGenerator.LineItemCount * squareItemSize},""y"":{i / SpriteGenerator.LineItemCount * squareItemSize}");
+            File.WriteAllText(spriteBase + ".json", @"{""images"":[{" + string.Join("},{", asJson) + "}]}");
 
             Console.WriteLine("Converting sprites to additional image formats...");
             var pWebp = Process.Start("ffmpeg.exe", $@"-hide_banner -y -i ""{spriteBase}.png"" ""{spriteBase}.webp""");
@@ -90,10 +91,12 @@ namespace KCode.SMITEClient.Data
             if (pAvif.ExitCode != 0) Console.WriteLine($"ERROR: Sprite avif conversion with avifenc.exe failed with exit code {pAvif.ExitCode}");
         }
 
-        public static (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, int> itemOffsets) ReadSpriteData(string spriteBasePath)
+        public static (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, (int x, int y)> itemOffsets) ReadSpriteData(string spriteBasePath)
         {
             var spriteFiles = GetOrderedSpriteFiles(spriteBasePath);
-            var itemOffsets = File.ReadAllLines(spriteBasePath + ".spriteorder").Select((x, i) => (file: x, offset: i * squareItemSize)).ToImmutableDictionary(x => x.file, x => x.offset);
+            var itemOffsets = File.ReadAllLines(spriteBasePath + ".spriteorder")
+                .Select((x, i) => (file: x, offset: (x: i % SpriteGenerator.LineItemCount * squareItemSize, y: i / SpriteGenerator.LineItemCount * squareItemSize)))
+                .ToImmutableDictionary(x => x.file, x => x.offset);
             return (spriteFiles.ToImmutableArray(), itemOffsets);
 
             static IEnumerable<string> GetOrderedSpriteFiles(string spriteBasePath)

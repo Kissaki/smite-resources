@@ -119,10 +119,11 @@
 															<source srcset="img/godicons.png" type="image/png">
 															@{
 																var iconfilename = god.GodIconUrl.AbsolutePath.Substring(god.GodIconUrl.AbsolutePath.LastIndexOf('/') + 1);
-																// Half because we show them in half size
-																var offset = Model.GodIconSpriteOffsets[iconfilename] / 2;
+																var offsetX = Model.GodIconSpriteOffsets[iconfilename].x;
+																var offsetY = Model.GodIconSpriteOffsets[iconfilename].y;
 															}
-															<img src="img/godicons.jpg" data-offset="@offset" style="transform: translateX(-@(offset)px) scale(0.5) translate(-50%,-50%);">
+															@* Half offset because we scale them to half size *@
+															<img src="img/godicons.jpg" style="transform-origin: 0 0; transform: translate(-@(offsetX/2)px, -@(offsetY/2)px) scale(0.5);">
 														</picture>
 														@*<img class="godicon" src="@god.GodIconUrl" title="@god.Name god icon">*@
 													}

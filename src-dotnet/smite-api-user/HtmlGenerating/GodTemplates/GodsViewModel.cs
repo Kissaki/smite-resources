@@ -11,9 +11,9 @@ namespace KCode.SMITEClient.HtmlGenerating.GodTemplates
         public string[] Roles { get; }
 #pragma warning restore CA1819 // Properties should not return arrays
         public ImmutableArray<string> GodIconSpriteFiles { get; }
-        public ImmutableDictionary<string, int> GodIconSpriteOffsets { get; }
+        public ImmutableDictionary<string, (int x, int y)> GodIconSpriteOffsets { get; }
 
-        public GodsViewModel(GodResult[] gods, string[] pantheons, string[] roles, (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, int> itemOffsets) godIconSprites)
+        public GodsViewModel(GodResult[] gods, string[] pantheons, string[] roles, (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, (int x, int y)> itemOffsets) godIconSprites)
         {
             Gods = gods;
             Pantheons = pantheons;

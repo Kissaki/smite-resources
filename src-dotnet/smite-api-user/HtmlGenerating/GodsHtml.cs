@@ -6,7 +6,7 @@ namespace KCode.SMITEClient.HtmlGenerating
 {
     internal static class GodsHtml
 	{
-		public static void GenerateGodsHtml(string targetFile, GodResult[] gods, (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, int> itemOffsets) godIconSprites)
+		public static void GenerateGodsHtml(string targetFile, GodResult[] gods, (ImmutableArray<string> spriteFiles, ImmutableDictionary<string, (int x, int y)> itemOffsets) godIconSprites)
 		{
 			var (pantheons, roles) = ParseGods(gods);
 
