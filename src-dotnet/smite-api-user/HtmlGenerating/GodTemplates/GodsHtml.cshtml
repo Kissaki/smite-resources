@@ -148,14 +148,17 @@
 																<details>
 																	<summary><img data-src="@ability.Url" alt="" />@ability.Summary</summary>
 																	<div class="ability-description">
-																		@{ var abDesc = ability.Description!.Description!; }
-																		<div class="description-primary">@abDesc.Description!</div>
+																		@{ var abDesc = ability.Description?.Description; }
+																		<div class="description-primary">@abDesc?.Description!</div>
 																		<hr>
-																		<div>Cost: @abDesc.Cost</div>
-																		<div>Cooldown: @abDesc.Cooldown</div>
-																		@foreach (var item in abDesc.Menuitems!)
-                                                                        {
-																			<div>@item.Description@item.Value</div>
+																		<div>Cost: @abDesc?.Cost</div>
+																		<div>Cooldown: @abDesc?.Cooldown</div>
+																		@if (abDesc?.Menuitems != null)
+																		{
+																			@foreach (var item in abDesc?.Menuitems!)
+																			{
+																				<div>@item.Description@item.Value</div>
+																			}
 																		}
 																	</div>
 																</details>
