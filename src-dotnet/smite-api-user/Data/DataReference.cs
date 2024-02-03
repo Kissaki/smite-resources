@@ -29,6 +29,7 @@
                 "Magical Protection",
                 "Magical Protections",
                 "Crowd Control Reduction",
+                "Lifesteal",
                 "Physical Lifesteal",
                 "Magical Lifesteal",
                 "Critical Strike Chance",
